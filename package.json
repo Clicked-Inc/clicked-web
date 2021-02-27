@@ -13,7 +13,8 @@
     "prettier:check": "prettier --check",
     "prettier:fix": "prettier --write src/**/*.{ts,tsx}",
     "generate": "plop --plopfile plop/plop.ts",
-    "storybook": "start-storybook -p 6006"
+    "storybook": "start-storybook -p 6006",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.3.3",
