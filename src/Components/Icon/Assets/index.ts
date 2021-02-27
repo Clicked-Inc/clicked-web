@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Notification from './Icons/notification.svg';
 import NotificationDot from './Icons/notification_dot.svg';
 
@@ -16,6 +17,8 @@ export default {
 =======
 =======
 >>>>>>> 575ed7d... [V1-32] Almost done with Icons
+=======
+>>>>>>> dc1478f... Fix Icon
 import Notification from './Icons/notification.svg';
 import NotificationDot from './Icons/notification_dot.svg';
 import BadgeOne from './Icons/badge_one.svg';
@@ -33,3 +36,10 @@ export default {
   Notification
 };
 >>>>>>> 88b8213... [V1-32] Almost done with Icons
+=======
+import Notification from './Icons/notification.svg';
+
+export default {
+  Notification,
+};
+>>>>>>> 143abe1... Fix Icon
