@@ -1,5 +1,7 @@
 import React from 'react';
-import ExperienceLevel from './ExperienceLevel';
+import { Story } from '@storybook/react';
+import Badges from 'src/Components/Profile/Badges';
+import ExperienceLevel from 'src/Components/Profile/ExperienceLevel';
 
 export default {
   title: 'ExperienceLevel',

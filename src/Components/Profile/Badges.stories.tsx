@@ -1,7 +1,9 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 
-import Badges from './Badges';
+import Fonts from 'src/Components/Icon/Assets/Fonts';
+
+import Badges from 'src/Components/Profile/Badges';
 
 export default {
   title: 'Badges',

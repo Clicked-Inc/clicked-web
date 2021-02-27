@@ -3415,6 +3415,7 @@
     lodash "^4.17.20"
     lodash-es "^4.17.20"
 
+<<<<<<< HEAD
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
@@ -3431,6 +3432,19 @@
     "@storybook/components" "6.1.20"
     "@storybook/core-events" "6.1.20"
     "@storybook/theming" "6.1.20"
+=======
+"@storybook/addon-actions@6.1.18":
+  version "6.1.18"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-6.1.18.tgz#9dad0f2be52db778ec4519f130d9e0c46188b504"
+  integrity sha512-05p52RWst3jS5txwqplLZFWuZ89PMtsHojxs4rWRQ6mrgPwiTE0MUl+S1wMihabLm9CYUUJ0/41QNb2Uv0+hhw==
+  dependencies:
+    "@storybook/addons" "6.1.18"
+    "@storybook/api" "6.1.18"
+    "@storybook/client-api" "6.1.18"
+    "@storybook/components" "6.1.18"
+    "@storybook/core-events" "6.1.18"
+    "@storybook/theming" "6.1.18"
+>>>>>>> c905ee4... styling almost done, need to get storyboard and icons to work still
     core-js "^3.0.1"
     fast-deep-equal "^3.1.1"
     global "^4.3.2"
@@ -4508,16 +4522,28 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@types/react@17.0.2", "@types/react@^17.0.0":
 =======
 "@types/react@17.0.2", "@types/react@>=16.9.11", "@types/react@>=16.9.35":
 >>>>>>> b90eeaa... styling almost done, need to get storyboard and icons to work still
 =======
+=======
+>>>>>>> 807d78e... styling almost done, need to get storyboard and icons to work still
 "@types/react@17.0.2", "@types/react@>=16.9.11", "@types/react@>=16.9.35":
 =======
 "@types/react@17.0.2", "@types/react@^17.0.0":
 >>>>>>> 88b8213... [V1-32] Almost done with Icons
+<<<<<<< HEAD
 >>>>>>> 575ed7d... [V1-32] Almost done with Icons
+=======
+=======
+"@types/react@17.0.2", "@types/react@^17.0.0":
+=======
+"@types/react@17.0.2", "@types/react@>=16.9.11", "@types/react@>=16.9.35":
+>>>>>>> b90eeaa... styling almost done, need to get storyboard and icons to work still
+>>>>>>> c905ee4... styling almost done, need to get storyboard and icons to work still
+>>>>>>> 807d78e... styling almost done, need to get storyboard and icons to work still
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.2.tgz#3de24c4efef902dd9795a49c75f760cbe4f7a5a8"
   integrity sha512-Xt40xQsrkdvjn1EyWe1Bc0dJLcil/9x2vAuW7ya+PuQip4UYUaXyhzWmAbwRsdMgwOFHpfp7/FFZebDU6Y8VHA==
@@ -6382,7 +6408,11 @@ bootstrap@^4.6.0:
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.6.0.tgz#97b9f29ac98f98dfa43bf7468262d84392552fd7"
   integrity sha512-Io55IuQY3kydzHtbGvQya3H+KorS/M9rSNyfCGCg9WZ4pyT/lCxIlpJgG1GXW/PswzC84Tr2fBYi+7+jFVQQBw==
 
+<<<<<<< HEAD
 boxen@^4.1.0, boxen@^4.2.0:
+=======
+boxen@^4.1.0:
+>>>>>>> c905ee4... styling almost done, need to get storyboard and icons to work still
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/boxen/-/boxen-4.2.0.tgz#e411b62357d6d6d36587c8ac3d5d974daa070e64"
   integrity sha512-eB4uT9RGzg2odpER62bBwSLvUeGC+WbRjjyyFhGsKnc8wp/m0+hQsMUvUe3H2V0D5vw0nBdO1hCJoZo5mKeuIQ==
@@ -11062,11 +11092,14 @@ lodash-es@^4.17.20:
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
   integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
 
+<<<<<<< HEAD
 lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
+=======
+>>>>>>> c905ee4... styling almost done, need to get storyboard and icons to work still
 lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
@@ -12872,6 +12905,7 @@ promise.prototype.finally@^3.1.0:
     es-abstract "^1.17.0-next.0"
     function-bind "^1.1.1"
 
+<<<<<<< HEAD
 prompts@2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/prompts/-/prompts-2.4.0.tgz#4aa5de0723a231d1ee9121c40fdf663df73f61d7"
@@ -12880,6 +12914,8 @@ prompts@2.4.0:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
+=======
+>>>>>>> c905ee4... styling almost done, need to get storyboard and icons to work still
 prop-types-extra@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/prop-types-extra/-/prop-types-extra-1.1.1.tgz#58c3b74cbfbb95d304625975aa2f0848329a010b"
@@ -13407,10 +13443,13 @@ react-textarea-autosize@^8.1.1:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 react@^17.0.1:
 =======
 =======
 >>>>>>> 575ed7d... [V1-32] Almost done with Icons
+=======
+>>>>>>> 807d78e... styling almost done, need to get storyboard and icons to work still
 react-transition-group@^4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
@@ -13428,7 +13467,26 @@ react@17.0.1:
 =======
 react@^17.0.1:
 >>>>>>> 88b8213... [V1-32] Almost done with Icons
+<<<<<<< HEAD
 >>>>>>> 575ed7d... [V1-32] Almost done with Icons
+=======
+=======
+react@^17.0.1:
+=======
+react-transition-group@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
+  integrity sha512-Djqr7OQ2aPUiYurhPalTrVy9ddmFCCzwhqQmtN+J3+3DzLO209Fdr70QrN8Z3DsglWql6iY1lDWAfpFiBtuKGw==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    dom-helpers "^5.0.1"
+    loose-envify "^1.4.0"
+    prop-types "^15.6.2"
+
+react@17.0.1:
+>>>>>>> b90eeaa... styling almost done, need to get storyboard and icons to work still
+>>>>>>> c905ee4... styling almost done, need to get storyboard and icons to work still
+>>>>>>> 807d78e... styling almost done, need to get storyboard and icons to work still
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.1.tgz#6e0600416bd57574e3f86d92edba3d9008726127"
   integrity sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w==
