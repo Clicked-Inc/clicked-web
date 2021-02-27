@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Notification from './Icons/notification.svg';
 import NotificationDot from './Icons/notification_dot.svg';
 
@@ -13,6 +14,8 @@ export default {
   Awards,
 >>>>>>> b90eeaa... styling almost done, need to get storyboard and icons to work still
 =======
+=======
+>>>>>>> 575ed7d... [V1-32] Almost done with Icons
 import Notification from './Icons/notification.svg';
 import NotificationDot from './Icons/notification_dot.svg';
 import BadgeOne from './Icons/badge_one.svg';
@@ -24,3 +27,9 @@ export default {
   CourseLogo,
 >>>>>>> 281bd95... pulling from main
 };
+=======
+import {ReactComponent as Notification } from "./Icons/notification.svg"
+export default {
+  Notification
+};
+>>>>>>> 88b8213... [V1-32] Almost done with Icons
