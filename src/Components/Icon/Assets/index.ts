@@ -1,4 +1,5 @@
-import {ReactComponent as Notification } from "./Icons/notification.svg"
+import Notification from './Icons/notification.svg';
+
 export default {
-  Notification
+  Notification,
 };

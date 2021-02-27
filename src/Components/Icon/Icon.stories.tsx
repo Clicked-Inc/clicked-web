@@ -1,15 +1,17 @@
 import React from 'react';
 
-import Icon from './Icon';
+import Icon, { IconProps } from './Icon';
+import { Story } from '@storybook/react';
 
 export default {
   component: Icon,
   title: 'Icon',
 };
 
-const Template = args => <Icon {...args} />;
+const Template: Story<IconProps> = (args) => <Icon {...args} />;
 
 export const Default = Template.bind({});
+
 Default.args = {
-    name:"notification"
+  name: 'Notification',
 };
