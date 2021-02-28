@@ -10,8 +10,12 @@ export default function Header() {
 import { Input, SimpleGrid, Box } from "@chakra-ui/react"
 =======
 import * as React from 'react';
+<<<<<<< HEAD
 import { Input, SimpleGrid, Box, InputGroup, InputRightElement, Flex } from "@chakra-ui/react"
 >>>>>>> 61f3229... [V1-32] Revised spacing, added Icons
+=======
+import { Input, SimpleGrid, Box, InputGroup, InputRightElement, Flex, Spacer } from "@chakra-ui/react"
+>>>>>>> 2495692... [V1-32] Revised Stories and positioning
 import { SearchIcon } from '@chakra-ui/icons'
 import { Icon } from "../Icon" 
 
@@ -39,8 +43,6 @@ export default function Header() {
 >>>>>>> 575ed7d... [V1-32] Almost done with Icons
 =======
     <Box>
-      {/* <SimpleGrid columns={2} spacing="765px" w="415px" h="63px "> */}
-      {/* <SimpleGrid columns={2} spacing={750} w="415px" h="63px "> */}
       <Flex>
         <Box mt={5} ml={10}>
           <InputGroup w={380}>
@@ -80,6 +82,7 @@ export default function Header() {
           </InputGroup>
         </Box>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div>
           <Icon name="Notification"></Icon>
         </div>
@@ -89,14 +92,18 @@ export default function Header() {
 =======
         <Box>
           <Box pos="absolute" left={1180} top={21}>
+=======
+        <Spacer/>
+        <Box mr={40} mt={6}>
+          <Box mr={5}>
+>>>>>>> 2495692... [V1-32] Revised Stories and positioning
             <Icon name="Notification"/>
           </Box>
-          <Box pos="absolute" left={1191} top={22}>
+          <Box mt={-5} ml={2.5}>
             <Icon name="RedEllipse"/>
           </Box>
         </Box>
       </Flex>
-      {/* </SimpleGrid> */}
     </Box>
 >>>>>>> 61f3229... [V1-32] Revised spacing, added Icons
   )

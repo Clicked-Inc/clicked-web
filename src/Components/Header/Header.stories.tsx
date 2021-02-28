@@ -1,5 +1,6 @@
 import React from 'react';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Story } from '@storybook/react';
 import Header from './Header';
 
@@ -16,6 +17,9 @@ export const Default = Template.bind({});
 
 =======
 
+=======
+import { Story } from '@storybook/react';
+>>>>>>> 2495692... [V1-32] Revised Stories and positioning
 import Header from './Header';
 
 export default {
@@ -23,11 +27,10 @@ export default {
   title: 'Header',
 };
 
-const Template = args => <Header {...args} />;
-
+const Template: Story = () => (
+  <Header />
+);
 export const Default = Template.bind({});
-Default.args = {
-};
 
 
 <<<<<<< HEAD
