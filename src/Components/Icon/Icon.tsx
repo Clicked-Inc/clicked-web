@@ -55,9 +55,12 @@ export type IconProps = CustomIcon | ReactIcons;
 >>>>>>> dc1478f... Fix Icon
 const Icon: React.FC<IconProps> = (props) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   console.log(Icons);
 >>>>>>> 88b8213... [V1-32] Almost done with Icons
+=======
+>>>>>>> 3027390... [V1-32] Revised spacing, added Icons
   if (props.type === 'react-icons') {
     return <ChakraIcon {...props} />;
   } else {

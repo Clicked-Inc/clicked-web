@@ -16,33 +16,21 @@ export const Default = Template.bind({});
 
 =======
 
-import Task from './Header';
+import Header from './Header';
 
 export default {
-  component: Task,
-  title: 'Task',
+  component: Header,
+  title: 'Header',
 };
 
-const Template = args => <Task {...args} />;
+const Template = args => <Header {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  task: {
-    id: '1',
-    title: 'Test Task',
-    state: 'TASK_INBOX',
-    updatedAt: new Date(2018, 0, 1, 9, 0),
-  },
 };
 
-export const Pinned = Template.bind({});
-Pinned.args = {
-  task: {
-    ...Default.args.task,
-    state: 'TASK_PINNED',
-  },
-};
 
+<<<<<<< HEAD
 export const Archived = Template.bind({});
 Archived.args = {
   task: {
@@ -51,3 +39,5 @@ Archived.args = {
   },
 };
 >>>>>>> 575ed7d... [V1-32] Almost done with Icons
+=======
+>>>>>>> 61f3229... [V1-32] Revised spacing, added Icons

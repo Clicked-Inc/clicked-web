@@ -9,6 +9,15 @@ export default {
   title: 'Icon',
   component: Icon,
 };
+const Template: Story<IconProps> = () => (
+  <Box>
+    {Object.keys(Icons).map((key) => (
+      <Icon key={key} name={key as IconNames} />
+    ))}
+  </Box>
+);
+export const Custom = Template.bind({});
+Custom.args = {} as IconProps;
 
 const Template: Story<IconProps> = () => (
   <Box>
