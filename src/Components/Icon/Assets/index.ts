@@ -1,8 +1,8 @@
 import Notification from './Icons/notification.svg';
-import RedEllipse from './Icons/ellipse_27.svg';
+import NotificationDot from './Icons/notification_dot.svg';
 
 
 export default {
   Notification,
-  RedEllipse,
+  NotificationDot,
 };

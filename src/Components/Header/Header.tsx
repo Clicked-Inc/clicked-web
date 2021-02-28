@@ -29,7 +29,7 @@ export default function Header() {
             <Icon name="Notification"/>
           </Box>
           <Box mt={-5} ml={2.5}>
-            <Icon name="RedEllipse"/>
+            <Icon name="NotificationDot"/>
           </Box>
         </Box>
       </Flex>
