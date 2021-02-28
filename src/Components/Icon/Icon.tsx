@@ -17,7 +17,6 @@ export type ReactIcons = {
 export type IconProps = CustomIcon | ReactIcons;
 
 const Icon: React.FC<IconProps> = (props) => {
-  console.log(Icons);
   if (props.type === 'react-icons') {
     return <ChakraIcon {...props} />;
   } else {

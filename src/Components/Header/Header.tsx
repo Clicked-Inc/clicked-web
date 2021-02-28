@@ -1,34 +1,40 @@
-import { Input, SimpleGrid, Box } from "@chakra-ui/react"
-import { SearchIcon } from '@chakra-ui/icons'
-import { InputGroup, InputRightElement } from "@chakra-ui/input"
-import { Icon } from "../Icon" 
 import * as React from 'react';
+import { Input, SimpleGrid, Box, InputGroup, InputRightElement, Flex } from "@chakra-ui/react"
+import { SearchIcon } from '@chakra-ui/icons'
+import { Icon } from "../Icon" 
 
-export default function Header({ task: { id, title, state }, onArchiveTask, onPinTask }) {
+export default function Header() {
   const [value, setValue] = React.useState("")
   const handleChange = (event) => setValue(event.target.value)
 
   return (
-    <div>
-      <SimpleGrid columns={2} spacing="830px" w="415px" h="63px">
-        <Box mt="15px" ml= "48px">
-          <InputGroup w="22.9rem">
+    <Box>
+      {/* <SimpleGrid columns={2} spacing="765px" w="415px" h="63px "> */}
+      {/* <SimpleGrid columns={2} spacing={750} w="415px" h="63px "> */}
+      <Flex>
+        <Box mt={5} ml={10}>
+          <InputGroup w={380}>
             <Input
               variant="flushed"
               value={value}
               onChange={handleChange}
               placeholder="Discover experiences, courses, and discussions"
               size="sm"
-              fontSize="14px"
-              // marginLeft="9px"
+              fontSize={14}
             />
-            <InputRightElement mt="9px" h="14px" w="14px" children={<SearchIcon h="14px" w="14px" />}></InputRightElement>
+            <InputRightElement mt={3} h={3.75} w={3.75} children={<SearchIcon h={4} w={4} />}/>
           </InputGroup>
         </Box>
-        <div>
-          <Icon name="Notification"></Icon>
-        </div>
-      </SimpleGrid>
-    </div>
+        <Box>
+          <Box pos="absolute" left={1180} top={21}>
+            <Icon name="Notification"/>
+          </Box>
+          <Box pos="absolute" left={1191} top={22}>
+            <Icon name="RedEllipse"/>
+          </Box>
+        </Box>
+      </Flex>
+      {/* </SimpleGrid> */}
+    </Box>
   )
 }
