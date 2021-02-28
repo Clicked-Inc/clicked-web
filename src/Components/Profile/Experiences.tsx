@@ -12,14 +12,14 @@ import {
   Spacer,
   Circle,
 } from '@chakra-ui/react';
-import Fonts from 'src/Components/Icon/Assets/Fonts';
+import Fonts from '../../Components/Icon/Assets/Fonts';
 
 const listOfExperiences = (experiences) => {
   return (
     <div>
       {experiences.map((experience) => {
         return (
-          <Box>
+          <Box pb={5}>
             <Text fontSize={16} fontWeight="semibold" mb={3}>
               Improving Headspaces
             </Text>

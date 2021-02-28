@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 import HoverProfile from './HoverProfile';
-import CoursesSummaryCard from 'src/Components/Profile/CoursesSummaryCard';
+import CoursesSummaryCard from './CoursesSummaryCard';
 
 export default {
   title: 'CoursesSummaryCard',

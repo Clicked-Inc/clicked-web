@@ -15,12 +15,11 @@ import {
 } from '@chakra-ui/react';
 
 // import Awards from 'src/icons/profile/badge_2.svg';
-import CoursesSummaryCard from 'src/Components/Profile/CoursesSummaryCard';
-import Experiences from 'src/Components/Profile/Experiences';
-import Badges from 'src/Components/Profile/Badges';
-import ExperienceLevel from 'src/Components/Profile/ExperienceLevel';
-
-import Fonts from 'src/Components/Icon/Assets/Fonts';
+import CoursesSummaryCard from './CoursesSummaryCard';
+import Experiences from './Experiences';
+import Badges from './Badges';
+import ExperienceLevel from './ExperienceLevel';
+import Fonts from '../../Components/Icon/Assets/Fonts';
 
 const HoverProfile = () => {
   return (
@@ -46,15 +45,6 @@ const HoverProfile = () => {
       <ExperienceLevel />
       <Badges />
       <Experiences />
-      <Flex isInline>
-        <Text theme={Fonts} textStyle="h1">
-          Courses
-        </Text>
-        <Spacer />
-        <Circle size={6} bg="tomato" color="white" my={5} h={5}>
-          2
-        </Circle>
-      </Flex>
       <CoursesSummaryCard />
       <Stack isInline color="tomato" fontSize={20} mt={2}>
         <Text mt={5}>Go to Profile</Text>
