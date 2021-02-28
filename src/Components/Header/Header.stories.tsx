@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Story } from '@storybook/react';
 import Header from './Header';
 
 export default {
@@ -7,10 +7,9 @@ export default {
   title: 'Header',
 };
 
-const Template = args => <Header {...args} />;
-
+const Template: Story = () => (
+  <Header />
+);
 export const Default = Template.bind({});
-Default.args = {
-};
 
 
