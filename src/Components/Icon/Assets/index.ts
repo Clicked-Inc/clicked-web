@@ -38,11 +38,11 @@ export default {
 >>>>>>> 88b8213... [V1-32] Almost done with Icons
 =======
 import Notification from './Icons/notification.svg';
-import RedEllipse from './Icons/ellipse_27.svg';
+import NotificationDot from './Icons/notification_dot.svg';
 
 
 export default {
   Notification,
-  RedEllipse,
+  NotificationDot,
 };
 >>>>>>> 143abe1... Fix Icon
