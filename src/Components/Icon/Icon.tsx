@@ -40,4 +40,5 @@ const Icon: React.FC<IconProps> = (props) => {
     return <SVG />;
   }
 };
+
 export default Icon;
