@@ -1,25 +1,21 @@
 import React from 'react';
-import { Story } from '@storybook/react';
 import {
-  Badge,
   Progress,
   Box,
   Text,
   Flex,
-  extendTheme,
   Stack,
-  Image,
   Spacer,
   Circle,
 } from '@chakra-ui/react';
-import Fonts from 'src/Components/Icon/Assets/Fonts';
+import Fonts from '../../Components/Icon/Assets/Fonts';
 
 const listOfExperiences = (experiences) => {
   return (
     <div>
       {experiences.map((experience) => {
         return (
-          <Box>
+          <Box pb={5}>
             <Text fontSize={16} fontWeight="semibold" mb={3}>
               Improving Headspaces
             </Text>
@@ -36,7 +32,7 @@ const listOfExperiences = (experiences) => {
                 ))}
               <Progress w="25%" value={0} colorScheme="orange" rounded="full" />
             </Stack>
-            <Text> Milestone 3/4 </Text>
+            <Text> Milestone 3 / 4 </Text>
           </Box>
         );
       })}
