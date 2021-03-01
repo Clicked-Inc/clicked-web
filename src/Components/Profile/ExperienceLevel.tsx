@@ -12,7 +12,6 @@ import {
   Spacer,
 } from '@chakra-ui/react';
 import Fonts from '../../Components/Icon/Assets/Fonts';
-import Colors from '../../Components/Icon/Assets/Colors';
 
 const listOfSkills = (skills) => {
   return (
@@ -28,8 +27,6 @@ const listOfSkills = (skills) => {
               <Badge
                 textTransform="none"
                 variant="solid"
-                theme={Colors}
-                textStyle="blue"
                 rounded={10}
                 my={5}
                 h={5}
