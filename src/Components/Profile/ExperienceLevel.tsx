@@ -37,7 +37,6 @@ const listOfSkills = (skills) => {
               <Text>Level 1</Text>
               <Spacer />
               <Text>
-                {' '}
                 <b>50 / 500</b> points
               </Text>
             </Stack>

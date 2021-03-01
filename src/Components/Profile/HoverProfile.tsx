@@ -1,20 +1,6 @@
-// import Container from 'react-bootstrap/Container';
-// import { Badge, InputRightElement } from '@chakra-ui/core';
 import React from 'react';
-import {
-  Badge,
-  Progress,
-  Box,
-  Text,
-  Flex,
-  Stack,
-  Center,
-  Image,
-  Spacer,
-  Circle,
-} from '@chakra-ui/react';
+import { Box, Text, Stack, Center, Image, Spacer } from '@chakra-ui/react';
 
-// import Awards from 'src/icons/profile/badge_2.svg';
 import CoursesSummaryCard from './CoursesSummaryCard';
 import Experiences from './Experiences';
 import Badges from './Badges';
@@ -24,24 +10,21 @@ import Fonts from '../../Components/Icon/Assets/Fonts';
 const HoverProfile = () => {
   return (
     <Box w="400px" p={10} justifyContent="center">
-      <div>
-        {/* <img src={Awards}></img> */}
-        <Center>
-          <Image
-            borderRadius="full"
-            boxSize="100px"
-            objectFit="cover"
-            src="https://bit.ly/sage-adebayo"
-            alt="Profile Picture"
-          />
-        </Center>
-        <Text theme={Fonts} textStyle="h1" textAlign="center" mb={0}>
-          Emma Myers
-        </Text>
-        <Text textAlign="center" mt={0}>
-          @emmamyers
-        </Text>
-      </div>
+      <Center>
+        <Image
+          borderRadius="full"
+          boxSize="100px"
+          objectFit="cover"
+          src="https://bit.ly/sage-adebayo"
+          alt="Profile Picture"
+        />
+      </Center>
+      <Text theme={Fonts} textStyle="h1" textAlign="center" mb={0}>
+        Emma Myers
+      </Text>
+      <Text textAlign="center" mt={0}>
+        @emmamyers
+      </Text>
       <ExperienceLevel />
       <Badges />
       <Experiences />
