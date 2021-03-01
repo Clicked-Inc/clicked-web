@@ -1,5 +1,4 @@
 import React from 'react';
-import { Story } from '@storybook/react';
 import { Box, Flex, Text, Spacer, Circle } from '@chakra-ui/react';
 import Fonts from '../../Components/Icon/Assets/Fonts';
 
