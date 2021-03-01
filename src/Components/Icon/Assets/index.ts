@@ -3,6 +3,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Notification from './Icons/notification.svg';
 import NotificationDot from './Icons/notification_dot.svg';
 
@@ -22,6 +23,8 @@ export default {
 >>>>>>> dc1478f... Fix Icon
 =======
 >>>>>>> 807d78e... styling almost done, need to get storyboard and icons to work still
+=======
+>>>>>>> 643f9ba... minor changes
 import Notification from './Icons/notification.svg';
 import NotificationDot from './Icons/notification_dot.svg';
 import BadgeOne from './Icons/badge_one.svg';
@@ -33,6 +36,7 @@ export default {
   CourseLogo,
 >>>>>>> 281bd95... pulling from main
 };
+<<<<<<< HEAD
 =======
 import {ReactComponent as Notification } from "./Icons/notification.svg"
 export default {
@@ -56,3 +60,5 @@ export default {
 >>>>>>> b90eeaa... styling almost done, need to get storyboard and icons to work still
 };
 >>>>>>> 143abe1... Fix Icon
+=======
+>>>>>>> 643f9ba... minor changes

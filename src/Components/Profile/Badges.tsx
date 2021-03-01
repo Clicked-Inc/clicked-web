@@ -1,20 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-import { Story } from '@storybook/react';
-import {
-  Badge,
-  Progress,
-  Box,
-  Text,
-  Flex,
-  extendTheme,
-  Stack,
-  Image,
-  Spacer,
-} from '@chakra-ui/react';
-import Fonts from 'src/Components/Icon/Assets/Fonts';
-
-=======
 import { Wrap, WrapItem, Box, Text, Flex, Spacer } from '@chakra-ui/react';
 import Fonts from '../../Components/Icon/Assets/Fonts';
 
@@ -29,7 +13,6 @@ const listOfBadges = (badges) => {
     </Wrap>
   );
 };
->>>>>>> 6c22e1d... almost done
 const Badges = () => {
   return (
     <Box>
@@ -42,10 +25,7 @@ const Badges = () => {
           View All
         </Text>
       </Flex>
-<<<<<<< HEAD
-=======
       <Box my={2}>{listOfBadges([1, 2, 3, 4, 5, 6, 7, 8])}</Box>
->>>>>>> 6c22e1d... almost done
     </Box>
   );
 };

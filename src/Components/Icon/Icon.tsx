@@ -2,6 +2,7 @@ import React from 'react';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Icon as ChakraIcon, IconProps as ChakraIconProps } from '@chakra-ui/react';
 import Icons from './Assets';
 
@@ -12,15 +13,12 @@ export type IconNames = keyof typeof Icons;
 >>>>>>> 575ed7d... [V1-32] Almost done with Icons
 =======
 >>>>>>> 807d78e... styling almost done, need to get storyboard and icons to work still
+=======
+>>>>>>> 643f9ba... minor changes
 import {
   Icon as ChakraIcon,
   IconProps as ChakraIconProps,
 } from '@chakra-ui/react';
-=======
-=======
->>>>>>> c905ee4... styling almost done, need to get storyboard and icons to work still
-import { Icon as ChakraIcon, IconProps as ChakraIconProps } from '@chakra-ui/react';
->>>>>>> 88b8213... [V1-32] Almost done with Icons
 import Icons from './Assets';
 
 export type IconNames = keyof typeof Icons;
@@ -28,6 +26,7 @@ export type IconNames = keyof typeof Icons;
 >>>>>>> b90eeaa... styling almost done, need to get storyboard and icons to work still
 =======
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> dc1478f... Fix Icon
 =======
@@ -40,6 +39,8 @@ import Icons from './Assets';
 export type IconNames = keyof typeof Icons;
 >>>>>>> b90eeaa... styling almost done, need to get storyboard and icons to work still
 >>>>>>> 807d78e... styling almost done, need to get storyboard and icons to work still
+=======
+>>>>>>> 643f9ba... minor changes
 export type CustomIcon = {
   type?: 'custom';
   name: IconNames;
@@ -47,6 +48,7 @@ export type CustomIcon = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> b90eeaa... styling almost done, need to get storyboard and icons to work still
@@ -58,6 +60,8 @@ export type CustomIcon = {
 =======
 >>>>>>> b90eeaa... styling almost done, need to get storyboard and icons to work still
 >>>>>>> 807d78e... styling almost done, need to get storyboard and icons to work still
+=======
+>>>>>>> 643f9ba... minor changes
 export type ReactIcons = {
   type: 'react-icons';
   as: any;
@@ -65,6 +69,7 @@ export type ReactIcons = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 export type IconProps = CustomIcon | ReactIcons;
 
@@ -84,14 +89,12 @@ export type IconProps = CustomIcon | ReactIcons;
 export type IconProps = CustomIcon | ReactIcons;
 >>>>>>> b90eeaa... styling almost done, need to get storyboard and icons to work still
 >>>>>>> 807d78e... styling almost done, need to get storyboard and icons to work still
+=======
+
+export type IconProps = CustomIcon | ReactIcons;
+
+>>>>>>> 643f9ba... minor changes
 const Icon: React.FC<IconProps> = (props) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  console.log(Icons);
->>>>>>> 88b8213... [V1-32] Almost done with Icons
-=======
->>>>>>> 3027390... [V1-32] Revised spacing, added Icons
   if (props.type === 'react-icons') {
     return <ChakraIcon {...props} />;
   } else {
@@ -101,11 +104,13 @@ const Icon: React.FC<IconProps> = (props) => {
 };
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 export default Icon;
 =======
 export default Icon;
 >>>>>>> 88b8213... [V1-32] Almost done with Icons
 =======
+=======
+>>>>>>> 643f9ba... minor changes
 export default Icon;
->>>>>>> 143abe1... Fix Icon
