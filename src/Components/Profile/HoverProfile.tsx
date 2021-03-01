@@ -9,11 +9,11 @@ import Fonts from '../../Components/Icon/Assets/Fonts';
 
 const HoverProfile = () => {
   return (
-    <Box w="400px" p={10} justifyContent="center">
+    <Box w={400} p={10} justifyContent="center">
       <Center>
         <Image
           borderRadius="full"
-          boxSize="100px"
+          boxSize={100}
           objectFit="cover"
           src="https://bit.ly/sage-adebayo"
           alt="Profile Picture"
