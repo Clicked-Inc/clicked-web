@@ -1,6 +1,10 @@
-import { Document, model, Schema } from 'mongoose';
-import GeoPoint, { IGeoPoint } from './geoPoint';
-import SkillInterest, { ISkillInterest } from './skillInterest';
-import Education, { IEducation } from './education';
-import ExternalExperience, { IExternalExperience } from './externalExperience';
-import User, { IUser } from './user';
+export { default as GeoPoint } from './geoPoint';
+export type { IGeoPoint } from './geoPoint';
+export { default as SkillInterest } from './skillInterest';
+export type { ISkillInterest } from './skillInterest';
+export { default as Education } from './education';
+export type { IEducation } from './education';
+export { default as ExternalExperience } from './externalExperience';
+export type { IExternalExperience } from './externalExperience';
+export { default as User } from './user';
+export type { IUser } from './user';
