@@ -20,28 +20,7 @@ const Badges = ({ badges }) => (
         </WrapItem>
       ))}
     </Wrap>
-<<<<<<< HEAD
-  );
-};
-const Badges = () => {
-  return (
-    <Box>
-      <Flex isInline>
-        <Text theme={Fonts} textStyle="h1">
-          Your Badges
-        </Text>
-        <Spacer />
-        <Text my={5} h={5}>
-          View All
-        </Text>
-      </Flex>
-      <Box my={2}>{listOfBadges([1, 2, 3, 4, 5, 6, 7, 8])}</Box>
-    </Box>
-  );
-};
-=======
   </Box>
 );
 
->>>>>>> d446cac... revised
 export default Badges;

@@ -28,7 +28,12 @@ export default {
 import Notification from './Icons/notification.svg';
 import NotificationDot from './Icons/notification_dot.svg';
 import BadgeOne from './Icons/badge_one.svg';
+<<<<<<< HEAD
 import CourseLogo from './Icons/courses_logo.svg';
+=======
+import CourseLogo from './Icons/course_logo.svg';
+
+>>>>>>> 2913375... done
 export default {
   Notification,
   NotificationDot,
