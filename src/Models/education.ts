@@ -1,20 +1,20 @@
-import { Schema } from 'mongoose';
+import { Document, model, Schema } from 'mongoose';
 
 enum DegreeType {
-  HighSchool,
-  Bachelors,
-  Masters,
-  Doctorate,
+  HighSchool = 0,
+  Bachelors = 1,
+  Masters = 2,
+  Doctorate = 3,
 }
 
-export interface IEducation {
+export interface IEducation extends Document {
   schoolName: string;
   major: string;
   graduatingYear: number;
   degreeType: DegreeType;
 }
 
-export const Education = new Schema({
+const EducationSchema = new Schema({
   schoolName: {
     type: String,
     required: true,
@@ -28,7 +28,10 @@ export const Education = new Schema({
     required: false,
   },
   degreeType: {
-    type: DegreeType,
+    type: Number,
+    enum: Object.values(DegreeType),
     required: true,
   },
 });
+
+export default model<IEducation>('Education', EducationSchema);

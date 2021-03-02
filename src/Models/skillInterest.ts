@@ -1,12 +1,12 @@
-import { Schema } from 'mongoose';
+import { Document, model, Schema } from 'mongoose';
 
-export interface ISkillInterest {
+export interface ISkillInterest extends Document {
   skillName: string;
   progress: number;
   hoursSpent: number;
 }
 
-export const SkillInterest = new Schema({
+export const SkillInterestSchema = new Schema({
   skillName: {
     type: String,
     required: true,
@@ -20,3 +20,5 @@ export const SkillInterest = new Schema({
     required: true,
   },
 });
+
+export default model<ISkillInterest>('SkillInterest', SkillInterestSchema);

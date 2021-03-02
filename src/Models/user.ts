@@ -1,18 +1,26 @@
 import { Document, model, Schema } from 'mongoose';
-import { IGeoPoint, GeoPoint } from './geopoint';
-import { ISkillInterest, SkillInterest } from './skillInterest';
-import { IEducation, Education } from './education';
-import { IExternalExperience, ExternalExperience } from './externalExperience';
+import GeoPoint, { IGeoPoint } from './geoPoint';
+import SkillInterest, { ISkillInterest } from './skillInterest';
+import Education, { IEducation } from './education';
+import ExternalExperience, { IExternalExperience } from './externalExperience';
 
+// TODO: add more aspiration types
 enum AspirationType {
-  Explore,
-  Dive,
+  Explore = 'explore',
+  Dive = 'dive',
 }
 
-// user interface
+enum UserType {
+  Student = 'student',
+  Coach = 'coach',
+  Admin = 'admin',
+}
+
+// User interface
 export interface IUser extends Document {
   email: string;
   username: string;
+  role: UserType;
   password: string;
   firstName: string;
   lastName: string;
@@ -29,6 +37,11 @@ export interface IUser extends Document {
 const UserSchema = new Schema({
   email: {
     type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    enum: Object.values(UserType),
     required: true,
   },
   username: {
@@ -55,12 +68,13 @@ const UserSchema = new Schema({
     required: false,
   },
   education: {
-    type: Education,
+    type: [Education],
     required: false,
   },
   aspirationType: {
-    type: AspirationType,
-    default: AspirationType.Explore,
+    type: String,
+    enum: Object.values(AspirationType),
+    required: true,
   },
   externalExperiences: {
     type: [ExternalExperience],

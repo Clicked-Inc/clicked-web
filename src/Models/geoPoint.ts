@@ -1,12 +1,14 @@
-import { Schema } from 'mongoose';
+import { Document, model, Schema } from 'mongoose';
 
-export interface IGeoPoint {
+export interface IGeoPoint extends Document {
   coordinates: number[];
 }
 
-export const GeoPoint = new Schema({
+const GeoPointSchema = new Schema({
   coordinates: {
     type: [Number],
     required: true,
   },
 });
+
+export default model<IGeoPoint>('GeoPoint', GeoPointSchema);

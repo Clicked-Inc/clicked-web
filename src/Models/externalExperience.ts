@@ -1,29 +1,35 @@
-import { Schema } from 'mongoose';
+import { Document, model, Schema } from 'mongoose';
 
 enum ExternalExperienceType {
-  Course,
-  Career,
+  Course = 0,
+  Career = 1,
 }
 
-export interface IExternalExperience {
-  courseName: string;
-  courseDescription: string;
-  courseLink: string;
+export interface IExternalExperience extends Document {
+  name: string;
+  organization: string;
+  description: string;
+  link: string;
   dateStarted: Date;
   dateCompleted: Date;
   backgroundType: ExternalExperienceType;
+  credentialId: string;
 }
 
-export const ExternalExperience = new Schema({
-  courseName: {
+export const ExternalExperienceSchema = new Schema({
+  name: {
     type: String,
     required: true,
   },
-  courseDescription: {
+  organization: {
+    type: String,
+    required: true,
+  },
+  description: {
     type: String,
     required: false,
   },
-  courseLink: {
+  link: {
     type: String,
     required: true,
   },
@@ -36,7 +42,17 @@ export const ExternalExperience = new Schema({
     required: true,
   },
   backgroundType: {
-    type: ExternalExperienceType,
+    type: Number,
+    enum: Object.values(ExternalExperienceType),
     required: true,
   },
+  credentialId: {
+    type: String,
+    required: false,
+  },
 });
+
+export default model<IExternalExperience>(
+  'ExternalExperience',
+  ExternalExperienceSchema
+);
