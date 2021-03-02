@@ -16,7 +16,6 @@ enum UserType {
   Admin = 'admin',
 }
 
-// User interface
 export interface IUser extends Document {
   email: string;
   username: string;
@@ -24,16 +23,15 @@ export interface IUser extends Document {
   password: string;
   firstName: string;
   lastName: string;
-  profilePic: string;
-  location: IGeoPoint[];
-  education: IEducation;
+  profilePic?: string;
+  location?: IGeoPoint[];
+  education?: IEducation[];
   aspirationType: AspirationType;
-  externalExperiences: IExternalExperience[];
+  externalExperiences?: IExternalExperience[];
   skillInterests: ISkillInterest[];
   points: number;
 }
 
-// Schema
 const UserSchema = new Schema({
   email: {
     type: String,

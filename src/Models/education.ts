@@ -1,16 +1,16 @@
 import { Document, model, Schema } from 'mongoose';
 
 enum DegreeType {
-  HighSchool = 0,
-  Bachelors = 1,
-  Masters = 2,
-  Doctorate = 3,
+  HighSchool = 'highSchool',
+  Bachelors = 'bachelors',
+  Masters = 'masters',
+  Doctorate = 'doctorate',
 }
 
 export interface IEducation extends Document {
   schoolName: string;
   major: string;
-  graduatingYear: number;
+  graduatingYear?: number;
   degreeType: DegreeType;
 }
 
@@ -28,7 +28,7 @@ const EducationSchema = new Schema({
     required: false,
   },
   degreeType: {
-    type: Number,
+    type: String,
     enum: Object.values(DegreeType),
     required: true,
   },

@@ -1,19 +1,19 @@
 import { Document, model, Schema } from 'mongoose';
 
 enum ExternalExperienceType {
-  Course = 0,
-  Career = 1,
+  Course = 'course',
+  Career = 'career',
 }
 
 export interface IExternalExperience extends Document {
   name: string;
   organization: string;
-  description: string;
+  description?: string;
   link: string;
-  dateStarted: Date;
-  dateCompleted: Date;
+  startDate?: Date;
+  completeDate: Date;
   backgroundType: ExternalExperienceType;
-  credentialId: string;
+  credentialId?: string;
 }
 
 export const ExternalExperienceSchema = new Schema({
@@ -33,16 +33,16 @@ export const ExternalExperienceSchema = new Schema({
     type: String,
     required: true,
   },
-  dateStarted: {
+  startDate: {
     type: Date,
     required: false,
   },
-  dateCompleted: {
+  completeDate: {
     type: Date,
     required: true,
   },
   backgroundType: {
-    type: Number,
+    type: String,
     enum: Object.values(ExternalExperienceType),
     required: true,
   },
