@@ -24,6 +24,7 @@
     "@emotion/styled": "^11.1.5",
     "@svgr/webpack": "^5.5.0",
     "framer-motion": "^3.6.2",
+    "mongoose": "^5.11.18",
     "next": "^10.0.7",
     "react": "^17.0.1",
     "react-dom": "17.0.1",
