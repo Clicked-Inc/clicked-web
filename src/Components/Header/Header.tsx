@@ -1,11 +1,20 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 import * as React from 'react';
-import { Input, SimpleGrid, Box, InputGroup, InputRightElement, Flex, Spacer } from "@chakra-ui/react"
-import { SearchIcon } from '@chakra-ui/icons'
-import { Icon } from "../Icon" 
+import {
+  Input,
+  SimpleGrid,
+  Box,
+  InputGroup,
+  InputRightElement,
+  Flex,
+  Spacer,
+} from '@chakra-ui/react';
+import { SearchIcon } from '@chakra-ui/icons';
+import { Icon } from '../Icon';
 
 export default function Header() {
+<<<<<<< HEAD
 =======
 import { Input, SimpleGrid, Box } from "@chakra-ui/react"
 =======
@@ -27,6 +36,10 @@ export default function Header() {
 >>>>>>> 61f3229... [V1-32] Revised spacing, added Icons
   const [value, setValue] = React.useState("")
   const handleChange = (event) => setValue(event.target.value)
+=======
+  const [value, setValue] = React.useState('');
+  const handleChange = (event) => setValue(event.target.value);
+>>>>>>> 3efa6b0... added theme
 
   return (
 <<<<<<< HEAD
@@ -78,9 +91,15 @@ export default function Header() {
               fontSize={14}
 >>>>>>> 61f3229... [V1-32] Revised spacing, added Icons
             />
-            <InputRightElement mt={3} h={3.75} w={3.75} children={<SearchIcon h={4} w={4} />}/>
+            <InputRightElement
+              mt={3}
+              h={3.75}
+              w={3.75}
+              children={<SearchIcon h={4} w={4} />}
+            />
           </InputGroup>
         </Box>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         <div>
@@ -98,13 +117,23 @@ export default function Header() {
           <Box mr={5}>
 >>>>>>> 2495692... [V1-32] Revised Stories and positioning
             <Icon name="Notification"/>
+=======
+        <Spacer />
+        <Box mr={40} mt={6}>
+          <Box mr={5}>
+            <Icon name="Notification" />
+>>>>>>> 3efa6b0... added theme
           </Box>
           <Box mt={-5} ml={2.5}>
-            <Icon name="NotificationDot"/>
+            <Icon name="NotificationDot" />
           </Box>
         </Box>
       </Flex>
     </Box>
+<<<<<<< HEAD
 >>>>>>> 61f3229... [V1-32] Revised spacing, added Icons
   )
+=======
+  );
+>>>>>>> 3efa6b0... added theme
 }

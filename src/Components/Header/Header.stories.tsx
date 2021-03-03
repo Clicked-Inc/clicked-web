@@ -9,10 +9,9 @@ export default {
   title: 'Header',
 };
 
-const Template: Story = () => (
-  <Header />
-);
+const Template: Story = () => <Header />;
 export const Default = Template.bind({});
+<<<<<<< HEAD
 
 
 =======
@@ -44,3 +43,5 @@ Archived.args = {
 >>>>>>> 575ed7d... [V1-32] Almost done with Icons
 =======
 >>>>>>> 61f3229... [V1-32] Revised spacing, added Icons
+=======
+>>>>>>> 3efa6b0... added theme

@@ -13,17 +13,19 @@ const ExperienceLevel = ({ skills }) =>
   skills.map((i) => (
     <Box key={i}>
       <Flex isInline>
-        <Text fontSize={19} fontWeight="bold" lineHeight="110%" my={5}>
+        <Text textStyle="h1" my={4}>
           Explorer
         </Text>
         <Spacer />
         <Badge
           textTransform="none"
-          colorScheme="blackAlpha"
+          bg="gray.100"
+          color="black"
           variant="solid"
+          fontSize="md"
           rounded={10}
-          my={5}
-          h={5}
+          my={3}
+          h={6}
         >
           UI/UX
         </Badge>
