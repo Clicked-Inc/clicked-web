@@ -16,19 +16,12 @@ const Experiences = ({ experiences }) => (
         Experiences
       </Text>
       <Spacer />
-      <Circle
-        size={6}
-        bg="red.400"
-        color="white"
-        my={5}
-        h={5}
-        fontWeight="bold"
-      >
+      <Circle size={6} bg="red.400" color="white" fontWeight="bold" my={5}>
         2
       </Circle>
     </Flex>
     {experiences.map((i) => (
-      <Box pb={5} key={i}>
+      <Box key={i}>
         <Text fontSize="md" fontWeight="semibold" mb={3}>
           Improving Headspaces
         </Text>

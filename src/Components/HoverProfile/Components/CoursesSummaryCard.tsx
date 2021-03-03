@@ -5,18 +5,9 @@ import { Icon } from '../../Icon';
 const CoursesSummaryCard = () => (
   <Box>
     <Flex isInline>
-      <Text textStyle="h1" my={5}>
-        Courses
-      </Text>
+      <Text textStyle="h1">Courses</Text>
       <Spacer />
-      <Circle
-        size={6}
-        bg="red.400"
-        color="white"
-        fontWeight="bold"
-        my={5}
-        h={5}
-      >
+      <Circle size={6} bg="red.400" color="white" fontWeight="bold" my={5}>
         2
       </Circle>
     </Flex>
