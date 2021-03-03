@@ -3,7 +3,6 @@ import GeoPoint, { IGeoPoint } from './geoPoint';
 import SkillInterest, { ISkillInterest } from './skillInterest';
 import Education, { IEducation } from './education';
 import ExternalExperience, { IExternalExperience } from './externalExperience';
-
 // TODO: add more aspiration types
 enum AspirationType {
   Explore = 'explore',
@@ -29,7 +28,7 @@ export interface IUser extends Document {
   aspirationType: AspirationType;
   externalExperiences?: IExternalExperience[];
   skillInterests: ISkillInterest[];
-  points: number;
+  points?: number;
 }
 
 const UserSchema = new Schema({
@@ -85,6 +84,7 @@ const UserSchema = new Schema({
   points: {
     type: Number,
     default: 0,
+    required: false,
   },
 });
 
