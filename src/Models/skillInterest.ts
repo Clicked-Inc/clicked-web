@@ -14,10 +14,12 @@ export const SkillInterestSchema = new Schema({
   progress: {
     type: Number,
     default: 0,
+    required: false,
   },
   hoursSpent: {
     type: Number,
     default: 0,
+    required: false,
   },
 });
 

@@ -61,11 +61,11 @@ const UserSchema = new Schema({
     required: false,
   },
   location: {
-    type: [GeoPoint],
+    type: [GeoPoint.schema],
     required: false,
   },
   education: {
-    type: [Education],
+    type: [Education.schema],
     required: false,
   },
   aspirationType: {
@@ -74,11 +74,11 @@ const UserSchema = new Schema({
     required: true,
   },
   externalExperiences: {
-    type: [ExternalExperience],
+    type: [ExternalExperience.schema],
     required: false,
   },
   skillInterests: {
-    type: [SkillInterest],
+    type: [SkillInterest.schema],
     required: true,
   },
   points: {

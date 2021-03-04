@@ -1,15 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '../../../src/Models/index';
+import connect from '../../../Utils/databaseConnection';
 
 const generateSkillInterests = (arr): Models.ISkillInterest[] => {
-  // export interface ISkillInterest extends Document {
-  //   skillName: string;
-  //   progress: number;
-  //   hoursSpent: number;
-  // }
   const skillInterestArray: Models.ISkillInterest[] = [];
   arr.forEach((skillName) => {
-    const skillInterest = new Models.SkillInterest(skillName);
+    const skillInterest = new Models.SkillInterest({
+      skillName: skillName,
+    });
     skillInterestArray.push(skillInterest);
   });
   return skillInterestArray;
@@ -23,6 +21,7 @@ export default async function registrationHandler(
     return;
   }
   try {
+    await connect();
     const {
       email,
       username,
