@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Flex, Text, Spacer, Circle } from '@chakra-ui/react';
-import { Icon } from '../../Icon';
+import { Icon } from '../../../Icon';
 
 const CoursesSummaryCard = () => (
   <Box>

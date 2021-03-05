@@ -2,6 +2,7 @@ import React from 'react';
 import { RouterContext } from 'next/dist/next-server/lib/router-context';
 import { ChakraProvider } from '@chakra-ui/react';
 import * as nextImage from 'next/image';
+import PageWrapper from '../src/Components/PageWrapper';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -22,9 +23,10 @@ export const decorators = [
   ),
   (Story) => (
     <ChakraProvider resetCSS>
-        <Story />
+      <Story />
     </ChakraProvider>
   ),
+  (Story) => <PageWrapper>{Story()}</PageWrapper>,
 ];
 
 //Overriding the next/image component with a responsive image in all storybooks
