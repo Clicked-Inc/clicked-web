@@ -2,7 +2,6 @@ import { IUser } from '@Models/user';
 import { Document, model, Schema } from 'mongoose';
 import { User } from '..';
 
-
 enum DateType {
     Start = 'start',
     End = 'end',
