@@ -4,8 +4,8 @@ import { IUser, User } from '..';
 
 
 enum FeedbackType {
-    Private = 'Private',
-    Public = 'Public'
+    Private = 'private',
+    Public = 'public'
   }
 
 export interface IFeedback extends Document {

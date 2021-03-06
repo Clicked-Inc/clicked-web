@@ -2,7 +2,7 @@ import { IUser } from '@Models/user';
 import { Document, model, Schema } from 'mongoose';
 import { User } from '..';
 
-enum DateType {
+enum DateRangeType {
     Start = 'start',
     End = 'end',
 }
@@ -14,7 +14,7 @@ enum UserType {
 
 export interface IExperienceUsers extends Document {
     user: IUser,
-    dateType: DateType, 
+    dateType: DateRangeType, 
     userType: UserType,
     date: Date,
   }
@@ -26,7 +26,7 @@ const ExperienceUserSchema = new Schema({
     },
     dateType: {
         type: String,
-        enum: Object.values(DateType),
+        enum: Object.values(DateRangeType),
         required: true,
     }, 
     userType: {
