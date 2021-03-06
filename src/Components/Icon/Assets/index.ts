@@ -4,8 +4,6 @@ import BadgeOne from './Icons/badge_one.svg';
 import CourseLogo from './Icons/course_logo.svg';
 import InkIcon from './Icons/ink_icon.svg';
 
-
-
 export default {
   Notification,
   NotificationDot,

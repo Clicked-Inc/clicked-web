@@ -1,44 +1,44 @@
 import React from 'react';
 import { Story } from '@storybook/react';
-import Tags from './Tags';
+import Tag from './Tag';
 
 export default {
-  component: Tags,
-  title: 'Tags',
+  component: Tag,
+  title: 'Tag',
 };
 
 const Template1: Story = () => (
-  <Tags type="orange_white_small" name="Tag Name"/>
+  <Tag type="orange_white_small" label="Tag Name" icon=""/>
 );
 export const OrangeWhiteSmall = Template1.bind({});
 
 const Template2: Story = () => (
-  <Tags type="gray_black_small" name="Tag Name"/>
+  <Tag type="gray_black_small" label="Tag Name" icon=""/>
 );
 export const GrayBlackSmall = Template2.bind({});
 
 const Template3: Story = () => (
-  <Tags type="orange_white_medium" name="Tag Name"/>
+  <Tag type="orange_white_medium" label="Tag Name" icon=""/>
 );
 export const OrangeWhiteMedium = Template3.bind({});
 
 const Template4: Story = () => (
-  <Tags type="white_gray_medium" name="Tag Name"/>
+  <Tag type="white_gray_medium" label="Tag Name" icon=""/>
 );
 export const WhiteGrayMedium = Template4.bind({});
 
 const Template5: Story = () => (
-  <Tags type="orange_white_icon" name="Tag Name" icon="InkIcon"/>
+  <Tag type="orange_white_icon" label="Tag Name" icon="InkIcon"/>
 );
 export const OrangeWhiteIcon = Template5.bind({});
 
 const Template6: Story = () => (
-  <Tags type="white_gray_icon1" name="Tag Name" icon="InkIcon"/>
+  <Tag type="white_gray_icon1" label="Tag Name" icon="InkIcon"/>
 );
 export const WhiteGrayIconL = Template6.bind({});
 
 const Template7: Story = () => (
-  <Tags type="white_gray_icon2" name="Tag Name" icon="InkIcon"/>
+  <Tag type="white_gray_icon2" label="Tag Name" icon="InkIcon"/>
 );
 export const WhiteGrayIconM = Template7.bind({});
 

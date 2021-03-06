@@ -1,11 +1,17 @@
-import * as React from 'react';
-import { Box, Tag, TagLabel,TagLeftIcon, Avatar } from "@chakra-ui/react"
+import React from 'react';
+import { Box, Tag as ChakraTag, TagLabel,TagLeftIcon, Avatar } from "@chakra-ui/react"
 import { Icon } from "../Icon" 
 
-export default function Tags(props) {
-  const type = props.type;
-  const name = props.name;
-  const icon = props.icon;
+type TagProps = {
+  type: string;
+  label: string;
+  icon: string;
+}
+
+const Tag: React.FC<TagProps> = ({ type, label, icon }) => {
+  // const type = props.type;
+  // const name = props.name;
+  // const icon = props.icon;
 
   var size = "";
   var font = "";
@@ -52,21 +58,22 @@ export default function Tags(props) {
   }
 
   var addIcon = <hr/>;
-  if (typeof icon != 'undefined') {
+  if (icon != "") {
     addIcon = (
-      <Box display={typeof icon != 'undefined' ? "show" : "none"} mr={2}>
+      <Box display={ icon != "" ? "show" : "none" } mr={2}>
           <Icon name={icon}/>
       </Box>
     )
-    
   }
 
   return (
     <Box>
-      <Tag size={size} key={size} variant="subtle" bgColor={colorScheme} borderRadius="16px">
+      <ChakraTag size={size} key={size} variant="subtle" bgColor={colorScheme} borderRadius="16px">
         {addIcon}
-        <TagLabel fontStyle="Avenir Next Cyr" color={font} fontWeight={weight}>{name}</TagLabel>
-      </Tag>
+        <TagLabel fontStyle="Avenir Next Cyr" color={font} fontWeight={weight}>{label}</TagLabel>
+      </ChakraTag>
     </Box>
   )
 }
+
+export default Tag;
