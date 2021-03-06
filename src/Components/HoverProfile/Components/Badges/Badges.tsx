@@ -5,7 +5,7 @@ import { Icon } from '../../../Icon';
 const Badges = ({ badges }) => (
   <Box mb={3}>
     <Flex isInline>
-      <Text textStyle="h1">Your Badges</Text>
+      <Text textStyle="Header1">Your Badges</Text>
       <Spacer />
       <Text my={5} fontSize="md">
         View All

@@ -13,7 +13,7 @@ const ExperienceLevel = ({ skills }) =>
   skills.map((i) => (
     <Box key={i}>
       <Flex isInline>
-        <Text textStyle="h1" my={4}>
+        <Text textStyle="Header1" my={4}>
           Explorer
         </Text>
         <Spacer />

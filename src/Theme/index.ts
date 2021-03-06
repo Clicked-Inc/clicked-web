@@ -2,7 +2,7 @@ import { extendTheme, ThemeOverride } from '@chakra-ui/react';
 
 const theme: ThemeOverride = {
   textStyles: {
-    h1: {
+    Header1: {
       fontSize: 'lg',
       fontWeight: 'bold',
       lineHeight: '110%',

@@ -12,7 +12,7 @@ import {
 const Experiences = ({ experiences }) => (
   <Box>
     <Flex isInline>
-      <Text textStyle="h1" textAlign="center">
+      <Text textStyle="Header1" textAlign="center">
         Experiences
       </Text>
       <Spacer />

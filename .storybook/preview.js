@@ -22,11 +22,10 @@ export const decorators = [
     </RouterContext.Provider>
   ),
   (Story) => (
-    <ChakraProvider resetCSS>
+    <PageWrapper resetCSS>
       <Story />
-    </ChakraProvider>
+    </PageWrapper>
   ),
-  (Story) => <PageWrapper>{Story()}</PageWrapper>,
 ];
 
 //Overriding the next/image component with a responsive image in all storybooks

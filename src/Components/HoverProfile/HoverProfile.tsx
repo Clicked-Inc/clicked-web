@@ -18,7 +18,7 @@ const HoverProfile = () => (
         alt="Profile Picture"
       />
     </Center>
-    <Text textStyle="h1" textAlign="center" mb={0}>
+    <Text textStyle="Header1" textAlign="center" mb={0}>
       Emma Myers
     </Text>
     <Text textAlign="center" mt={0}>
