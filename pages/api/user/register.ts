@@ -2,20 +2,19 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '../../../src/Models/index';
 import connect from '../../../Utils/databaseConnection';
 
-const generateSkillInterests = (arr): Models.ISkillInterest[] => {
-  const skillInterestArray: Models.ISkillInterest[] = [];
-  arr.forEach((skillName) => {
-    const skillInterest = new Models.SkillInterest({
-      skillName: skillName,
-    });
-    skillInterestArray.push(skillInterest);
-  });
+const generateSkillInterests = (
+  skillNames: string[]
+): Models.ISkillInterest[] => {
+  const skillInterestArray: Models.ISkillInterest[] = skillNames.map(
+    (skillName) => new Models.SkillInterest({ skillName })
+  );
   return skillInterestArray;
 };
-export default async function registrationHandler(
+
+const registrationHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
-): Promise<void> {
+): Promise<void> => {
   if (req.method !== 'POST') {
     res.status(421).json({ message: 'Incorrect request type' });
     return;
@@ -57,4 +56,6 @@ export default async function registrationHandler(
     // TODO: more specific error codes based on situation
     res.status(400).json({ message: 'Registration failed' });
   }
-}
+};
+
+export default registrationHandler;

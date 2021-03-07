@@ -23,7 +23,6 @@
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
     "@svgr/webpack": "^5.5.0",
-    "dotenv": "^8.2.0",
     "framer-motion": "^3.6.2",
     "mongoose": "^5.11.18",
     "next": "^10.0.7",

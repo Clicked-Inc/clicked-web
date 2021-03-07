@@ -1,12 +1,9 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-dotenv.config();
 
-async function connect() {
+const connect = async (): Promise<void> => {
   if (mongoose.connection.readyState >= 1) {
     return;
   }
-
   return mongoose
     .connect(process.env.DB_URI, {
       useNewUrlParser: true,
@@ -16,5 +13,5 @@ async function connect() {
     })
     .then(() => console.log('MongoDB successfully connected'))
     .catch((err) => console.log(err));
-}
+};
 export default connect;
