@@ -13,7 +13,7 @@ enum UserType {
 }
 
 export interface IExperienceUsers extends Document {
-    user: IUser,
+    user: string[],
     dateType: DateRangeType, 
     userType: UserType,
     date: Date,
@@ -21,7 +21,7 @@ export interface IExperienceUsers extends Document {
 
 const ExperienceUserSchema = new Schema({
     user: {
-        type: [User],
+        type: [String],
         required: true,
     },
     dateType: {

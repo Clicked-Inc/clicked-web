@@ -51,7 +51,7 @@ enum CategoryType {
         required: true,
       },
       coach: {
-          type: User, 
+          type: String, //UserID 
           required: true, 
           validate: [coachValidator, 'This user is not a coach'],
       }, 
