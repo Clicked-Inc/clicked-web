@@ -11,64 +11,90 @@ const experienceHandler = async (
     method,
   } = req;
 
-  await connect();
+  try {
+    await connect();
 
-  switch (method) {
-    case 'GET' /* Get a model by its ID */:
-      try {
-        const experience = await Models.Experience.findById(id);
-        if (!experience) {
-          return res.status(400).json({ success: false });
-        }
-        //ADD THAT IF ID == NULL, RETURN ALL EXPERIENCES
-        res.status(200).json({ success: true, data: experience });
-      } catch (error) {
-        res
-          .status(400)
-          .json({ success: false, message: 'Getting Experience failed' });
-      }
-      break;
-
-    case 'PUT' /* Edit a model by its ID */:
-      try {
-        const experience = await Models.Experience.findByIdAndUpdate(
-          id,
-          req.body,
-          {
-            new: true,
-            runValidators: true,
+    switch (method) {
+      case 'GET' /* Get a model by its ID */:
+        try {
+          const experience = await Models.Experience.find({ _id: id });
+          if (!experience) {
+            return res.status(400).json({ success: false });
           }
-        );
-        if (!experience) {
-          return res.status(400).json({ success: false });
+          res.status(200).json({ success: true, data: experience });
+        } catch (error) {
+          res
+            .status(400)
+            .json({ success: false, message: 'Getting Experience failed' });
         }
-        res.status(200).json({ success: true, data: experience });
-      } catch (error) {
-        res
-          .status(400)
-          .json({ success: false, message: 'Editing Experience failed' });
-      }
-      break;
+        break;
 
-    case 'DELETE' /* Delete a model by its ID */:
-      try {
-        const deletedExperience = await Models.Experience.deleteOne({
-          _id: id,
+      case 'PUT' /* Edit a model by its ID */:
+        try {
+          const experience = await Models.Experience.findByIdAndUpdate(
+            id,
+            req.body,
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          if (!experience) {
+            return res.status(400).json({ success: false });
+          }
+          res.status(200).json({ success: true, data: experience });
+        } catch (error) {
+          res
+            .status(400)
+            .json({ success: false, message: 'Editing Experience failed' });
+        }
+        break;
+
+      case 'DELETE' /* Delete a model by its ID */:
+        try {
+          const deletedExperience = await Models.Experience.deleteOne({
+            _id: id,
+          });
+          if (!deletedExperience) {
+            return res.status(400).json({ success: false });
+          }
+          res.status(200).json({ success: true, data: {} });
+        } catch (error) {
+          res.status(400).json({ success: false });
+        }
+        break;
+
+      case 'POST' /* Create a experience in the database */:
+        try {
+          const experience: Models.IExperience = new Models.Experience(
+            req.body
+          );
+          await experience.save((err) => {
+            if (err) {
+              res
+                .status(400)
+                .json({ message: 'Failed to add experience to the databse' });
+              return;
+            }
+          });
+          res
+            .status(200)
+            .json({ message: 'Experience added to the database!' });
+        } catch (error) {
+          res.status(400).json({ success: false });
+        }
+        break;
+
+      default:
+        res.status(400).json({
+          success: false,
+          message:
+            'Request was not one of the following: Post, Get, Delete, Put',
         });
-        if (!deletedExperience) {
-          return res.status(400).json({ success: false });
-        }
-        res.status(200).json({ success: true, data: {} });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
-
-    default:
-      res
-        .status(400)
-        .json({ success: false, message: 'Deleting Experience failed' });
-      break;
+        break;
+    }
+  } catch (error) {
+    res.status(400).json({ message: 'Database could not be connected.' });
   }
 };
 
