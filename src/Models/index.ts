@@ -17,10 +17,10 @@ export type { IExperience } from './ExperienceFolder/experience';
 export { default as ExperienceUsers } from './ExperienceFolder/experienceUsers';
 export type { IExperienceUsers } from './ExperienceFolder/experienceUsers';
 export { default as SkillScore } from './ExperienceFolder/skillScore';
-export type { ISkillScore  } from './ExperienceFolder/skillScore';
+export type { ISkillScore } from './ExperienceFolder/skillScore';
 
 /**
  * Feedback Schemas
  */
- export { default as Feedback } from './Feedback/feedback';
- export type { IFeedback  } from './Feedback/feedback';
+export { default as Feedback } from './Feedback/feedback';
+export type { IFeedback } from './Feedback/feedback';

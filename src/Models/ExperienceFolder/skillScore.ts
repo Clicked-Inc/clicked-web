@@ -13,7 +13,7 @@ export const SkillScoreSchema = new Schema({
   score: {
     type: Number,
     required: true,
-  }
+  },
 });
 
-export default model<ISkillScore>('SkillScore', SkillScoreSchema );
+export default model<ISkillScore>('SkillScore', SkillScoreSchema);
