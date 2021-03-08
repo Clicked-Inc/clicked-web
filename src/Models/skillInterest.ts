@@ -2,8 +2,8 @@ import { Document, model, Schema } from 'mongoose';
 
 export interface ISkillInterest extends Document {
   skillName: string;
-  progress: number;
-  hoursSpent: number;
+  progress?: number;
+  hoursSpent?: number;
 }
 
 export const SkillInterestSchema = new Schema({
@@ -13,11 +13,13 @@ export const SkillInterestSchema = new Schema({
   },
   progress: {
     type: Number,
-    required: true,
+    default: 0,
+    required: false,
   },
   hoursSpent: {
     type: Number,
-    required: true,
+    default: 0,
+    required: false,
   },
 });
 
