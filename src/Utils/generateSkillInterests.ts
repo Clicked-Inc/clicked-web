@@ -1,4 +1,5 @@
 import * as Models from '@Models/index';
+
 const generateSkillInterests = (
   skillNames: string[]
 ): Models.ISkillInterest[] => {

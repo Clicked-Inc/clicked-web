@@ -4,8 +4,9 @@ const connect = async (): Promise<void> => {
   if (mongoose.connection.readyState >= 1) {
     return;
   }
+  const uri: string = process.env.DB_URI || 'mongodb://localhost:27017/clicked';
   return mongoose
-    .connect(process.env.DB_URI, {
+    .connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
