@@ -1,9 +1,9 @@
 import { NativeError } from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
-import * as Models from '../../../src/Models/index';
-import connect from '../../../Utils/databaseConnection';
+import * as Models from '@Models/index';
+import connect from '@Utils/databaseConnection';
 
-const getHandler = async (
+const retrieveUserHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
@@ -34,4 +34,4 @@ const getHandler = async (
   }
 };
 
-export default getHandler;
+export default retrieveUserHandler;

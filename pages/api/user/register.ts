@@ -1,16 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import * as Models from '../../../src/Models/index';
-import connect from '../../../Utils/databaseConnection';
-
-const generateSkillInterests = (
-  skillNames: string[]
-): Models.ISkillInterest[] => {
-  const skillInterestArray: Models.ISkillInterest[] = skillNames.map(
-    (skillName) => new Models.SkillInterest({ skillName })
-  );
-  return skillInterestArray;
-};
-
+import * as Models from '@Models/index';
+import connect from '@Utils/databaseConnection';
+import generateSkillInterests from '@Utils/generateSkillInterests';
 const registrationHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
