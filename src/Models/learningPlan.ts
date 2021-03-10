@@ -1,18 +1,18 @@
 import { Document, model, Schema } from 'mongoose';
+import Experience, { IExperience } from './ExperienceFolder/experience';
 
 enum TierType {
-  SelfDiscovery = 'self discovery',
+  SelfDiscovery = 'selfDiscovery',
   Pathfinder = 'pathfinder',
-  FirstStep = 'first step',
+  FirstStep = 'firstStep',
   Launch = 'launch',
 }
 
-// TODO: Waiting on Experience schema
 export interface ILearningPlan extends Document {
   skillName: string;
   tier: TierType;
-  // completedExperiences: Experience[];
-  // currentExperiences: Experience[];
+  completedExperiences: IExperience[];
+  currentExperiences: IExperience[];
 }
 
 const LearningPlanSchema = new Schema({
@@ -25,14 +25,14 @@ const LearningPlanSchema = new Schema({
     enum: Object.values(TierType),
     required: true,
   },
-  // completedExperiences: {
-  //   type: [Experience],
-  //   required: true,
-  // },
-  // currentExperiences: {
-  //   type: [Experience],
-  //   required: true,
-  // },
+  completedExperiences: {
+    type: [Experience.schema],
+    required: true,
+  },
+  currentExperiences: {
+    type: [Experience.schema],
+    required: true,
+  },
 });
 
 export default model<ILearningPlan>('LearningPlan', LearningPlanSchema);
