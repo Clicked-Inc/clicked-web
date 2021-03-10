@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import generateSkillInterests from '@Utils/generateSkillInterests';
+import { hash } from 'bcrypt';
+
 const registrationHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
