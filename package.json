@@ -26,6 +26,7 @@
     "@emotion/styled": "^11.1.5",
     "@svgr/webpack": "^5.5.0",
     "@types/mongodb": "^3.6.8",
+    "bcrypt": "^5.0.1",
     "framer-motion": "^3.6.2",
     "mongoose": "^5.11.18",
     "next": "^10.0.7",

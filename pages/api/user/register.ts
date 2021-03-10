@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '../../../src/Models/index';
 import connect from '../../../Utils/databaseConnection';
+import { hash } from 'bcrypt';
 
 const generateSkillInterests = (
   skillNames: string[]
@@ -19,6 +20,7 @@ const registrationHandler = async (
     res.status(421).json({ message: 'Incorrect request type' });
     return;
   }
+
   try {
     await connect();
     const {
@@ -35,23 +37,27 @@ const registrationHandler = async (
       skillInterests
     );
     // TODO: create hooks for User schema to encrypt password, validate email, etc.
-    const user: Models.IUser = new Models.User({
-      email: email,
-      username: username,
-      role: role,
-      password: password,
-      firstName: firstName,
-      lastName: lastName,
-      aspirationType: aspirationType,
-      skillInterests: skillInterestArray,
+
+    hash(req.body.password, 10, async function (err, hash) {
+      // Store hash in your password DB.
+      const user: Models.IUser = new Models.User({
+        email: email,
+        username: username,
+        role: role,
+        password: hash,
+        firstName: firstName,
+        lastName: lastName,
+        aspirationType: aspirationType,
+        skillInterests: skillInterestArray,
+      });
+      await user.save((err) => {
+        if (err) {
+          res.status(400).json({ message: 'Registration failed' });
+          return;
+        }
+      });
+      res.status(200).json({ message: 'Registration successful', user: user });
     });
-    await user.save((err) => {
-      if (err) {
-        res.status(400).json({ message: 'Registration failed' });
-        return;
-      }
-    });
-    res.status(200).json({ message: 'Registration successful' });
   } catch (e) {
     // TODO: more specific error codes based on situation
     res.status(400).json({ message: 'Registration failed' });
