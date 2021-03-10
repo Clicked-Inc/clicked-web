@@ -24,7 +24,7 @@ const retrieveUserHandler = async (
       }
     );
     if (user) {
-      res.status(200).json({ message: 'User found', user: user });
+      res.status(200).json({ message: 'User found' });
       return;
     }
     res.status(404).json({ message: 'User not found.' });
