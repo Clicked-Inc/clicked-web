@@ -16,7 +16,7 @@ const loginHandler = async (
 
   try {
     await connect();
-    const { email } = req.body;
+    const { email, password } = req.body;
 
     // Retrieve user with the given email
     const user: Models.IUser = await Models.User.findOne(
@@ -29,7 +29,7 @@ const loginHandler = async (
       }
     );
 
-    compare(req.body.password, user.password, function (err, result) {
+    compare(password, user.password, function (err, result) {
       const secretKey: string = process.env.JWT_SECRET;
       // result == true
       if (!err && result) {

@@ -28,7 +28,7 @@ const registrationHandler = async (
     );
     // TODO: create hooks for User schema to encrypt password, validate email, etc.
 
-    hash(req.body.password, 10, async function (err, hash) {
+    hash(password, 10, async function (err, hash) {
       // Store hash in your password DB.
       const user: Models.IUser = new Models.User({
         email: email,
