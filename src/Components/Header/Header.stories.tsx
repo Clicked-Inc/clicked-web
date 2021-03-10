@@ -7,9 +7,5 @@ export default {
   title: 'Header',
 };
 
-const Template: Story = () => (
-  <Header />
-);
+const Template: Story = () => <Header />;
 export const Default = Template.bind({});
-
-

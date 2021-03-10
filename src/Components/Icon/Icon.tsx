@@ -1,5 +1,8 @@
 import React from 'react';
-import { Icon as ChakraIcon, IconProps as ChakraIconProps } from '@chakra-ui/react';
+import {
+  Icon as ChakraIcon,
+  IconProps as ChakraIconProps,
+} from '@chakra-ui/react';
 import Icons from './Assets';
 
 export type IconNames = keyof typeof Icons;

@@ -25,4 +25,3 @@ const Template2: Story<IconProps> = () => (
   </Box>
 );
 export const ReactIcons = Template2.bind({});
-
