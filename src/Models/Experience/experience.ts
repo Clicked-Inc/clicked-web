@@ -1,6 +1,6 @@
-import Feedback, { IFeedback } from '@Models/Feedback/feedback';
-import { Document, model, Schema } from 'mongoose';
-import { IUser, User } from '..';
+import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
+import Feedback, { IFeedback } from '../Feedback/feedback';
+import { IUser } from '../user';
 import ExperienceUsers, { IExperienceUsers } from './experienceUsers';
 import SkillScore, { ISkillScore } from './skillScore';
 
@@ -23,11 +23,9 @@ export interface IExperience extends Document {
   name: string;
   category: CategoryType;
   experienceType: ExperienceType;
-  coach: IUser;
-  // learningPlan: string; //TO CHANGE: Reference to learning plans?
+  coach: ObjectId;
   targetSkill: ISkillScore[];
-  feedback: IFeedback[];
-  // TODO: Add feedback Schema
+  feedback: IFeedback[]; //TODO: Change this to a reference to objectID instead?
   averageRating?: number;
   currentUsers: IExperienceUsers;
   previousUsers: IExperienceUsers;
@@ -49,21 +47,17 @@ const ExperienceSchema = new Schema({
     required: true,
   },
   coach: {
-    type: String, //UserID
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
     validate: [coachValidator, 'This user is not a coach'],
   },
-  learningPlan: {
-    //TODO: Change this
-    type: String,
-    required: true,
-  },
   targetSkill: {
-    type: [SkillScore],
+    type: [SkillScore.schema],
     required: true,
   },
   feedback: {
-    type: [Feedback],
+    type: [Feedback.schema],
     required: false,
   },
   averageRating: {
@@ -72,11 +66,11 @@ const ExperienceSchema = new Schema({
     required: false, //Not Required if has not been completed before
   },
   currentUsers: {
-    type: [ExperienceUsers],
+    type: [ExperienceUsers.schema],
     required: true,
   },
   previousUsers: {
-    type: [ExperienceUsers],
+    type: [ExperienceUsers.schema],
     required: true,
   },
 });

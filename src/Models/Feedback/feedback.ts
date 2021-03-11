@@ -1,6 +1,4 @@
-import Experience, { IExperience } from '@Models/Experience/experience';
-import { Document, model, Schema } from 'mongoose';
-import { IUser, User } from '..';
+import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
 
 enum FeedbackType {
   Private = 'private',
@@ -8,9 +6,9 @@ enum FeedbackType {
 }
 
 export interface IFeedback extends Document {
-  user: IUser;
-  coach: IUser;
-  experience: IExperience;
+  user: ObjectId;
+  coach: ObjectId;
+  experience: ObjectId;
   privacy: FeedbackType;
   feedbackText: string;
   enjoyabilityRating: number;
@@ -21,15 +19,18 @@ export interface IFeedback extends Document {
 
 const FeedbackSchema = new Schema({
   user: {
-    type: User,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   coach: {
-    type: User,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
   },
   experience: {
-    type: Experience,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Experience',
     required: true,
   },
   privacy: {

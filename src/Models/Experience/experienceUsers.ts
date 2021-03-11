@@ -1,6 +1,4 @@
-import { IUser } from '@Models/user';
-import { Document, model, Schema } from 'mongoose';
-import { User } from '..';
+import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
 
 enum DateRangeType {
   Start = 'start',
@@ -13,7 +11,7 @@ enum UserType {
 }
 
 export interface IExperienceUsers extends Document {
-  user: string[];
+  user: ObjectId[];
   dateType: DateRangeType;
   userType: UserType;
   date: Date;
@@ -21,7 +19,8 @@ export interface IExperienceUsers extends Document {
 
 const ExperienceUserSchema = new Schema({
   user: {
-    type: [String],
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'User',
     required: true,
   },
   dateType: {
