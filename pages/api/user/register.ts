@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { hash } from 'bcrypt';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import generateSkillInterests from '@Utils/generateSkillInterests';
-import { hash } from 'bcrypt';
 
 const registrationHandler = async (
   req: NextApiRequest,
@@ -30,7 +30,7 @@ const registrationHandler = async (
     );
     // TODO: create hooks for User schema to encrypt password, validate email, etc.
 
-    hash(password, 10, async function (err, hash) {
+    hash(password, Number(process.env.saltRounds), async (err, hash) => {
       // Store hash in your password DB.
       const user: Models.IUser = new Models.User({
         email: email,

@@ -1,10 +1,10 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import { verify } from 'jsonwebtoken';
 
-export const authenticate = (fn: NextApiHandler) => async (
+const authenticate = (fn: NextApiHandler) => async (
   req: NextApiRequest,
   res: NextApiResponse
-) => {
+): Promise<void> => {
   verify(
     req.headers.authorization,
     process.env.JWT_SECRET,

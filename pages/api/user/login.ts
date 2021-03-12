@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { NativeError, Model } from 'mongoose';
-import * as Models from '../../../src/Models/index';
-import connect from '../../../Utils/databaseConnection';
+import { NativeError } from 'mongoose';
 import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
+import * as Models from '@Models/index';
+import connect from '@Utils/databaseConnection';
 
 const loginHandler = async (
   req: NextApiRequest,
@@ -29,7 +29,7 @@ const loginHandler = async (
       }
     );
 
-    compare(password, user.password, function (err, result) {
+    compare(password, user.password, (err, result) => {
       const secretKey: string = process.env.JWT_SECRET;
       // result == true
       if (!err && result) {
