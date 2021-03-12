@@ -2,14 +2,14 @@ import * as React from 'react';
 import { Link, Container, VStack, SimpleGrid, Box, InputGroup, InputRightElement, Flex, Spacer } from "@chakra-ui/react"
 import { Icon } from "../Icon" 
 
-export default function SideBar() {
+export default function SideNav() {
     return (
         <VStack w={195} l={2754}>
             <Box>
                 <Icon name="ClickedLogo"/>
             </Box>
             <Box position="relative">
-                <Icon name="SideBarOrangeRectangle"/>
+                <Icon name="SideNavOrangeRectangle"/>
                 <Box fontSize={14} fontWeight="bold" fontStyle="Rubik" color="white" position="absolute" ml={8} top={3} >Emma Myers</Box>
                 <Box fontSize={12} fontWeight="normal" fontStyle="Rubik" color="white" position="absolute" ml={8} top={8} >@emmamyers</Box>
 

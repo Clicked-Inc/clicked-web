@@ -1,14 +1,14 @@
 import React from 'react';
 import { Story } from '@storybook/react';
-import SideBar from './SideBar';
+import SideNav from './SideNav';
 
 export default {
-  component: SideBar,
-  title: 'SideBar',
+  component: SideNav,
+  title: 'SideNav',
 };
 
 const Template: Story = () => (
-  <SideBar />
+  <SideNav />
 );
 export const Default = Template.bind({});
 
