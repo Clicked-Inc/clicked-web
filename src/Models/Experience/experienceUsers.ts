@@ -1,3 +1,9 @@
+/*  
+When a USER starts and experience, a document of this model is creates. 
+When a USER finished an experience, their document of the experience is edited to include
+their end date and change the userType to 'previous'. 
+**/
+
 import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
 
 enum DateRangeType {
@@ -11,6 +17,7 @@ enum UserType {
 }
 
 export interface IExperienceUsers extends Document {
+  experience: ObjectId[];
   user: ObjectId[];
   dateType: DateRangeType;
   userType: UserType;
@@ -18,6 +25,11 @@ export interface IExperienceUsers extends Document {
 }
 
 const ExperienceUserSchema = new Schema({
+  experience: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Experience',
+    required: true,
+  },
   user: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: 'User',
@@ -39,4 +51,5 @@ const ExperienceUserSchema = new Schema({
   },
 });
 
-export default model<IExperienceUsers>('ExperienceUsers', ExperienceUserSchema);
+export default mongoose.models.ExperienceUsers ||
+  model<IExperienceUsers>('ExperienceUsers', ExperienceUserSchema);

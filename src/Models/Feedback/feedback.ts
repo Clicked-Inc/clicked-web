@@ -52,7 +52,7 @@ const FeedbackSchema = new Schema({
   },
   completed: {
     type: Boolean,
-    required: true,
+    required: false,
   },
   personalizedMessage: {
     type: String,
@@ -60,4 +60,5 @@ const FeedbackSchema = new Schema({
   },
 });
 
-export default model<IFeedback>('Feedback', FeedbackSchema);
+export default mongoose.models.SkillInterest ||
+  model<IFeedback>('Feedback', FeedbackSchema);

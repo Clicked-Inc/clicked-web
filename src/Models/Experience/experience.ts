@@ -1,7 +1,4 @@
 import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
-import Feedback, { IFeedback } from '../Feedback/feedback';
-import { IUser } from '../user';
-import ExperienceUsers, { IExperienceUsers } from './experienceUsers';
 import SkillScore, { ISkillScore } from './skillScore';
 
 // Add Validation
@@ -25,10 +22,10 @@ export interface IExperience extends Document {
   experienceType: ExperienceType;
   coach: ObjectId;
   targetSkill: ISkillScore[];
-  feedback: IFeedback[]; //TODO: Change this to a reference to objectID instead?
+  feedback?: ObjectId; //TODO: Change this to a reference to objectID instead?
   averageRating?: number;
-  currentUsers: IExperienceUsers;
-  previousUsers: IExperienceUsers;
+  currentUsers?: ObjectId;
+  previousUsers?: ObjectId;
 }
 
 const ExperienceSchema = new Schema({
@@ -50,33 +47,36 @@ const ExperienceSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-    validate: [coachValidator, 'This user is not a coach'],
   },
   targetSkill: {
     type: [SkillScore.schema],
     required: true,
   },
   feedback: {
-    type: [Feedback.schema],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Feedback',
     required: false,
   },
   averageRating: {
-    //TODO: automatically calculate this, when feedback schema set up
     type: Number,
-    required: false, //Not Required if has not been completed before
+    required: false,
   },
   currentUsers: {
-    type: [ExperienceUsers.schema],
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ExperienceUsers',
+    required: false,
   },
   previousUsers: {
-    type: [ExperienceUsers.schema],
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'ExperienceUsers',
+    required: false,
   },
 });
 
-function coachValidator(value: IUser): boolean {
-  return value.role == 'coach';
-}
+// Removed because a coach could be a student and vice versa
+// function coachValidator(value: IUser): boolean {
+//   return value.role == 'coach';
+// }
 
-export default model<IExperience>('Experience', ExperienceSchema);
+export default mongoose.models.Experience ||
+  model<IExperience>('Experience', ExperienceSchema);

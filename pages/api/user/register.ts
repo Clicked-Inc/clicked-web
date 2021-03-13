@@ -47,12 +47,14 @@ const registrationHandler = async (
     });
     await user.save((err) => {
       if (err) {
+        console.log(err);
         res.status(400).json({ message: 'Registration failed' });
         return;
       }
     });
     res.status(200).json({ message: 'Registration successful' });
   } catch (e) {
+    console.log(e);
     // TODO: more specific error codes based on situation
     res.status(400).json({ message: 'Registration failed' });
   }
