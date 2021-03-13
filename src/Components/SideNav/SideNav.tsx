@@ -9,7 +9,7 @@ export default function SideNav() {
                 <Icon name="ClickedLogo"/>
             </Box>
             <Box position="relative">
-                <Icon name="SideNavOrangeRectangle"/>
+                <Icon name="SideBarOrangeRectangle"/>
                 <Box fontSize={14} fontWeight="bold" fontStyle="Rubik" color="white" position="absolute" ml={8} top={3} >Emma Myers</Box>
                 <Box fontSize={12} fontWeight="normal" fontStyle="Rubik" color="white" position="absolute" ml={8} top={8} >@emmamyers</Box>
 
@@ -18,7 +18,7 @@ export default function SideNav() {
             <Spacer/>
             <Container fontSize={10} fontStyle="Rubik" color="#B3B0BC">COMMUNITY</Container>
             <Box>
-                <Link fontSize={14} fontStyle="Rubik" color="#7C788A">Dashboard</Link>
+                <Link fontSize={14} fontWeight="normal" fontStyle="Rubik" color="#7C788A">Dashboard</Link>
             </Box>
             <Box>
                 <Link fontSize={14} fontWeight="normal" fontStyle="Rubik" color="#7C788A">Experiences</Link>
@@ -32,6 +32,18 @@ export default function SideNav() {
             <Box>
                 <Link fontSize={14} fontWeight="normal" fontStyle="Rubik" color="#7C788A">Inspiration</Link>
             </Box>
+            <Spacer/>
+            <Container fontSize={10} fontStyle="Rubik" color="#B3B0BC">HELP</Container>
+            <Box>
+                <Link fontSize={14} fontWeight="normal" fontStyle="Rubik" color="#7C788A">Guide</Link>
+            </Box>
+            <Box>
+                <Link fontSize={14} fontWeight="normal" fontStyle="Rubik" color="#7C788A">FAQs</Link>
+            </Box>
+            <Box>
+                <Link fontSize={14} fontWeight="normal" fontStyle="Rubik" color="#7C788A">Contact Us</Link>
+            </Box>
+            
         </VStack>
     )
 }
