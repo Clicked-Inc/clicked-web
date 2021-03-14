@@ -37,7 +37,11 @@ const loginHandler = async (
     compare(password, user.password, (err, result) => {
       if (!err && result) {
         sign(
-          { uid: user.id },
+          {
+            uid: user.id,
+            email: user.email,
+            role: user.role,
+          },
           process.env.JWT_SECRET,
           { expiresIn: '2 days' },
           (err, token) => {
