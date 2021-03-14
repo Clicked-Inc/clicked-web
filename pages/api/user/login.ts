@@ -9,7 +9,7 @@ const loginHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
-  if (req.method !== 'POST') {
+  if (req.method !== 'GET') {
     res.status(421).json({ message: 'Incorrect request type' });
     return;
   }
