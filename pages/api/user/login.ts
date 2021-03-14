@@ -17,10 +17,15 @@ const loginHandler = async (
   try {
     await connect();
     const { email, password } = req.body;
+    if (email == null || password == null) {
+      res
+        .status(400)
+        .json({ message: 'Login requires both email and password' });
+    }
 
     // Retrieve user with the given email
     const user: Models.IUser = await Models.User.findOne(
-      { email: email },
+      { email },
       (err: NativeError, user: Models.IUser) => {
         if (err) {
           return;
@@ -30,12 +35,10 @@ const loginHandler = async (
     );
 
     compare(password, user.password, (err, result) => {
-      const secretKey: string = process.env.JWT_SECRET;
-      // result == true
       if (!err && result) {
         sign(
           { uid: user.id },
-          secretKey,
+          process.env.JWT_SECRET,
           { expiresIn: '2 days' },
           (err, token) => {
             if (token) {

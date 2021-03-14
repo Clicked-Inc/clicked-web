@@ -2,7 +2,7 @@ import { NativeError } from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import authenticate from '../authenticate';
+import authGuard from '../../../src/api/authenticate';
 
 const retrieveUserHandler = async (
   req: NextApiRequest,
@@ -35,4 +35,4 @@ const retrieveUserHandler = async (
   }
 };
 
-export default authenticate(retrieveUserHandler);
+export default authGuard(retrieveUserHandler);

@@ -1,16 +1,16 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import { verify } from 'jsonwebtoken';
 
-const authenticate = (fn: NextApiHandler) => async (
+const authGuard = (nextApiHandler: NextApiHandler) => async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
-  verify(
+  return verify(
     req.headers.authorization,
     process.env.JWT_SECRET,
     async (err, decoded) => {
       if (!err && decoded) {
-        return await fn(req, res);
+        return await nextApiHandler(req, res);
       } else {
         res.status(500).json({ message: 'You are not authenticated' });
       }
@@ -18,4 +18,4 @@ const authenticate = (fn: NextApiHandler) => async (
   );
 };
 
-export default authenticate;
+export default authGuard;
