@@ -9,7 +9,7 @@ const requireIdHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
-  const {
+  let {
     query: { id },
     method,
   } = req;
@@ -17,9 +17,15 @@ const requireIdHandler = async (
   try {
     await connect();
     switch (method) {
-      case 'GET' /* Get a model by its ID */:
+      /* Get a model by its ID, if the given ID is 'all' the method authomatically returns all*/
+      case 'GET':
         try {
-          const experience = await Models.Experience.find({ _id: id });
+          let experience: Array<Models.IExperience>;
+          if (id == 'all') {
+            experience = await Models.Experience.find();
+          } else {
+            experience = await Models.Experience.find({ _id: id });
+          }
           if (!experience) {
             return res.status(400).json({ success: false });
           }
@@ -29,14 +35,20 @@ const requireIdHandler = async (
             message: 'Successful GET of experiene ' + id,
           });
         } catch (error) {
-          res
-            .status(400)
-            .json({ success: false, message: 'Getting Experience failed' });
+          res.status(400).json({
+            success: false,
+            message:
+              'Getting Experience failed, no experience with id: ' +
+              id +
+              ' found.',
+          });
         }
         break;
 
       case 'PUT' /* Edit a model by its ID */:
         try {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //@ts-ignore TS2349
           const experience = await Models.Experience.findByIdAndUpdate(
             id,
             req.body,

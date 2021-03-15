@@ -73,10 +73,5 @@ const ExperienceSchema = new Schema({
   },
 });
 
-// Removed because a coach could be a student and vice versa
-// function coachValidator(value: IUser): boolean {
-//   return value.role == 'coach';
-// }
-
 export default mongoose.models.Experience ||
   model<IExperience>('Experience', ExperienceSchema);
