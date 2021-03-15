@@ -33,13 +33,13 @@ const registrationHandler = async (
     hash(password, Number(process.env.saltRounds), async (err, hash) => {
       // Store hash in your password DB.
       const user: Models.IUser = new Models.User({
-        email: email,
-        username: username,
-        role: role,
+        email,
+        username,
+        role,
         password: hash,
-        firstName: firstName,
-        lastName: lastName,
-        aspirationType: aspirationType,
+        firstName,
+        lastName,
+        aspirationType,
         skillInterests: skillInterestArray,
       });
       await user.save((err) => {
