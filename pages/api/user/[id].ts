@@ -2,7 +2,7 @@ import { NativeError } from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import authGuard from '../../../src/api/authenticate';
+import authGuard from '@Api/authGuard';
 
 const retrieveUserHandler = async (
   req: NextApiRequest,
