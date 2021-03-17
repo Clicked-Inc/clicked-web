@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Tag as ChakraTag, TagLabel,TagLeftIcon, Avatar } from "@chakra-ui/react"
 import { Icon } from "../Icon" 
-import { NONAME } from 'dns';
 
 type TagProps = {
   variant: string;
@@ -10,10 +9,6 @@ type TagProps = {
 }
 
 const Tag: React.FC<TagProps> = ({ variant, label, icon }) => {
-  // const type = props.type;
-  // const name = props.name;
-  // const icon = props.icon;
-
   var size = "";
   var fontColor = "";
   var colorScheme = "";
