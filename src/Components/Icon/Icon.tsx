@@ -13,8 +13,8 @@ export type CustomIcon = {
 };
 
 export type ReactIcons = {
-  type: 'react-icons';
-  as: any;
+  type?: 'react-icons';
+  as?: any;
 } & Omit<ChakraIconProps, 'css'>;
 
 export type IconProps = CustomIcon | ReactIcons;
