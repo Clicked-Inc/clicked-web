@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {
   Box,
   Text,
@@ -8,15 +8,20 @@ import {
   IconButton,
   Container,
 } from '@chakra-ui/react';
-import { Icon as Icons } from '../Icon';
 import { QuestionIcon } from '@chakra-ui/icons';
 import { MdBookmark } from 'react-icons/md';
+import { Icon as Icons } from '../Icon';
 
 const ProjectCard = () => (
-  <Box w={321} h={450} boxShadow="md" rounded={10}>
-    <Box spacing={10} w="100%" h={200} objectFit="cover">
+  <Box maxW={321} h={450} boxShadow="md" rounded={10}>
+    <Box spacing={10} minW="100%" h={200} objectFit="cover">
       <Box>
-        <Icons name="ProjectCardCover" alt="Project Card Cover" />
+        <Icons
+          name="ProjectCardCover"
+          alt="Project Card Cover"
+          maxW="100%"
+          h={200}
+        />
       </Box>
       <IconButton
         variant="outline"
