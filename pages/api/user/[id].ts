@@ -2,6 +2,7 @@ import { NativeError } from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
+import authGuard from '@Api/authGuard';
 
 const retrieveUserHandler = async (
   req: NextApiRequest,
@@ -24,7 +25,7 @@ const retrieveUserHandler = async (
       }
     );
     if (user) {
-      res.status(200).json({ message: 'User found', user: user });
+      res.status(200).json({ message: 'User found' });
       return;
     }
     res.status(404).json({ message: 'User not found.' });
@@ -34,4 +35,4 @@ const retrieveUserHandler = async (
   }
 };
 
-export default retrieveUserHandler;
+export default authGuard(retrieveUserHandler);

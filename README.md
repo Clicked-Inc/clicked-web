@@ -49,3 +49,5 @@ These are configured in `.babelrc` and `tsconfig.json`.
 To run this project, add a .env.local file to the root directory. Inside the file, define the following variables:
 
 - DB_URI (MongoDB database URI)
+- JWT_SECRET (secret key to verify JWT from client)
+- saltRounds (how intensely we encrypt the password)
