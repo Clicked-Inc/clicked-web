@@ -11,7 +11,7 @@ export default {
   NotificationDot,
   BadgeOne,
   CourseLogo,
-  InkIcon
+  InkIcon,
   ProjectCardCover,
   CourseCardCover,
 };

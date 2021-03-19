@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Box,
   Text,
-  ChakraIcon,
+  Icon,
   Stack,
   Button,
   IconButton,
@@ -10,13 +10,13 @@ import {
 } from '@chakra-ui/react';
 import { QuestionIcon } from '@chakra-ui/icons';
 import { MdBookmark } from 'react-icons/md';
-import { Icon } from '../Icon';
+import { Icon as Icons } from '../Icon';
 
 const ProjectCard = () => (
   <Box maxW={321} h={450} boxShadow="md" rounded={10}>
     <Box spacing={10} minW="100%" h={200} objectFit="cover">
       <Box>
-        <Icon
+        <Icons
           name="ProjectCardCover"
           alt="Project Card Cover"
           maxW="100%"
@@ -28,7 +28,7 @@ const ProjectCard = () => (
         colorScheme="orange"
         rounded="full"
         aria-label="Bookmark"
-        icon={<ChakraIcon as={MdBookmark} transform="scale(2)" />}
+        icon={<Icon as={MdBookmark} transform="scale(2)" />}
         float="right"
         bottom={180}
         right={3}
