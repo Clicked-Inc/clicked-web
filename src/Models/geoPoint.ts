@@ -1,4 +1,4 @@
-import { Document, model, Schema } from 'mongoose';
+import mongoose, { Document, model, Schema } from 'mongoose';
 
 export interface IGeoPoint extends Document {
   coordinates: number[];
@@ -11,4 +11,5 @@ const GeoPointSchema = new Schema({
   },
 });
 
-export default model<IGeoPoint>('GeoPoint', GeoPointSchema);
+export default mongoose.models.GeoPoint ||
+  model<IGeoPoint>('GeoPoint', GeoPointSchema);

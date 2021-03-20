@@ -1,4 +1,4 @@
-import { Document, model, Schema } from 'mongoose';
+import mongoose, { Document, model, Schema } from 'mongoose';
 import GeoPoint, { IGeoPoint } from './geoPoint';
 import SkillInterest, { ISkillInterest } from './skillInterest';
 import Education, { IEducation } from './education';
@@ -88,4 +88,4 @@ const UserSchema = new Schema({
   },
 });
 
-export default model<IUser>('User', UserSchema);
+export default mongoose.models.User || model<IUser>('User', UserSchema);

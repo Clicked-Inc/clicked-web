@@ -51,6 +51,7 @@ const registrationHandler = async (
       res.status(200).json({ message: 'Registration successful', user: user });
     });
   } catch (e) {
+    console.log(e);
     // TODO: more specific error codes based on situation
     res.status(400).json({ message: 'Registration failed' });
   }
