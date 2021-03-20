@@ -19,8 +19,9 @@ export type { IExperienceUsers } from './Experience/experienceUsers';
 export { default as SkillScore } from './Experience/skillScore';
 export type { ISkillScore } from './Experience/skillScore';
 
-/**
- * Feedback Schemas
- */
+
+// /**
+//  * Feedback Schemas
+//  */
 export { default as Feedback } from './Feedback/feedback';
 export type { IFeedback } from './Feedback/feedback';
