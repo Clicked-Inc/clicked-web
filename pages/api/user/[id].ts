@@ -1,8 +1,10 @@
 import { NativeError } from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { verify } from 'jsonwebtoken';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
+import checkPermissionLevel from '@Api/checkPermissionLevel';
 
 const retrieveUserHandler = async (
   req: NextApiRequest,
@@ -36,6 +38,19 @@ const retrieveUserHandler = async (
       try {
         await connect();
         const { id } = req.query;
+        const permissionLevelMet = await checkPermissionLevel(
+          req,
+          ['admin'],
+          id
+        );
+
+        if (!permissionLevelMet) {
+          res.status(400).json({
+            message: 'User does not have permission for this request.',
+          });
+          return;
+        }
+
         const user = await Models.User.findByIdAndUpdate(
           id,
           req.body,
@@ -63,7 +78,17 @@ const retrieveUserHandler = async (
       try {
         await connect();
         const { id } = req.query;
-        await Models.User.findByIdAndDelete(
+
+        const permissionLevelMet = await checkPermissionLevel(req, ['admin']);
+
+        if (!permissionLevelMet) {
+          res.status(400).json({
+            message: 'User does not have permission for this request.',
+          });
+          return;
+        }
+
+        await Models.User.findByIdAndRemove(
           id,
           {
             new: true,
@@ -79,7 +104,7 @@ const retrieveUserHandler = async (
         res.status(200).json({ message: 'User succesfully deleted' });
         return;
       } catch (e) {
-        res.status(404).json({ message: 'User not updated.' });
+        res.status(404).json({ message: 'User not updated.', error: e });
       }
     default:
       res.status(421).json({ message: 'Incorrect request type' });
