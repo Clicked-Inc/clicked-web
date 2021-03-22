@@ -9,11 +9,11 @@ const userRequestHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
+  await connect();
+  const { id } = req.query;
   switch (req.method) {
     case 'GET':
       try {
-        await connect();
-        const { id } = req.query;
         const user = await Models.User.findById(
           id,
           (err: NativeError, user: Models.IUser) => {
@@ -35,8 +35,6 @@ const userRequestHandler = async (
 
     case 'PUT':
       try {
-        await connect();
-        const { id } = req.query;
         const permissionLevelMet = await checkPermissionLevel(
           req,
           ['admin'],
@@ -50,6 +48,8 @@ const userRequestHandler = async (
           return;
         }
 
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore TS2349
         const user = await Models.User.findByIdAndUpdate(
           id,
           req.body,
@@ -75,9 +75,6 @@ const userRequestHandler = async (
 
     case 'DELETE':
       try {
-        await connect();
-        const { id } = req.query;
-
         const permissionLevelMet = await checkPermissionLevel(req, ['admin']);
 
         if (!permissionLevelMet) {
