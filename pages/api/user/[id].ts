@@ -1,12 +1,11 @@
 import { NativeError } from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { verify } from 'jsonwebtoken';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
 import checkPermissionLevel from '@Api/checkPermissionLevel';
 
-const retrieveUserHandler = async (
+const userRequestHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
@@ -112,4 +111,4 @@ const retrieveUserHandler = async (
   }
 };
 
-export default authGuard(retrieveUserHandler);
+export default authGuard(userRequestHandler);
