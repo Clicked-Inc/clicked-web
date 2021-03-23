@@ -1,4 +1,4 @@
-import { Document, model, Schema } from 'mongoose';
+import mongoose, { Document, model, Schema } from 'mongoose';
 
 export interface ISkillScore extends Document {
   skillName: string;
@@ -16,4 +16,5 @@ export const SkillScoreSchema = new Schema({
   },
 });
 
-export default model<ISkillScore>('SkillScore', SkillScoreSchema);
+export default mongoose.models.SkillScore ||
+  model<ISkillScore>('SkillScore', SkillScoreSchema);

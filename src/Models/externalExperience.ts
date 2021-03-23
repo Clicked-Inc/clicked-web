@@ -1,4 +1,4 @@
-import { Document, model, Schema } from 'mongoose';
+import mongoose, { Document, model, Schema } from 'mongoose';
 
 enum ExternalExperienceType {
   Course = 'course',
@@ -52,7 +52,5 @@ export const ExternalExperienceSchema = new Schema({
   },
 });
 
-export default model<IExternalExperience>(
-  'ExternalExperience',
-  ExternalExperienceSchema
-);
+export default mongoose.models.ExternalExperience ||
+  model<IExternalExperience>('ExternalExperience', ExternalExperienceSchema);

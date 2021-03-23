@@ -1,4 +1,4 @@
-import { Document, model, Schema } from 'mongoose';
+import mongoose, { Document, model, Schema } from 'mongoose';
 
 enum DegreeType {
   HighSchool = 'highSchool',
@@ -34,4 +34,5 @@ const EducationSchema = new Schema({
   },
 });
 
-export default model<IEducation>('Education', EducationSchema);
+export default mongoose.models.Education ||
+  model<IEducation>('Education', EducationSchema);
