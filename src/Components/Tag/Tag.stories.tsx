@@ -41,4 +41,3 @@ const Template7: Story = () => (
   <Tag variant="white-gray-icon2" label="Tag Name" icon="InkIcon"/>
 );
 export const WhiteGrayIconM = Template7.bind({});
-
