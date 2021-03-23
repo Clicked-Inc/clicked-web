@@ -1,11 +1,19 @@
 import * as React from 'react';
-import { Input, SimpleGrid, Box, InputGroup, InputRightElement, Flex, Spacer } from "@chakra-ui/react"
-import { SearchIcon } from '@chakra-ui/icons'
-import { Icon } from "../Icon" 
+import {
+  Input,
+  SimpleGrid,
+  Box,
+  InputGroup,
+  InputRightElement,
+  Flex,
+  Spacer,
+} from '@chakra-ui/react';
+import { SearchIcon } from '@chakra-ui/icons';
+import { Icon } from '../Icon';
 
 export default function Header() {
-  const [value, setValue] = React.useState("")
-  const handleChange = (event) => setValue(event.target.value)
+  const [value, setValue] = React.useState('');
+  const handleChange = (event) => setValue(event.target.value);
 
   return (
     <Box>
@@ -20,19 +28,24 @@ export default function Header() {
               size="sm"
               fontSize={14}
             />
-            <InputRightElement mt={3} h={3.75} w={3.75} children={<SearchIcon h={4} w={4} />}/>
+            <InputRightElement
+              mt={3}
+              h={3.75}
+              w={3.75}
+              children={<SearchIcon h={4} w={4} />}
+            />
           </InputGroup>
         </Box>
-        <Spacer/>
+        <Spacer />
         <Box mr={40} mt={6}>
           <Box mr={5}>
-            <Icon name="Notification"/>
+            <Icon name="Notification" />
           </Box>
           <Box mt={-5} ml={2.5}>
-            <Icon name="NotificationDot"/>
+            <Icon name="NotificationDot" />
           </Box>
         </Box>
       </Flex>
     </Box>
-  )
+  );
 }

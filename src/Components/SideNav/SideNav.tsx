@@ -18,6 +18,7 @@ export default function SideNav() {
             <Spacer/>
             <Container fontSize={10} fontStyle="Rubik" color="#B3B0BC">COMMUNITY</Container>
             <Box>
+                <Icon name="IconDashboard"/>
                 <Link fontSize={14} fontWeight="normal" fontStyle="Rubik" color="#7C788A">Dashboard</Link>
             </Box>
             <Box>
@@ -43,7 +44,6 @@ export default function SideNav() {
             <Box>
                 <Link fontSize={14} fontWeight="normal" fontStyle="Rubik" color="#7C788A">Contact Us</Link>
             </Box>
-            
         </VStack>
     )
 }

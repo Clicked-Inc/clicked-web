@@ -1,12 +1,17 @@
 import Notification from './Icons/notification.svg';
 import NotificationDot from './Icons/notification_dot.svg';
-import SideBarOrangeRectangle from './Icons/sidebar_rectangle.svg';
-import ClickedLogo from './Icons/clicked_logo.svg';
-
+import BadgeOne from './Icons/badge_one.svg';
+import CourseLogo from './Icons/course_logo.svg';
+import InkIcon from './Icons/ink_icon.svg';
+import ProjectCardCover from './Icons/project_card_cover.svg';
+import IconDashboard from './Icons/icon_dashboard.svg'
 
 export default {
   Notification,
   NotificationDot,
-  SideBarOrangeRectangle,
-  ClickedLogo
+  BadgeOne,
+  CourseLogo,
+  InkIcon,
+  ProjectCardCover,
+  IconDashboard
 };
