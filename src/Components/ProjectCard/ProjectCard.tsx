@@ -16,12 +16,7 @@ const ProjectCard = () => (
   <Box maxW={321} h={450} boxShadow="md" rounded={10}>
     <Box spacing={10} minW="100%" h={200} objectFit="cover">
       <Box>
-        <Icons
-          name="ProjectCardCover"
-          alt="Project Card Cover"
-          maxW="100%"
-          h={200}
-        />
+        <Icons name="ProjectCardCover" maxW="100%" h={200} />
       </Box>
       <IconButton
         variant="outline"
