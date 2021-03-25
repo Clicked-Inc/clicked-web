@@ -6,7 +6,7 @@ import { NextApiRequest } from 'next';
 // if not, check that user role is an admin or coach or whatever in list of passed in roles [done]
 const checkPermissionLevel = async (
   req: NextApiRequest,
-  permission?: string[],
+  permissionLevels?: string[],
   id?: string | string[]
 ): Promise<boolean> => {
   let jwt_payload;
@@ -23,9 +23,9 @@ const checkPermissionLevel = async (
     return true;
   }
 
-  if (permission) {
-    for (let i = 0; i < permission.length; i++) {
-      if (jwt_payload.role === permission[i]) {
+  if (permissionLevels) {
+    for (let i = 0; i < permissionLevels.length; i++) {
+      if (jwt_payload.role === permissionLevels[i]) {
         return true;
       }
     }
