@@ -11,4 +11,3 @@ const Template: Story = () => (
   <SideNav />
 );
 export const Default = Template.bind({});
-

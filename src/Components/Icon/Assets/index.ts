@@ -14,6 +14,8 @@ import IconFAQ from './Icons/icon_faq.svg'
 import IconFeed from './Icons/icon_feed.svg'
 import IconGuide from './Icons/icon_guide.svg'
 import IconInpsiration from './Icons/icon_inspiration.svg'
+import SideNavArrow from './Icons/sidenav_arrow.svg'
+import SideNavSelection from './Icons/sidenav_selection.svg'
 
 
 export default {
@@ -32,5 +34,7 @@ export default {
   IconFAQ,
   IconFeed,
   IconGuide,
-  IconInpsiration
+  IconInpsiration,
+  SideNavArrow,
+  SideNavSelection
 };
