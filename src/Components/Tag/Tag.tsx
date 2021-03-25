@@ -12,11 +12,7 @@ type TagProps = {
 }
 
 const Tag: React.FC<TagProps> = ({ variant, label, icon }) => {
-  var json = generateStyles(variant);
-  var size = json.size;
-  var fontColor = json.fontColor;
-  var bgColor = json.bgColor;
-  var weight = json.weight;
+  const { size, fontColor, bgColor, weight } = generateStyles(variant);
 
   function renderSwitch(param) {
     switch(param) {

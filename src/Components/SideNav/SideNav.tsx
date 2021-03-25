@@ -1,20 +1,19 @@
 import * as React from 'react';
 import { Link, Container, VStack, Stack, Box, InputGroup, InputRightElement, Flex, Spacer } from "@chakra-ui/react"
 import { Icon } from '../Icon';
+import { topLabels, bottomLabels} from './SideNav.constants';
 
 
 export default function SideNav() {
-    var topLabels = [["Dashboard", <Icon name="IconDashboard"/>, true], ["Experiences", <Icon name="IconExperiences"/>, false], ["All Courses", <Icon name="IconCourses"/>, false], ["Feed", <Icon name="IconFeed"/>, false], ["Inspiration", <Icon name="IconInpsiration"/>, false]]
-    var bottomLabels = [["Guide", <Icon name="IconGuide"/>, false], ["FAQs", <Icon name="IconFAQ"/>, false], ["Contact Us", <Icon name="IconContact"/>, false]];
-    const renderRow = (input) => {
+    const renderRow = (input: (string | boolean | JSX.Element)[][]) => {
         return input.map((label) => {
-            let selection;
+            let selectionRectangle;
             if(label[2] == true) {
-                selection = <Box position="relative" ml={-4} mr={1}><Icon  name="SideNavSelection"/></Box>;
+                selectionRectangle = <Box position="relative" ml={-4} mr={1}><Icon  name="SideNavSelection"/></Box>;
             }
             return (
             <Stack position="relative" marginTop={2} marginBottom={5} paddingLeft={4} isInline>
-                {selection}
+                {selectionRectangle}
                 {label[1]}                    
                 <Link verticalAlign="center" fontSize={14} fontWeight="normal" fontStyle="Rubik" color="#7C788A">{label[0]}</Link>
 
@@ -24,7 +23,7 @@ export default function SideNav() {
     
     return (
         <VStack alignItems="left" w={195} l={2754}>
-            <Container marginLeft={1.5} marginTop={6} marginRight={6.4375} marginBottom={6}>
+            <Container marginLeft={1.5} marginTop={6} marginRight={6} marginBottom={6}>
                 <Icon name="ClickedLogo"/>
             </Container>
             <Box position="relative">

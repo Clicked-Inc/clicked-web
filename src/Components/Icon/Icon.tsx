@@ -9,7 +9,7 @@ export type IconNames = keyof typeof Icons;
 
 export type CustomIcon = {
   type?: 'custom';
-  name: IconNames | string;
+  name: IconNames;
 };
 
 export type ReactIcons = {
