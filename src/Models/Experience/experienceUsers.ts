@@ -21,7 +21,8 @@ export interface IExperienceUsers extends Document {
   user: ObjectId[];
   dateType: DateRangeType;
   userType: UserType;
-  date: Date;
+  startDate: Date;
+  endDate: Date;
 }
 
 const ExperienceUserSchema = new Schema({
@@ -45,9 +46,13 @@ const ExperienceUserSchema = new Schema({
     enum: Object.values(UserType),
     required: true,
   },
-  date: {
+  startDate: {
     type: Date,
-    required: true,
+    required: false,
+  },
+  endDate: {
+    type: Date,
+    required: false,
   },
 });
 

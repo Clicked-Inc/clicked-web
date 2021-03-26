@@ -25,7 +25,7 @@ const userEndExperienceHandler = async (
       console.log(filter);
       req.body.dateType = 'end';
       req.body.userType = 'previous';
-      req.body.date = new Date();
+      req.body.endDate = new Date();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore TS2349
       const experienceUser = await Models.ExperienceUsers.findOneAndUpdate(
