@@ -22,7 +22,6 @@ const userEndExperienceHandler = async (
         user: { $in: [new ObjectId(_id)] },
         experience: { $in: [new ObjectId(experience)] },
       };
-      console.log(filter);
       req.body.dateType = 'end';
       req.body.userType = 'previous';
       req.body.endDate = new Date();
