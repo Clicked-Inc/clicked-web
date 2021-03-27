@@ -22,8 +22,6 @@ const userEndExperienceHandler = async (
         user: { $in: [new ObjectId(_id)] },
         experience: { $in: [new ObjectId(experience)] },
       };
-      req.body.dateType = 'end';
-      req.body.userType = 'previous';
       req.body.endDate = new Date();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore TS2349
