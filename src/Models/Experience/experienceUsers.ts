@@ -1,26 +1,13 @@
 /*  
 When a USER starts and experience, a document of this model is creates. 
-When a USER finished an experience, their document of the experience is edited to include
-their end date and change the userType to 'previous'. 
+When a USER finishes an experience, an enddate is added. Users currently in the experience will not have an enddate. 
 **/
 
 import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
 
-enum DateRangeType {
-  Start = 'start',
-  End = 'end',
-}
-
-enum UserType {
-  Current = 'current',
-  Previous = 'previous',
-}
-
 export interface IExperienceUsers extends Document {
   experience: ObjectId[];
   user: ObjectId[];
-  dateType: DateRangeType;
-  userType: UserType;
   startDate: Date;
   endDate: Date;
 }
@@ -34,16 +21,6 @@ const ExperienceUserSchema = new Schema({
   user: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: 'User',
-    required: true,
-  },
-  dateType: {
-    type: String,
-    enum: Object.values(DateRangeType),
-    required: true,
-  },
-  userType: {
-    type: String,
-    enum: Object.values(UserType),
     required: true,
   },
   startDate: {

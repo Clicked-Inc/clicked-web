@@ -22,8 +22,6 @@ const userEndExperienceHandler = async (
         user: { $in: [new ObjectId(_id)] },
         experience: { $in: [new ObjectId(experience)] },
       };
-      req.body.dateType = 'end';
-      req.body.userType = 'previous';
       req.body.endDate = new Date();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore TS2349
@@ -36,8 +34,11 @@ const userEndExperienceHandler = async (
         }
       );
       if (!experienceUser) {
-        console.log('no experence found with this filter');
-        return res.status(400).json({ success: false });
+        console.log(`No experence found with this filter ${filter}`);
+        return res.status(400).json({
+          success: false,
+          message: `No experence found with this filter ${filter}`,
+        });
       }
       res.status(200).json({ success: true, data: experienceUser });
     } catch (error) {

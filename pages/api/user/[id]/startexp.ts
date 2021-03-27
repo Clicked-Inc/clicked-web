@@ -16,8 +16,6 @@ const userStartExperienceHandler = async (
     try {
       const { id } = req.query;
       req.body.user = id;
-      req.body.dateType = 'start';
-      req.body.userType = 'current';
       req.body.startDate = new Date();
       const experienceUsers: Models.IExperienceUsers = new Models.ExperienceUsers(
         req.body

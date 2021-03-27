@@ -1,5 +1,5 @@
 import { Document, model, Schema } from 'mongoose';
-import Experience, { IExperience } from './ExperienceFolder/experience';
+import Experience, { IExperience } from '@Models/Experience/experience';
 
 enum TierType {
   SelfDiscovery = 'selfDiscovery',
