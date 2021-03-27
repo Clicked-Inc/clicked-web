@@ -11,10 +11,10 @@ export interface IFeedback extends Document {
   experience: ObjectId;
   privacy: FeedbackType;
   feedbackText: string;
-  enjoyabilityRating: number;
-  difficultyRating: number;
+  enjoyabilityRating?: number;
+  difficultyRating?: number;
   completed: boolean;
-  personalizedMessage: string;
+  personalizedMessage?: string;
 }
 
 const FeedbackSchema = new Schema({
@@ -52,7 +52,8 @@ const FeedbackSchema = new Schema({
   },
   completed: {
     type: Boolean,
-    required: false,
+    required: true,
+    default: false,
   },
   personalizedMessage: {
     type: String,

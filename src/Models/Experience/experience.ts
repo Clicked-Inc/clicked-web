@@ -22,10 +22,10 @@ export interface IExperience extends Document {
   experienceType: ExperienceType;
   coach: ObjectId;
   targetSkill: ISkillScore[];
-  feedback?: ObjectId; //TODO: Change this to a reference to objectID instead?
+  feedback?: ObjectId;
   averageRating?: number;
-  currentUsers?: ObjectId;
-  previousUsers?: ObjectId;
+  currentUsers?: ObjectId[];
+  previousUsers?: ObjectId[];
 }
 
 const ExperienceSchema = new Schema({
@@ -62,12 +62,12 @@ const ExperienceSchema = new Schema({
     required: false,
   },
   currentUsers: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: [mongoose.Schema.Types.ObjectId],
     ref: 'ExperienceUsers',
     required: false,
   },
   previousUsers: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: [mongoose.Schema.Types.ObjectId],
     ref: 'ExperienceUsers',
     required: false,
   },

@@ -1,5 +1,5 @@
 /*  
-When a USER starts and experience, a document of this model is creates. 
+When a USER starts an experience, a document of this model is created. 
 When a USER finished an experience, their document of the experience is edited to include
 their end date and change the userType to 'previous'. 
 **/
@@ -22,6 +22,8 @@ export interface IExperienceUsers extends Document {
   dateType: DateRangeType;
   userType: UserType;
   date: Date;
+  feedbackGiven?: ObjectId;
+  notesTaken?: string;
 }
 
 const ExperienceUserSchema = new Schema({
@@ -49,6 +51,15 @@ const ExperienceUserSchema = new Schema({
     type: Date,
     required: true,
   },
+  feedbackGiven: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Feedback',
+    required: false,
+  },
+  notesTaken: {
+    type: String,
+    required: false,
+  }
 });
 
 export default mongoose.models.ExperienceUsers ||

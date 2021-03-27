@@ -1,8 +1,10 @@
-import mongoose, { Document, model, Schema } from 'mongoose';
+import mongoose, { Document, model, Schema, ObjectId } from 'mongoose';
 import GeoPoint, { IGeoPoint } from './geoPoint';
 import SkillInterest, { ISkillInterest } from './skillInterest';
 import Education, { IEducation } from './education';
 import ExternalExperience, { IExternalExperience } from './externalExperience';
+import ExperienceUsers, { IExperienceUsers } from '@Models/Experience/experienceUsers';
+
 // TODO: add more aspiration types
 enum AspirationType {
   Explore = 'explore',
@@ -24,11 +26,12 @@ export interface IUser extends Document {
   lastName: string;
   profilePic?: string;
   location?: IGeoPoint[];
-  education?: IEducation[];
+  education?: ObjectId[];
   aspirationType: AspirationType;
-  externalExperiences?: IExternalExperience[];
-  skillInterests: ISkillInterest[];
+  externalExperiences?: ObjectId[];
+  skillInterests: ObjectId[];
   points?: number;
+  allExperiences: ObjectId[];
 }
 
 const UserSchema = new Schema({
@@ -65,7 +68,8 @@ const UserSchema = new Schema({
     required: false,
   },
   education: {
-    type: [Education.schema],
+    type: [mongoose.schema.Types.ObjectId],
+    ref: 'Education',
     required: false,
   },
   aspirationType: {
@@ -74,11 +78,13 @@ const UserSchema = new Schema({
     required: true,
   },
   externalExperiences: {
-    type: [ExternalExperience.schema],
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'ExternalExperience',
     required: false,
   },
   skillInterests: {
-    type: [SkillInterest.schema],
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'SkillInterest',
     required: true,
   },
   points: {
@@ -86,6 +92,16 @@ const UserSchema = new Schema({
     default: 0,
     required: false,
   },
+  allExperiences: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'ExperienceUsers',
+    required: false,
+  },
+  learningPlan: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'LearningPlan',
+    required: false,
+  }
 });
 
 export default mongoose.models.User || model<IUser>('User', UserSchema);
