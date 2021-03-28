@@ -60,5 +60,5 @@ const FeedbackSchema = new Schema({
   },
 });
 
-export default mongoose.models.SkillInterest ||
+export default mongoose.models.Feedback ||
   model<IFeedback>('Feedback', FeedbackSchema);
