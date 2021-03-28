@@ -17,6 +17,7 @@ import IconInpsiration from './Icons/icon_inspiration.svg'
 import SideNavArrow from './Icons/sidenav_arrow.svg'
 import SideNavSelection from './Icons/sidenav_selection.svg'
 
+import CourseCardCover from './Icons/course_card_cover.svg';
 
 export default {
   Notification,
@@ -36,5 +37,6 @@ export default {
   IconGuide,
   IconInpsiration,
   SideNavArrow,
-  SideNavSelection
+  SideNavSelection,
+  CourseCardCover,
 };
