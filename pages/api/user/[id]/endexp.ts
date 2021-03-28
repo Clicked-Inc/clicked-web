@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ObjectId } from 'mongodb';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import { ObjectId } from 'mongodb';
-// import authGuard from '@Api/authGuard';
 
 const userEndExperienceHandler = async (
   req: NextApiRequest,
@@ -53,5 +52,4 @@ const userEndExperienceHandler = async (
   }
 };
 
-//do i have to use authguard?
 export default userEndExperienceHandler;
