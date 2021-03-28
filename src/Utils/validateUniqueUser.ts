@@ -8,6 +8,8 @@ const validateUniqueUser = async (
   const usernameExists: boolean = await Models.User.exists({
     username,
   });
+
   return [!emailExists, !usernameExists];
 };
+
 export default validateUniqueUser;
