@@ -21,7 +21,7 @@ const Tag: React.FC<TagProps> = ({ variant, label, icon }) => {
       default:
         return (
           <Box display={ param != "" ? "show" : "none" } mr={2}>
-              <Icon name={param}/>
+              <Icon name={param}/> 
           </Box>
         );;
     }
