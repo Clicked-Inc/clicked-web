@@ -3,6 +3,7 @@ import { hash } from 'bcrypt';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import generateSkillInterests from '@Utils/generateSkillInterests';
+import validateUniqueUser from '@Utils/validateUniqueUser';
 
 const registrationHandler = async (
   req: NextApiRequest,
@@ -25,33 +26,42 @@ const registrationHandler = async (
       aspirationType,
       skillInterests,
     } = req.body;
-    const skillInterestArray: Models.ISkillInterest[] = generateSkillInterests(
-      skillInterests
-    );
-    // TODO: create hooks for User schema to encrypt password, validate email, etc.
-
-    hash(password, Number(process.env.saltRounds), async (err, hash) => {
-      // Store hash in your password DB.
-      const user: Models.IUser = new Models.User({
-        email,
-        username,
-        role,
-        password: hash,
-        firstName,
-        lastName,
-        aspirationType,
-        skillInterests: skillInterestArray,
-      });
-      await user.save((err) => {
-        if (err) {
-          res.status(400).json({ message: 'Registration failed' });
-          return;
+    const uniqueUser: boolean[] = await validateUniqueUser(email, username);
+    if (uniqueUser[0] && uniqueUser[1]) {
+      const skillInterestArray: Models.ISkillInterest[] = generateSkillInterests(
+        skillInterests
+      );
+      await hash(
+        password,
+        Number(process.env.saltRounds),
+        async (err: any, hash: string) => {
+          const user: Models.IUser = new Models.User({
+            email,
+            username,
+            role,
+            password: hash,
+            firstName,
+            lastName,
+            aspirationType,
+            skillInterests: skillInterestArray,
+          });
+          await user.save((err) => {
+            if (err) {
+              res.status(400).json({ message: 'Registration failed' });
+              return;
+            }
+            res
+              .status(200)
+              .json({ message: 'Registration successful', user: user });
+          });
         }
-      });
-      res.status(200).json({ message: 'Registration successful', user: user });
-    });
+      );
+    } else if (!uniqueUser[0]) {
+      res.status(409).json({ message: 'Email already taken.' });
+    } else {
+      res.status(409).json({ message: 'Username already exists.' });
+    }
   } catch (e) {
-    console.log(e);
     // TODO: more specific error codes based on situation
     res.status(400).json({ message: 'Registration failed' });
   }
