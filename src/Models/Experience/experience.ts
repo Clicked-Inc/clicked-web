@@ -22,7 +22,7 @@ export interface IExperience extends Document {
   experienceType: ExperienceType;
   coach: ObjectId;
   targetSkill: ISkillScore[];
-  feedback?: ObjectId;
+  feedback?: ObjectId[];
   averageRating?: number;
   currentUsers?: ObjectId[];
   previousUsers?: ObjectId[];
@@ -53,7 +53,7 @@ const ExperienceSchema = new Schema({
     required: true,
   },
   feedback: {
-    type: Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
     ref: 'Feedback',
     required: false,
   },
