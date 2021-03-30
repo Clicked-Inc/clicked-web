@@ -8,14 +8,18 @@ export default function SideNav() {
     const renderRow = (input: (string | boolean | JSX.Element)[][]) => {
         return input.map((label) => {
             let selectionRectangle;
+            let color = "#7C788A";
+            let weight = "400";
             if(label[2] == true) {
                 selectionRectangle = <Box position="relative" ml={-4} mr={1}><Icon  name="SideNavSelection"/></Box>;
+                color = "#FF6600";
+                weight = "500";
             }
             return (
             <Stack position="relative" marginTop={2} marginBottom={5} paddingLeft={4} isInline>
                 {selectionRectangle}
                 {label[1]}                    
-                <Link verticalAlign="center" fontSize={14} fontWeight="normal" fontStyle="Rubik" color="#7C788A">{label[0]}</Link>
+                <Link verticalAlign="center" fontSize={14} fontWeight={weight} fontStyle="Rubik" color={color}>{label[0]}</Link>
 
             </Stack>)
         })
