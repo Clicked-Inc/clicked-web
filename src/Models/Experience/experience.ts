@@ -44,7 +44,7 @@ const ExperienceSchema = new Schema({
     required: true,
   },
   coach: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
@@ -53,7 +53,7 @@ const ExperienceSchema = new Schema({
     required: true,
   },
   feedback: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Feedback',
     required: false,
   },
@@ -62,13 +62,13 @@ const ExperienceSchema = new Schema({
     required: false,
   },
   currentUsers: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: 'ExperienceUsers',
+    type: [Schema.Types.ObjectId],
+    ref: 'ExperienceWrapper',
     required: false,
   },
   previousUsers: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: 'ExperienceUsers',
+    type: [Schema.Types.ObjectId],
+    ref: 'ExperienceWrapper',
     required: false,
   },
 });
