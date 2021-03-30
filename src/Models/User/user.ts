@@ -27,9 +27,9 @@ export interface IUser extends Document {
   externalExperiences?: ObjectId[];
   skillInterests: ObjectId[];
   points?: number;
-  learningPlan: ObjectId[];
-  completedExperiences: ObjectId[];
-  currentExperiences: ObjectId[];
+  learningPlan?: ObjectId[];
+  completedExperiences?: ObjectId[];
+  currentExperiences?: ObjectId[];
 }
 
 const UserSchema = new Schema({
