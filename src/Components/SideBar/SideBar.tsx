@@ -24,10 +24,11 @@ export default function SideBar() {
     }
     
     return (
-        <VStack alignItems="left" h={556} w={214}>
-            <Box position="absolute" left={68}><Icon name="SideBarPicture"/></Box>
-            <Box h={40} w={214} zIndex={-1}>
+        <VStack position="relative" alignItems="left" h={556} w={214}>
+            <Box position="absolute" left={68}>
+                <Icon name="SideBarPicture"/>
             </Box>
+            <Box h={40} w={214} />
             <Box bgColor="#F5F5F5" h={226} w={214} paddingLeft={3} paddingRight={3} paddingBottom={5} textAlign="center">
                 <Box marginTop={50} fontSIze={22}><b>Team</b></Box>
                 <Box fontWeight="400" fontSize={12} color="#B3B0BC" >@teamusername</Box>
