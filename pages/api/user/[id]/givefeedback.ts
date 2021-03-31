@@ -22,13 +22,13 @@ const giveFeedbackHandler = async (
         .populate('coach')
         .populate('user')
         .save()
-        .then(function (data) {
+        .then((data) => {
           res.status(200).send(data);
           console.log(
             `Feedback for experience ${experience} added to the database!`
           );
         })
-        .catch(function (err) {
+        .catch((err) => {
           console.log(err);
           res.status(400).json({
             message: `Failed to give feedback for experience ${experience}`,
@@ -50,4 +50,4 @@ const giveFeedbackHandler = async (
   }
 };
 
-export default authGuard(giveFeedbackHandler);
+export default giveFeedbackHandler;
