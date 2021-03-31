@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ObjectId } from 'mongodb';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
+import authGuard from '@Api/authGuard';
 
 const userEndExperienceHandler = async (
   req: NextApiRequest,
@@ -52,4 +53,4 @@ const userEndExperienceHandler = async (
   }
 };
 
-export default userEndExperienceHandler;
+export default authGuard(userEndExperienceHandler);
