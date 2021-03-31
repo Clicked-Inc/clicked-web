@@ -36,6 +36,7 @@ const loginHandler = async (
         }
       );
     } else {
+      // Retrieve user with the given username
       user = await Models.User.findOne(
         { username },
         (err: NativeError, user: Models.IUser) => {
@@ -48,9 +49,6 @@ const loginHandler = async (
     }
 
     compare(password, user.password, (err, result) => {
-      console.log(password);
-      console.log(user.password);
-      console.log(result);
       if (!err && result) {
         sign(
           {
