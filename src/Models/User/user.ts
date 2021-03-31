@@ -1,8 +1,6 @@
-import mongoose, { Document, model, Schema } from 'mongoose';
+import mongoose, { Document, model, Schema, ObjectId } from 'mongoose';
 import GeoPoint, { IGeoPoint } from './geoPoint';
-import SkillInterest, { ISkillInterest } from './skillInterest';
-import Education, { IEducation } from './education';
-import ExternalExperience, { IExternalExperience } from './externalExperience';
+
 // TODO: add more aspiration types
 enum AspirationType {
   Explore = 'explore',
@@ -24,11 +22,14 @@ export interface IUser extends Document {
   lastName: string;
   profilePic?: string;
   location?: IGeoPoint[];
-  education?: IEducation[];
+  education?: ObjectId[];
   aspirationType: AspirationType;
-  externalExperiences?: IExternalExperience[];
-  skillInterests: ISkillInterest[];
+  externalExperiences?: ObjectId[];
+  skillInterests: ObjectId[];
   points?: number;
+  learningPlan?: ObjectId[];
+  completedExperiences?: ObjectId[];
+  currentExperiences?: ObjectId[];
 }
 
 const UserSchema = new Schema({
@@ -65,7 +66,8 @@ const UserSchema = new Schema({
     required: false,
   },
   education: {
-    type: [Education.schema],
+    type: [Schema.Types.ObjectId],
+    ref: 'Education',
     required: false,
   },
   aspirationType: {
@@ -74,16 +76,33 @@ const UserSchema = new Schema({
     required: true,
   },
   externalExperiences: {
-    type: [ExternalExperience.schema],
+    type: [Schema.Types.ObjectId],
+    ref: 'ExternalExperience',
     required: false,
   },
   skillInterests: {
-    type: [SkillInterest.schema],
+    type: [Schema.Types.ObjectId],
+    ref: 'SkillInterest',
     required: true,
   },
   points: {
     type: Number,
     default: 0,
+    required: false,
+  },
+  learningPlan: {
+    type: Schema.Types.ObjectId,
+    ref: 'LearningPlan',
+    required: false,
+  },
+  completedExperiences: {
+    type: [Schema.Types.ObjectId],
+    ref: 'ExperienceWrapper',
+    required: false,
+  },
+  currentExperiences: {
+    type: [Schema.Types.ObjectId],
+    ref: 'ExperienceWrapper',
     required: false,
   },
 });

@@ -16,10 +16,10 @@ const userStartExperienceHandler = async (
       const { id } = req.query;
       req.body.user = id;
       req.body.startDate = new Date();
-      const experienceUsers: Models.IExperienceUsers = new Models.ExperienceUsers(
+      const experienceWrapper: Models.IExperienceWrapper = new Models.ExperienceWrapper(
         req.body
       );
-      await experienceUsers
+      await experienceWrapper
         .populate('experience')
         .populate('user')
         .save()

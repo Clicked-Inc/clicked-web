@@ -16,23 +16,37 @@ const loginHandler = async (
 
   try {
     await connect();
-    const { email, password } = req.body;
-    if (email == null || password == null) {
-      res
-        .status(400)
-        .json({ message: 'Login requires both email and password' });
-    }
-
-    // Retrieve user with the given email
-    const user: Models.IUser = await Models.User.findOne(
-      { email },
-      (err: NativeError, user: Models.IUser) => {
-        if (err) {
-          return;
+    const { email = null, username = null, password } = req.body;
+    let user: Models.IUser = null;
+    if (password == null) {
+      res.status(400).json({ message: 'Login requires a password' });
+      return;
+    } else if (email == null && username == null) {
+      res.status(400).json({ message: 'Login requires an email/username' });
+      return;
+    } else if (email != null) {
+      // Retrieve user with the given email
+      user = await Models.User.findOne(
+        { email },
+        (err: NativeError, user: Models.IUser) => {
+          if (err) {
+            return;
+          }
+          return user;
         }
-        return user;
-      }
-    );
+      );
+    } else {
+      // Retrieve user with the given username
+      user = await Models.User.findOne(
+        { username },
+        (err: NativeError, user: Models.IUser) => {
+          if (err) {
+            return;
+          }
+          return user;
+        }
+      );
+    }
 
     compare(password, user.password, (err, result) => {
       if (!err && result) {
