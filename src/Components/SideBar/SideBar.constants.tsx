@@ -1,11 +1,13 @@
 
-export const barLabels = (
+export const barLabels = 
     [
-        ["Project Feed", true], 
-        ["Milestones", false], 
-        ["Project Details", false], 
-        ["Assignments",  false], 
-        ["Files and Media", false],
-        ["Related Courses", false],
-        ["Get Help", false]
-    ]);
+        "Project Feed", 
+        "Milestones", 
+        "Project Details", 
+        "Assignments", 
+        "Files and Media", 
+        "Related Courses", 
+        "Get Help"
+    ];
+
+export const selectedLabel = "Project Feed";

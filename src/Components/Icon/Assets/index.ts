@@ -17,7 +17,7 @@ import IconInpsiration from './Icons/icon_inspiration.svg'
 import SideNavArrow from './Icons/sidenav_arrow.svg'
 import SideNavSelection from './Icons/sidenav_selection.svg'
 import CourseCardCover from './Icons/course_card_cover.svg';
-import SideBarPicture from './Icons/sidebar_pic.svg';
+import SideBarProfileImage from './Icons/sidebar_pic.svg';
 
 
 export default {
@@ -40,5 +40,5 @@ export default {
   SideNavArrow,
   SideNavSelection,
   CourseCardCover,
-  SideBarPicture
+  SideBarProfileImage
 };
