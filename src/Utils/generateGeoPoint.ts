@@ -1,8 +1,10 @@
 import * as Models from '@Models/index';
 
-const generateGeoPoint = (coordinates: number[]): Models.IGeoPoint => {
+const generateGeoPoint = async (
+  coordinates: number[]
+): Promise<Models.IGeoPoint> => {
   const geoPoint: Models.IGeoPoint = new Models.GeoPoint({ coordinates });
-  console.log(geoPoint);
+  await geoPoint.save();
   return geoPoint;
 };
 export default generateGeoPoint;

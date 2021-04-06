@@ -1,4 +1,4 @@
-import { NativeError } from 'mongoose';
+import { ObjectId, NativeError } from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
@@ -6,6 +6,8 @@ import authGuard from '@Api/authGuard';
 import checkPermissionLevel from '@Api/checkPermissionLevel';
 import generateSkillInterests from '@Utils/generateSkillInterests';
 import generateGeoPoint from '@Utils/generateGeoPoint';
+import generateEducation from '@Utils/generateEducation';
+import generateExternalExperiences from '@Utils/generateExternalExperiences';
 
 const userRequestHandler = async (
   req: NextApiRequest,
@@ -39,11 +41,11 @@ const userRequestHandler = async (
     case 'PUT':
       try {
         let permissionLevelMet = await checkPermissionLevel(req, ['admin'], id);
-        const loggedInUserId: string = req.query.userInfo.uid;
+        const userInfo: any = req.query.userInfo;
+        const loggedInUserId: string = userInfo.uid;
         if (loggedInUserId === id) {
           permissionLevelMet = true;
         }
-        // TODO: permission level only required if editing a different user
         if (!permissionLevelMet) {
           res.status(400).json({
             message: 'User does not have permission for this request.',
@@ -62,110 +64,92 @@ const userRequestHandler = async (
           aspirationType,
           externalExperiences,
           points,
-          completedExperiences,
-          currentExperiences,
+        }: {
+          firstName: string;
+          lastName: string;
+          email: string;
+          age: number;
+          skillInterests: string[];
+          profilePic: string;
+          location: number[];
+          education: Models.IEducation[];
+          aspirationType: string;
+          externalExperiences: Models.IExternalExperience[];
+          points: number;
+          completedExperiences: Models.IExperienceWrapper[];
+          currentExperiences: Models.IExperienceWrapper[];
         } = req.body || {};
-
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore TS2349
-        let failedUpdates: any = [];
         await Models.User.findById(id, async (err, user) => {
-          if (err) {
-            res.status(404).json({ message: 'User not found.' });
+          try {
+            if (err) {
+              res.status(404).json({ message: 'User not found.' });
+              return;
+            }
+            if (firstName != undefined) {
+              user.firstName = firstName;
+            }
+            if (lastName != undefined) {
+              user.lastName = lastName;
+            }
+            if (email != undefined) {
+              user.email = email;
+            }
+            if (age != undefined) {
+              user.age = age;
+            }
+            if (location != undefined) {
+              const geoPoint: Models.IGeoPoint = await generateGeoPoint(
+                location
+              );
+              user.location = geoPoint;
+            }
+            if (points != undefined) {
+              user.points += points;
+            }
+            if (aspirationType != undefined) {
+              user.aspirationType = aspirationType;
+            }
+            if (skillInterests != undefined) {
+              const skillInterestArray: ObjectId[] = await generateSkillInterests(
+                skillInterests
+              );
+              user.skillInterests = user.skillInterests.concat(
+                skillInterestArray
+              );
+            }
+            if (profilePic != undefined) {
+              user.profilePic = profilePic;
+              await user.save();
+            }
+            if (education != undefined) {
+              const educationArray: ObjectId[] = await generateEducation(
+                education
+              );
+              user.education = user.education.concat(educationArray);
+            }
+            if (externalExperiences != undefined) {
+              const externalExperiencesArray: ObjectId[] = await generateExternalExperiences(
+                externalExperiences
+              );
+              user.externalExperiences = user.externalExperiences.concat(
+                externalExperiencesArray
+              );
+            }
+            await user.save();
+
+            res.status(200).json({
+              message: 'User updated',
+              user: user,
+            });
             return;
+          } catch (e) {
+            res.status(404).json({
+              message:
+                'User not updated. Atleast one update parameter was formatted incorrectly.',
+            });
           }
-          if (firstName != undefined) {
-            const originalFirstName = user.firstName;
-            user.firstName = firstName;
-            try {
-              await user.save();
-            } catch (e) {
-              failedUpdates.push('firstName');
-              user.firstName = originalFirstName;
-            }
-          }
-          if (lastName != undefined) {
-            const originalLastName = user.lastName;
-            user.lastName = lastName;
-            try {
-              await user.save();
-            } catch (e) {
-              failedUpdates.push('lastName');
-              user.lastName = originalLastName;
-            }
-          }
-          if (email != undefined) {
-            const originalEmail = user.email;
-            user.email = email;
-            try {
-              await user.save();
-            } catch (e) {
-              failedUpdates.push('email');
-              user.email = originalEmail;
-            }
-          }
-          if (age != undefined) {
-            const originalAge = user.age;
-            user.age = age;
-            try {
-              await user.save();
-            } catch (e) {
-              failedUpdates.push('age');
-              user.age = originalAge;
-            }
-          }
-          if (location != undefined) {
-            const originalLocation = user.location;
-            const geoPoint: Models.IGeoPoint = generateGeoPoint(location);
-            user.location = geoPoint;
-            try {
-              await user.save();
-            } catch (e) {
-              failedUpdates.push('location');
-              user.location = originalLocation;
-            }
-          }
-          if (points != undefined) {
-            const originalPoints = user.points;
-            user.points += points;
-            try {
-              await user.save();
-            } catch (e) {
-              failedUpdates.push('points');
-            }
-          }
-          if (aspirationType != undefined) {
-            const originalAspirationType = user.aspirationType;
-            user.aspirationType = aspirationType;
-            try {
-              await user.save();
-            } catch (e) {
-              console.log('aspirationtype failed');
-              failedUpdates.push('aspirationType');
-              user.aspirationType = originalAspirationType;
-            }
-          }
-          if (skillInterests != undefined) {
-            const originalSkillInterests = user.skillInterests;
-            const skillInterestArray: Models.ISkillInterest[] = generateSkillInterests(
-              skillInterests
-            );
-            user.skillInterests = user.skillInterests.concat(
-              skillInterestArray
-            );
-            try {
-              await user.save();
-            } catch (e) {
-              failedUpdates.push('skillInterests');
-              user.skillInterests = originalSkillInterests;
-            }
-          }
-          res.status(200).json({
-            message: 'User updated',
-            user: user,
-            failedUpdates: failedUpdates,
-          });
-          return;
         });
       } catch (e) {
         res.status(404).json({ message: 'User not updated.' });

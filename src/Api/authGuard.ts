@@ -11,7 +11,6 @@ const authGuard = (nextApiHandler: NextApiHandler) => async (
       const obj: any = req.query;
       obj.userInfo = decoded;
       req.query = obj;
-      console.log(req.query);
       return await nextApiHandler(req, res);
     } else {
       res.status(500).json({ message: 'You are not authenticated' });

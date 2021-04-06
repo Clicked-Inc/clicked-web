@@ -1,11 +1,30 @@
 import * as Models from '@Models/index';
+import { ObjectId } from 'mongoose';
 
-const generateSkillInterests = (
+const generateSkillInterests = async (
   skillNames: string[]
-): Models.ISkillInterest[] => {
-  const skillInterestArray: Models.ISkillInterest[] = skillNames.map(
-    (skillName) => new Models.SkillInterest({ skillName })
+): Promise<ObjectId[]> => {
+  let skillInterestIdsArray: ObjectId[] = await Promise.all(
+    skillNames.map(
+      async (skillName): Promise<ObjectId> => {
+        try {
+          const skillInterest: Models.ISkillInterest = new Models.SkillInterest(
+            {
+              skillName,
+            }
+          );
+          await skillInterest.save();
+          return skillInterest._id;
+        } catch (e) {
+          return;
+        }
+      }
+    )
   );
-  return skillInterestArray;
+
+  skillInterestIdsArray = skillInterestIdsArray.filter(
+    (element) => element != null && element != undefined
+  );
+  return skillInterestIdsArray;
 };
 export default generateSkillInterests;
