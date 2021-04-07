@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ObjectId } from 'mongodb';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
+import authGuard from '@Api/authGuard';
 
 const userEndExperienceHandler = async (
   req: NextApiRequest,
@@ -24,7 +25,7 @@ const userEndExperienceHandler = async (
       req.body.endDate = new Date();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore TS2349
-      const experienceUser = await Models.ExperienceUsers.findOneAndUpdate(
+      const experienceWrapper = await Models.ExperienceWrapper.findOneAndUpdate(
         filter,
         req.body,
         {
@@ -32,14 +33,14 @@ const userEndExperienceHandler = async (
           runValidators: true,
         }
       );
-      if (!experienceUser) {
+      if (!experienceWrapper) {
         console.log(`No experence found with this filter ${filter}`);
         return res.status(400).json({
           success: false,
           message: `No experence found with this filter ${filter}`,
         });
       }
-      res.status(200).json({ success: true, data: experienceUser });
+      res.status(200).json({ success: true, data: experienceWrapper });
     } catch (error) {
       console.log(error);
       res.status(400).json({
@@ -52,4 +53,4 @@ const userEndExperienceHandler = async (
   }
 };
 
-export default userEndExperienceHandler;
+export default authGuard(userEndExperienceHandler);

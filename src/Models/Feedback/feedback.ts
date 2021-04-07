@@ -1,6 +1,6 @@
 import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
 
-enum FeedbackType {
+enum PrivacyType {
   Private = 'private',
   Public = 'public',
 }
@@ -9,33 +9,34 @@ export interface IFeedback extends Document {
   user: ObjectId;
   coach: ObjectId;
   experience: ObjectId;
-  privacy: FeedbackType;
+  privacy: PrivacyType;
   feedbackText: string;
-  enjoyabilityRating: number;
-  difficultyRating: number;
+  enjoyabilityRating?: number;
+  difficultyRating?: number;
   completed: boolean;
-  personalizedMessage: string;
+  personalizedMessage?: string;
+  skillRatings?: ObjectId[];
 }
 
 const FeedbackSchema = new Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
   coach: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
   experience: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Experience',
     required: true,
   },
   privacy: {
     type: String,
-    enum: Object.values(FeedbackType),
+    enum: Object.values(PrivacyType),
     required: true,
   },
   feedbackText: {
@@ -50,9 +51,15 @@ const FeedbackSchema = new Schema({
     type: Number,
     required: false,
   },
+  skillRatings: {
+    type: [Schema.Types.ObjectId],
+    ref: 'SkillScore',
+    required: false,
+  },
   completed: {
     type: Boolean,
-    required: false,
+    required: true,
+    default: false,
   },
   personalizedMessage: {
     type: String,

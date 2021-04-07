@@ -32,7 +32,7 @@ const requireIdHandler = async (
           res.status(200).json({
             success: true,
             data: experience,
-            message: 'Successful GET of experiene ' + id,
+            message: 'Successful GET of experience ' + id,
           });
         } catch (error) {
           res.status(400).json({
