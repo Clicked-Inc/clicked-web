@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { hash } from 'bcrypt';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import generateSkillInterests from '@Utils/generateSkillInterests';
+import generateSkillInterests from '@Generators/generateSkillInterests';
 import validateUniqueUser from '@Utils/validateUniqueUser';
 import { ObjectId } from 'mongoose';
 const registrationHandler = async (

@@ -4,10 +4,24 @@ import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
 import checkPermissionLevel from '@Api/checkPermissionLevel';
-import generateSkillInterests from '@Utils/generateSkillInterests';
-import generateGeoPoint from '@Utils/generateGeoPoint';
-import generateEducation from '@Utils/generateEducation';
-import generateExternalExperiences from '@Utils/generateExternalExperiences';
+import generateSkillInterests from '@Generators/generateSkillInterests';
+import generateGeoPoint from '@Generators/generateGeoPoint';
+import generateEducation from '@Generators/generateEducation';
+import generateExternalExperiences from '@Generators/generateExternalExperiences';
+
+type PutRequestBody = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  age: number;
+  skillInterests: string[];
+  profilePic: string;
+  location: number[];
+  education: Models.IEducation[];
+  aspirationType: string;
+  externalExperiences: Models.IExternalExperience[];
+  points: number;
+};
 
 const userRequestHandler = async (
   req: NextApiRequest,
@@ -52,6 +66,7 @@ const userRequestHandler = async (
           });
           return;
         }
+        console.log(typeof req.body.points);
         const {
           firstName,
           lastName,
@@ -64,95 +79,71 @@ const userRequestHandler = async (
           aspirationType,
           externalExperiences,
           points,
-        }: {
-          firstName: string;
-          lastName: string;
-          email: string;
-          age: number;
-          skillInterests: string[];
-          profilePic: string;
-          location: number[];
-          education: Models.IEducation[];
-          aspirationType: string;
-          externalExperiences: Models.IExternalExperience[];
-          points: number;
-          completedExperiences: Models.IExperienceWrapper[];
-          currentExperiences: Models.IExperienceWrapper[];
-        } = req.body || {};
+        }: PutRequestBody = req.body || {};
+
+        let updatePayload: any = {};
+        let updateArrayPayload: any = {};
+
+        if (firstName != undefined) {
+          updatePayload.firstName = firstName;
+        }
+        if (lastName != undefined) {
+          updatePayload.lastName = lastName;
+        }
+        if (email != undefined) {
+          updatePayload.email = email;
+        }
+        if (age != undefined) {
+          updatePayload.age = age;
+        }
+        if (location != undefined) {
+          const geoPoint: Models.IGeoPoint = await generateGeoPoint(location);
+          updatePayload.location = geoPoint;
+        }
+        if (points != undefined) {
+          let inc: any = {};
+          inc.points = points;
+          updatePayload.$inc = inc;
+        }
+        if (aspirationType != undefined) {
+          updatePayload.aspirationType = aspirationType;
+        }
+        if (skillInterests != undefined) {
+          const skillInterestArray: ObjectId[] = await generateSkillInterests(
+            skillInterests
+          );
+          updateArrayPayload.skillInterests = skillInterestArray;
+        }
+        if (profilePic != undefined) {
+          updatePayload.profilePic = profilePic;
+        }
+        if (education != undefined) {
+          const educationArray: ObjectId[] = await generateEducation(education);
+          updateArrayPayload.education = educationArray;
+        }
+        if (externalExperiences != undefined) {
+          const externalExperiencesArray: ObjectId[] = await generateExternalExperiences(
+            externalExperiences
+          );
+          updateArrayPayload.externalExperiences = externalExperiencesArray;
+        }
+        updatePayload.$push = updateArrayPayload;
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore TS2349
-        await Models.User.findById(id, async (err, user) => {
-          try {
-            if (err) {
-              res.status(404).json({ message: 'User not found.' });
-              return;
-            }
-            if (firstName != undefined) {
-              user.firstName = firstName;
-            }
-            if (lastName != undefined) {
-              user.lastName = lastName;
-            }
-            if (email != undefined) {
-              user.email = email;
-            }
-            if (age != undefined) {
-              user.age = age;
-            }
-            if (location != undefined) {
-              const geoPoint: Models.IGeoPoint = await generateGeoPoint(
-                location
-              );
-              user.location = geoPoint;
-            }
-            if (points != undefined) {
-              user.points += points;
-            }
-            if (aspirationType != undefined) {
-              user.aspirationType = aspirationType;
-            }
-            if (skillInterests != undefined) {
-              const skillInterestArray: ObjectId[] = await generateSkillInterests(
-                skillInterests
-              );
-              user.skillInterests = user.skillInterests.concat(
-                skillInterestArray
-              );
-            }
-            if (profilePic != undefined) {
-              user.profilePic = profilePic;
-              await user.save();
-            }
-            if (education != undefined) {
-              const educationArray: ObjectId[] = await generateEducation(
-                education
-              );
-              user.education = user.education.concat(educationArray);
-            }
-            if (externalExperiences != undefined) {
-              const externalExperiencesArray: ObjectId[] = await generateExternalExperiences(
-                externalExperiences
-              );
-              user.externalExperiences = user.externalExperiences.concat(
-                externalExperiencesArray
-              );
-            }
-            await user.save();
-
-            res.status(200).json({
-              message: 'User updated',
-              user: user,
-            });
-            return;
-          } catch (e) {
-            res.status(404).json({
-              message:
-                'User not updated. Atleast one update parameter was formatted incorrectly.',
-            });
+        const updatedUser = await Models.User.findByIdAndUpdate(
+          id,
+          updatePayload,
+          {
+            new: true,
+            runValidators: true,
           }
+        );
+        res.status(200).json({
+          message: 'User updated',
+          user: updatedUser,
         });
       } catch (e) {
-        res.status(404).json({ message: 'User not updated.' });
+        res.status(404).json({ message: 'User not updated.', error: e });
         return;
       }
       break;
@@ -189,7 +180,6 @@ const userRequestHandler = async (
       break;
 
     default:
-      console.log('Default');
       res.status(421).json({ message: 'Incorrect request type' });
       break;
   }
