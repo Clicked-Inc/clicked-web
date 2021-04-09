@@ -14,6 +14,7 @@ enum UserType {
 }
 
 export interface IUser extends Document {
+  age: number;
   email: string;
   username: string;
   role: UserType;
@@ -21,7 +22,7 @@ export interface IUser extends Document {
   firstName: string;
   lastName: string;
   profilePic?: string;
-  location?: IGeoPoint[];
+  location?: IGeoPoint;
   education?: ObjectId[];
   aspirationType: AspirationType;
   externalExperiences?: ObjectId[];
@@ -33,6 +34,10 @@ export interface IUser extends Document {
 }
 
 const UserSchema = new Schema({
+  age: {
+    type: Number,
+    required: false,
+  },
   email: {
     type: String,
     required: true,
@@ -62,7 +67,7 @@ const UserSchema = new Schema({
     required: false,
   },
   location: {
-    type: [GeoPoint.schema],
+    type: GeoPoint.schema,
     required: false,
   },
   education: {
