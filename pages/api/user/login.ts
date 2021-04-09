@@ -59,7 +59,6 @@ const loginHandler = async (
           process.env.JWT_SECRET,
           { expiresIn: '2 weeks' },
           (err, token) => {
-            console.log(password, user.password, result, err);
             if (token) {
               res.status(200).json({ message: 'success', authToken: token });
             } else {

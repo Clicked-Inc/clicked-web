@@ -26,7 +26,6 @@ const registrationHandler = async (
       aspirationType,
       skillInterests,
     } = req.body;
-    console.log('this far 2');
     const uniqueUser: boolean[] = await validateUniqueUser(email, username);
     if (uniqueUser[0] && uniqueUser[1]) {
       const skillInterestArray: ObjectId[] = await generateSkillInterests(
@@ -46,7 +45,6 @@ const registrationHandler = async (
             aspirationType,
             skillInterests: skillInterestArray,
           });
-          console.log('this far');
           await user.save((err) => {
             if (err) {
               res.status(400).json({ message: 'Registration failed' });
