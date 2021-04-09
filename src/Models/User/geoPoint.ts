@@ -1,5 +1,5 @@
 import mongoose, { Document, model, Schema } from 'mongoose';
-
+// TODO: Update schema to include string information (city, country, state, etc.)
 export interface IGeoPoint extends Document {
   coordinates: number[];
 }
