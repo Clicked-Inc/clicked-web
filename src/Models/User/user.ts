@@ -22,7 +22,11 @@ export interface IUser extends Document {
   firstName: string;
   lastName: string;
   profilePic?: string;
+<<<<<<< HEAD:src/Models/User/user.ts
+  location?: IGeoPoint[];
+=======
   location?: IGeoPoint;
+>>>>>>> 3b2a5f39fa861b12fbf8db72cc3dacdf87e22771:src/Models/user.ts
   education?: ObjectId[];
   aspirationType: AspirationType;
   externalExperiences?: ObjectId[];
