@@ -6,7 +6,7 @@ export const topLabels = (
         ["Experiences", <Icon name="IconExperiences"/>], 
         ["All Courses", <Icon name="IconCourses"/>], 
         ["Feed", <Icon name="IconFeed"/>], 
-        ["Inspiration", <Icon name="IconInpsiration"/>]
+        ["Inspiration", <Icon name="IconInspiration"/>]
     ]);
 export const bottomLabels = (
     [
