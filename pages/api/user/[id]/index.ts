@@ -37,6 +37,7 @@ const userRequestHandler = async (
       try {
         const permissionLevelMet = await checkPermissionLevel(
           req,
+          'user',
           ['admin'],
           id
         );
@@ -75,7 +76,9 @@ const userRequestHandler = async (
 
     case 'DELETE':
       try {
-        const permissionLevelMet = await checkPermissionLevel(req, ['admin']);
+        const permissionLevelMet = await checkPermissionLevel(req, 'user', [
+          'admin',
+        ]);
 
         if (!permissionLevelMet) {
           res.status(400).json({
