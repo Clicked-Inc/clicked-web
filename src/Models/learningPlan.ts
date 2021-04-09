@@ -1,4 +1,4 @@
-import { Document, model, Schema } from 'mongoose';
+import { Document, model, ObjectId, Schema } from 'mongoose';
 import Experience, { IExperience } from '@Models/Experience/experience';
 
 enum TierType {
@@ -11,8 +11,8 @@ enum TierType {
 export interface ILearningPlan extends Document {
   skillName: string;
   tier: TierType;
-  completedExperiences: IExperience[];
-  currentExperiences: IExperience[];
+  completedExperiences: ObjectId | IExperience[];
+  currentExperiences: ObjectId | IExperience[];
 }
 
 const LearningPlanSchema = new Schema({
@@ -26,11 +26,13 @@ const LearningPlanSchema = new Schema({
     required: true,
   },
   completedExperiences: {
-    type: [Experience.schema],
+    type: [Schema.Types.ObjectId],
+    ref: 'Experience',
     required: true,
   },
   currentExperiences: {
-    type: [Experience.schema],
+    type: [Schema.Types.ObjectId],
+    ref: 'Experience',
     required: true,
   },
 });

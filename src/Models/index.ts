@@ -24,3 +24,9 @@ export type { IExperience } from './Experience/experience';
 //  */
 export { default as Feedback } from './Feedback/feedback';
 export type { IFeedback } from './Feedback/feedback';
+
+// /**
+//  * LearningPlan Schemas
+//  */
+export { default as LearningPlan } from './learningPlan';
+export type { ILearningPlan } from './learningPlan';
