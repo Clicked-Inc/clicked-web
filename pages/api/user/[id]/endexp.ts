@@ -42,6 +42,11 @@ const userEndExperienceHandler = async (
           message: `No experience found with this filter ${filter}`,
         });
         return;
+      } else if (experienceWrapper.endDate) {
+        res.status(400).json({
+          success: false,
+          message: `Experience has already been completed.`,
+        });
       } else {
         await experienceWrapper.populate('experience').execPopulate();
         const experience: any = experienceWrapper.experience;
@@ -59,7 +64,7 @@ const userEndExperienceHandler = async (
             res.status(200).json({ success: true, data: experienceWrapper });
             return;
           }
-          res.status(200).json({
+          res.status(400).json({
             success: false,
             data: experienceWrapper,
             message: 'Points failed to update.',

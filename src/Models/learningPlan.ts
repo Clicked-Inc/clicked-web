@@ -1,5 +1,5 @@
-import { Document, model, ObjectId, Schema } from 'mongoose';
-import Experience, { IExperience } from '@Models/Experience/experience';
+import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
+import { IExperience } from '@Models/Experience/experience';
 
 enum TierType {
   SelfDiscovery = 'selfDiscovery',
@@ -37,4 +37,5 @@ const LearningPlanSchema = new Schema({
   },
 });
 
-export default model<ILearningPlan>('LearningPlan', LearningPlanSchema);
+export default mongoose.models.LearningPlan ||
+  model<ILearningPlan>('LearningPlan', LearningPlanSchema);
