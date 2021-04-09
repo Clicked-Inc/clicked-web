@@ -21,6 +21,10 @@ import SideNavArrow from './Icons/sidenav_arrow.svg';
 import SideNavSelection from './Icons/sidenav_selection.svg';
 import CourseCardCover from './Icons/course_card_cover.svg';
 import SideBarProfileImage from './Icons/sidebar_pic.svg';
+import ExpertOneImage from './Icons/expert_one.svg';
+import ExpertTwoImage from './Icons/expert_two.svg';
+import ExpertThreeImage from './Icons/expert_three.svg';
+import ExpertFourImage from './Icons/expert_four.svg';
 
 
 export default {
@@ -46,5 +50,9 @@ export default {
   SideNavArrow,
   SideNavSelection,
   CourseCardCover,
-  SideBarProfileImage
+  SideBarProfileImage,
+  ExpertOneImage,
+  ExpertTwoImage,
+  ExpertThreeImage,
+  ExpertFourImage
 };

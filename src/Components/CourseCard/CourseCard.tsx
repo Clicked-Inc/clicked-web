@@ -17,7 +17,6 @@ const CourseCard = () => (
       <Box>
         <Icon
           name="CourseCardCover"
-          alt="Course Card Cover"
           maxW="100%"
           h={200}
         />
