@@ -1,3 +1,4 @@
+import * as Models from '@Models/index';
 import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
 import SkillScore, { ISkillScore } from './skillScore';
 
@@ -20,14 +21,15 @@ export interface IExperience extends Document {
   name: string;
   category: CategoryType;
   experienceType: ExperienceType;
-  coach: ObjectId;
+  coach: ObjectId | Models.IUser;
   targetSkill: ISkillScore[];
-  feedback?: ObjectId[];
+  feedback?: ObjectId[] | Models.IFeedback[];
   averageRating?: number;
-  currentUsers?: ObjectId[];
-  previousUsers?: ObjectId[];
+  currentUsers?: ObjectId[] | Models.IUser[];
+  previousUsers?: ObjectId[] | Models.IUser[];
+  points: number;
 }
-
+console.log('hi');
 const ExperienceSchema = new Schema({
   name: {
     type: String,
@@ -71,7 +73,12 @@ const ExperienceSchema = new Schema({
     ref: 'ExperienceWrapper',
     required: false,
   },
+  points: {
+    type: Number,
+    required: true,
+  },
 });
+console.log('hi 2');
 
 export default mongoose.models.Experience ||
   model<IExperience>('Experience', ExperienceSchema);
