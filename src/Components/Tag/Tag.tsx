@@ -3,6 +3,11 @@ import {
   Box,
   Tag as ChakraTag,
   TagLabel,
+<<<<<<< HEAD
+=======
+  TagLeftIcon,
+  Avatar,
+>>>>>>> 3b2a5f39fa861b12fbf8db72cc3dacdf87e22771
 } from '@chakra-ui/react';
 import { Icon } from '../Icon';
 import { generateStyles } from './Tag.utils';

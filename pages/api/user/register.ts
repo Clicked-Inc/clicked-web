@@ -2,9 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { hash } from 'bcrypt';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import generateSkillInterests from '@Utils/generateSkillInterests';
+import generateSkillInterests from '@Generators/generateSkillInterests';
 import validateUniqueUser from '@Utils/validateUniqueUser';
-
+import { ObjectId } from 'mongoose';
 const registrationHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
@@ -28,7 +28,7 @@ const registrationHandler = async (
     } = req.body;
     const uniqueUser: boolean[] = await validateUniqueUser(email, username);
     if (uniqueUser[0] && uniqueUser[1]) {
-      const skillInterestArray: Models.ISkillInterest[] = generateSkillInterests(
+      const skillInterestArray: ObjectId[] = await generateSkillInterests(
         skillInterests
       );
       await hash(

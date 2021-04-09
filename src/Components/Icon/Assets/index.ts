@@ -42,7 +42,7 @@ export default {
   IconFAQ,
   IconFeed,
   IconGuide,
-  IconInpsiration,
+  IconInspiration,
   SideNavArrow,
   SideNavSelection,
   CourseCardCover,

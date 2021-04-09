@@ -17,13 +17,14 @@
     "paths": {
       "@Components/*": ["./src/Components/*"],
       "@Components": ["./src/Components"],
-      "@Api/*": ["src/Api/*"],
+      "@Api/*": ["./src/Api/*"],
       "@Models/*": ["./src/Models/*"],
       "@Screens/*": ["./src/Screens/*"],
       "@Screens": ["./src/Screens"],
       "@Hooks/*": ["./src/Hooks/*"],
       "@Constants/*": ["./src/Constants/*"],
       "@Utils/*": ["./src/Utils/*"],
+      "@Generators/*": ["./src/Generators/*"],
       "@Config": ["./src/Config"],
       "@Public/*": ["./public/*"]
     }
