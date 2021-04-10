@@ -51,3 +51,4 @@ To run this project, add a .env.local file to the root directory. Inside the fil
 - DB_URI (MongoDB database URI)
 - JWT_SECRET (secret key to verify JWT from client)
 - saltRounds (how intensely we encrypt the password)
+- SERVER_ROOT_URI (base URL where the NextJS app's backend is being run, e.g. http://localhost:3000/api)

@@ -1,6 +1,6 @@
 import mongoose, { Document, model, Schema, ObjectId } from 'mongoose';
 import GeoPoint, { IGeoPoint } from './geoPoint';
-
+import * as Models from '@Models/index';
 // TODO: add more aspiration types
 enum AspirationType {
   Explore = 'explore',
@@ -14,6 +14,7 @@ enum UserType {
 }
 
 export interface IUser extends Document {
+  age?: number;
   email: string;
   username: string;
   role: UserType;
@@ -21,18 +22,22 @@ export interface IUser extends Document {
   firstName: string;
   lastName: string;
   profilePic?: string;
-  location?: IGeoPoint[];
-  education?: ObjectId[];
+  location?: IGeoPoint;
+  education?: ObjectId[] | Models.IEducation[];
   aspirationType: AspirationType;
-  externalExperiences?: ObjectId[];
-  skillInterests: ObjectId[];
+  externalExperiences?: ObjectId[] | Models.IExternalExperience[];
+  skillInterests: ObjectId[] | Models.ISkillInterest[];
   points?: number;
-  learningPlan?: ObjectId[];
-  completedExperiences?: ObjectId[];
-  currentExperiences?: ObjectId[];
+  learningPlan?: ObjectId | Models.ILearningPlan;
+  completedExperiences?: ObjectId[] | Models.IExperienceWrapper[];
+  currentExperiences?: ObjectId[] | Models.IExperienceWrapper[];
 }
 
 const UserSchema = new Schema({
+  age: {
+    type: Number,
+    required: false,
+  },
   email: {
     type: String,
     required: true,
@@ -62,7 +67,7 @@ const UserSchema = new Schema({
     required: false,
   },
   location: {
-    type: [GeoPoint.schema],
+    type: GeoPoint.schema,
     required: false,
   },
   education: {

@@ -1,9 +1,27 @@
-import { NativeError } from 'mongoose';
+import { ObjectId, NativeError } from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
 import checkPermissionLevel from '@Api/checkPermissionLevel';
+import generateSkillInterests from '@Generators/generateSkillInterests';
+import generateGeoPoint from '@Generators/generateGeoPoint';
+import generateEducation from '@Generators/generateEducation';
+import generateExternalExperiences from '@Generators/generateExternalExperiences';
+
+type PutRequestBody = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  age: number;
+  skillInterests: string[];
+  profilePic: string;
+  location: number[];
+  education: Models.IEducation[];
+  aspirationType: string;
+  externalExperiences: Models.IExternalExperience[];
+  points: number;
+};
 
 const userRequestHandler = async (
   req: NextApiRequest,
@@ -32,46 +50,102 @@ const userRequestHandler = async (
         // TODO: more specific error codes based on situation
         res.status(404).json({ message: 'User not found.' });
       }
+      break;
 
     case 'PUT':
       try {
-        const permissionLevelMet = await checkPermissionLevel(
-          req,
-          ['admin'],
-          id
-        );
-
+        let permissionLevelMet = await checkPermissionLevel(req, ['admin'], id);
+        const userInfo: any = req.query.userInfo;
+        const loggedInUserId: string = userInfo.uid;
+        if (loggedInUserId === id) {
+          permissionLevelMet = true;
+        }
         if (!permissionLevelMet) {
           res.status(400).json({
             message: 'User does not have permission for this request.',
           });
           return;
         }
+        const {
+          firstName,
+          lastName,
+          email,
+          age,
+          skillInterests,
+          profilePic,
+          location,
+          education,
+          aspirationType,
+          externalExperiences,
+          points,
+        }: PutRequestBody = req.body || {};
 
+        let updatePayload: any = {};
+        let updateArrayPayload: any = {};
+
+        if (firstName != undefined) {
+          updatePayload.firstName = firstName;
+        }
+        if (lastName != undefined) {
+          updatePayload.lastName = lastName;
+        }
+        if (email != undefined) {
+          updatePayload.email = email;
+        }
+        if (age != undefined) {
+          updatePayload.age = age;
+        }
+        if (location != undefined) {
+          const geoPoint: Models.IGeoPoint = await generateGeoPoint(location);
+          updatePayload.location = geoPoint;
+        }
+        if (points != undefined) {
+          let inc: any = {};
+          inc.points = points;
+          updatePayload.$inc = inc;
+        }
+        if (aspirationType != undefined) {
+          updatePayload.aspirationType = aspirationType;
+        }
+        if (skillInterests != undefined) {
+          const skillInterestArray: ObjectId[] = await generateSkillInterests(
+            skillInterests
+          );
+          updateArrayPayload.skillInterests = skillInterestArray;
+        }
+        if (profilePic != undefined) {
+          updatePayload.profilePic = profilePic;
+        }
+        if (education != undefined) {
+          const educationArray: ObjectId[] = await generateEducation(education);
+          updateArrayPayload.education = educationArray;
+        }
+        if (externalExperiences != undefined) {
+          const externalExperiencesArray: ObjectId[] = await generateExternalExperiences(
+            externalExperiences
+          );
+          updateArrayPayload.externalExperiences = externalExperiencesArray;
+        }
+        updatePayload.$push = updateArrayPayload;
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore TS2349
-        const user = await Models.User.findByIdAndUpdate(
+        const updatedUser = await Models.User.findByIdAndUpdate(
           id,
-          req.body,
+          updatePayload,
           {
             new: true,
             runValidators: true,
-          },
-          (err: NativeError, user: Models.IUser) => {
-            if (err) {
-              return;
-            }
-            return user;
           }
         );
-        if (user) {
-          res.status(200).json({ message: 'User updated', user: user });
-          return;
-        }
-        res.status(404).json({ message: 'User not updated.' });
+        res.status(200).json({
+          message: 'User updated',
+          user: updatedUser,
+        });
       } catch (e) {
-        res.status(404).json({ message: 'User not updated.' });
+        res.status(404).json({ message: 'User not updated.', error: e });
+        return;
       }
+      break;
 
     case 'DELETE':
       try {
@@ -102,9 +176,11 @@ const userRequestHandler = async (
       } catch (e) {
         res.status(404).json({ message: 'User not updated.', error: e });
       }
+      break;
+
     default:
       res.status(421).json({ message: 'Incorrect request type' });
-      return;
+      break;
   }
 };
 
