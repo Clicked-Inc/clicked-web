@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ObjectId } from 'mongodb';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
+import mongoose from 'mongoose';
 
 const ROOT = process.env.SERVER_ROOT_URI || 'http://localhost:3000/api';
 
@@ -20,42 +21,38 @@ const userEndExperienceHandler = async (
       const _id = Array.isArray(id) ? id[0] : id;
       const { experience } = req.body;
       const filter = {
-        user: new ObjectId(_id),
-        experience: new ObjectId(experience),
+        user: new mongoose.Types.ObjectId(_id),
+        experience: new mongoose.Types.ObjectId(experience),
       };
       req.body.endDate = new Date();
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore TS2349
-      const experienceWrapper: Models.IExperienceWrapper = await Models.ExperienceWrapper.findOneAndUpdate(
-        filter,
-        req.body,
-        {
-          new: true,
-          runValidators: true,
-        }
+      const experienceWrapper: Models.IExperienceWrapper = await Models.ExperienceWrapper.findOne(
+        filter
       );
       if (!experienceWrapper) {
-<<<<<<< HEAD
         console.log(
           `No experence found with this user ${_id} and experience id: ${experience}`
         );
-        return res.status(400).json({
-          success: false,
-          message: `No experence found with this user ${_id} and experience id: ${experience}`,
-=======
-        console.log(`No experience found with this filter ${filter}`);
         res.status(400).json({
           success: false,
-          message: `No experience found with this filter ${filter}`,
+          message: `No experence found with this user ${_id} and experience id: ${experience}`,
         });
         return;
       } else if (experienceWrapper.endDate) {
         res.status(400).json({
           success: false,
           message: `Experience has already been completed.`,
->>>>>>> 46412b24f527ed8fd7ef94f85a1a695b01d05fa3
         });
       } else {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore TS2349
+        const experienceWrapper: Models.IExperienceWrapper = await Models.ExperienceWrapper.findOneAndUpdate(
+          filter,
+          req.body,
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
         await experienceWrapper.populate('experience').execPopulate();
         const experience: any = experienceWrapper.experience;
         try {
@@ -68,6 +65,10 @@ const userEndExperienceHandler = async (
             },
             body: JSON.stringify({ points }),
           });
+          const userObj = await Models.User.findById(_id);
+          console.log(userObj.populate('skillInterests'));
+          console.log(experience.targetSkill);
+
           if (response.status == 200) {
             res.status(200).json({ success: true, data: experienceWrapper });
             return;
@@ -87,16 +88,6 @@ const userEndExperienceHandler = async (
           return;
         }
       }
-<<<<<<< HEAD
-      //TODO: get user skill interest
-      const userObj = await Models.User.findById(_id);
-      userObj.skillInterests.forEach((element) => {
-        console.log(element);
-      });
-      console.log(userObj);
-      res.status(200).json({ success: true, data: experienceWrapper });
-=======
->>>>>>> 46412b24f527ed8fd7ef94f85a1a695b01d05fa3
     } catch (error) {
       console.log(error);
       res.status(400).json({
