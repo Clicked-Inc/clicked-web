@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import authGuard from '@Api/authGuard';
 
 const userStartExperienceHandler = async (
   req: NextApiRequest,
@@ -26,7 +25,9 @@ const userStartExperienceHandler = async (
         .save()
         .then(function (data) {
           res.status(200).send(data);
-          console.log('User has started this added to the database!');
+          console.log(
+            'User has started this experience and an ExperienceWrapper has been added to the database!'
+          );
         })
         .catch(function (err) {
           console.log(err);
@@ -44,4 +45,4 @@ const userStartExperienceHandler = async (
   }
 };
 
-export default authGuard(userStartExperienceHandler);
+export default userStartExperienceHandler;

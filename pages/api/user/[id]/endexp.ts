@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ObjectId } from 'mongodb';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import authGuard from '@Api/authGuard';
 
 const userEndExperienceHandler = async (
   req: NextApiRequest,
@@ -34,12 +33,20 @@ const userEndExperienceHandler = async (
         }
       );
       if (!experienceWrapper) {
-        console.log(`No experence found with this filter ${filter}`);
+        console.log(
+          `No experence found with this user ${_id} and experience id: ${experience}`
+        );
         return res.status(400).json({
           success: false,
-          message: `No experence found with this filter ${filter}`,
+          message: `No experence found with this user ${_id} and experience id: ${experience}`,
         });
       }
+      //TODO: get user skill interest
+      const userObj = await Models.User.findById(_id);
+      userObj.skillInterests.forEach((element) => {
+        console.log(element);
+      });
+      console.log(userObj);
       res.status(200).json({ success: true, data: experienceWrapper });
     } catch (error) {
       console.log(error);
@@ -53,4 +60,4 @@ const userEndExperienceHandler = async (
   }
 };
 
-export default authGuard(userEndExperienceHandler);
+export default userEndExperienceHandler;
