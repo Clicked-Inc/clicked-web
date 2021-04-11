@@ -2,17 +2,19 @@
 POST new experience.
  **/
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ObjectId } from 'mongoose';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
+import generateSkillScore from '@Generators/generateSkillScore';
 
-const generateSkillScore = (
-  skillInfo: (string | number)[][]
-): Models.ISkillScore[] => {
-  const skillScoreArray: Models.ISkillScore[] = skillInfo.map(
-    (skill) => new Models.SkillScore({ skillName: skill[0], score: skill[1] })
-  );
-  return skillScoreArray;
-};
+// const generateSkillScore = (
+//   skillInfo: (string | number)[][]
+// ): Models.ISkillScore[] => {
+//   const skillScoreArray: Models.ISkillScore[] = skillInfo.map(
+//     (skill) => new Models.SkillScore({ skillName: skill[0], score: skill[1] })
+//   );
+//   return skillScoreArray;
+// };
 
 const createExperienceHandler = async (
   req: NextApiRequest,
@@ -27,9 +29,8 @@ const createExperienceHandler = async (
     await connect();
     try {
       const { targetSkill } = req.body;
-      const skillScoreArray: Models.ISkillScore[] = generateSkillScore(
-        targetSkill
-      );
+      const skillScoreArray: ObjectId[] = await generateSkillScore(targetSkill);
+      console.log(skillScoreArray);
       req.body.targetSkill = skillScoreArray;
       const experience: Models.IExperience = new Models.Experience(req.body);
       await experience

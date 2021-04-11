@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ObjectId } from 'mongodb';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import mongoose from 'mongoose';
+import mongoose, { ObjectId } from 'mongoose';
+// import ObjectId from 'mongodb';
 
 const ROOT = process.env.SERVER_ROOT_URI || 'http://localhost:3000/api';
 
@@ -37,11 +37,11 @@ const userEndExperienceHandler = async (
           message: `No experence found with this user ${_id} and experience id: ${experience}`,
         });
         return;
-      } else if (experienceWrapper.endDate) {
-        res.status(400).json({
-          success: false,
-          message: `Experience has already been completed.`,
-        });
+        // } else if (experienceWrapper.endDate) {
+        // res.status(400).json({
+        //     success: false,
+        //     message: `Experience has already been completed.`,
+        //   });
       } else {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore TS2349
@@ -57,6 +57,13 @@ const userEndExperienceHandler = async (
         const experience: any = experienceWrapper.experience;
         try {
           const points = <Models.IExperience>experience.points;
+          const skillInterests = experience.targetSkill;
+          // result = skillInterests.map((o: any) => {
+          //   let obj = Object.assign({}, o);
+          //   delete obj._id;
+          //   console.log(obj);
+          //   return obj;
+          // });
           const response = await fetch(`${ROOT}/user/${id}`, {
             method: 'put',
             headers: {
@@ -65,9 +72,15 @@ const userEndExperienceHandler = async (
             },
             body: JSON.stringify({ points }),
           });
-          const userObj = await Models.User.findById(_id);
-          console.log(userObj.populate('skillInterests'));
-          console.log(experience.targetSkill);
+          const updateSkill = await fetch(`${ROOT}/user/${id}/updateskill`, {
+            method: 'put',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: req.headers.authorization,
+            },
+            body: JSON.stringify({ skillInterests }),
+          });
+          // console.log(experience.targetSkill);
 
           if (response.status == 200) {
             res.status(200).json({ success: true, data: experienceWrapper });

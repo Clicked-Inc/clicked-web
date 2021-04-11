@@ -20,7 +20,7 @@ export interface IExperience extends Document {
   category: CategoryType;
   experienceType: ExperienceType;
   coach: ObjectId | Models.IUser;
-  targetSkill: Models.ISkillScore[];
+  targetSkill: ObjectId[] | Models.ISkillScore[];
   feedback?: ObjectId[] | Models.IFeedback[];
   averageRating?: number;
   currentUsers?: ObjectId[] | Models.IUser[];
