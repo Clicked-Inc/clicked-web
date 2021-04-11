@@ -45,5 +45,7 @@ const ExperienceWrapperSchema = new Schema({
   },
 });
 
+ExperienceWrapperSchema.index({ experience: 1, user: 1 }, { unique: true });
+
 export default mongoose.models.ExperienceWrapper ||
   model<IExperienceWrapper>('ExperienceWrapper', ExperienceWrapperSchema);
