@@ -71,7 +71,6 @@ const userRequestHandler = async (
           });
           return;
         }
-        console.log(typeof req.body.points);
         const {
           firstName,
           lastName,

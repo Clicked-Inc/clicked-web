@@ -16,10 +16,12 @@ import IconExperiences from './Icons/icon_experiences.svg';
 import IconFAQ from './Icons/icon_faq.svg';
 import IconFeed from './Icons/icon_feed.svg';
 import IconGuide from './Icons/icon_guide.svg';
-import IconInpsiration from './Icons/icon_inspiration.svg';
+import IconInspiration from './Icons/icon_inspiration.svg';
 import SideNavArrow from './Icons/sidenav_arrow.svg';
 import SideNavSelection from './Icons/sidenav_selection.svg';
 import CourseCardCover from './Icons/course_card_cover.svg';
+import SideBarProfileImage from './Icons/sidebar_pic.svg';
+
 
 export default {
   Notification,
@@ -40,8 +42,9 @@ export default {
   IconFAQ,
   IconFeed,
   IconGuide,
-  IconInpsiration,
+  IconInspiration,
   SideNavArrow,
   SideNavSelection,
   CourseCardCover,
+  SideBarProfileImage
 };
