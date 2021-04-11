@@ -48,7 +48,8 @@ const ExperienceSchema = new Schema({
     required: true,
   },
   targetSkill: {
-    type: [Models.SkillScore.schema],
+    type: [Schema.Types.ObjectId],
+    ref: 'SkillScore',
     required: true,
   },
   feedback: {

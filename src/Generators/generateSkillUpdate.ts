@@ -1,38 +1,34 @@
 import * as Models from '@Models/index';
-import { ObjectId } from 'mongoose';
 
 const generateSkillUpdate = async (
-  skillNames: Array<Models.ISkillScore>
-): Promise<ObjectId[]> => {
-  let skillInterestIdsArray: ObjectId[] = await Promise.all(
-    skillNames.map(
-      async (skill): Promise<ObjectId> => {
-        try {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          //@ts-ignore TS2349
-          const skillInterest: Models.ISkillInterest = await Models.SkillInterest.findByIdAndUpdate(
-            skill._id,
-            {
-              skillName: skill.skillName,
-              progress: skill.progress,
-            },
-            {
-              new: true,
-              runValidators: true,
-            }
-          );
+  skillNames: Array<Models.ISkillScore>,
+  skillInt: string[]
+): Promise<void> => {
+  console.log('skill update called');
+  skillNames.forEach(
+    async (skill): Promise<Models.ISkillInterest> => {
+      const fullSkill = await Models.SkillScore.findById(skill);
+      try {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore TS2349
+        const skillInterest: Models.ISkillInterest = await Models.SkillInterest.findOneAndUpdate(
+          { _id: { $in: skillInt }, skillName: fullSkill.skillName },
+          { $inc: { progress: fullSkill.progress } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+        if (skillInterest) {
+          console.log('FOUND SKILL' + skillInterest);
           await skillInterest.save();
-          return skillInterest._id;
-        } catch (e) {
-          return;
         }
+        return skillInterest;
+      } catch (e) {
+        console.log(e);
+        return;
       }
-    )
+    }
   );
-
-  skillInterestIdsArray = skillInterestIdsArray.filter(
-    (element) => element != null && element != undefined
-  );
-  return skillInterestIdsArray;
 };
 export default generateSkillUpdate;

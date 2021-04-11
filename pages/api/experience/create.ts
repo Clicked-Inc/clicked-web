@@ -30,7 +30,6 @@ const createExperienceHandler = async (
     try {
       const { targetSkill } = req.body;
       const skillScoreArray: ObjectId[] = await generateSkillScore(targetSkill);
-      console.log(skillScoreArray);
       req.body.targetSkill = skillScoreArray;
       const experience: Models.IExperience = new Models.Experience(req.body);
       await experience

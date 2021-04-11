@@ -11,8 +11,10 @@ import checkPermissionLevel from '@Api/checkPermissionLevel';
 import generateSkillUpdate from '@Generators/generateSkillUpdate';
 
 type PutRequestBody = {
-  skillInterests: Array<Models.ISkillScore>;
+  skillScore: Array<Models.ISkillScore>;
 };
+
+const ROOT = process.env.SERVER_ROOT_URI || 'http://localhost:3000/api';
 
 const updateSkillHandler = async (
   req: NextApiRequest,
@@ -39,35 +41,21 @@ const updateSkillHandler = async (
           });
           return;
         }
-        const { skillInterests }: PutRequestBody = req.body || {};
-        console.log(skillInterests);
-
-        let updatePayload: any = {};
-        let updateArrayPayload: any = {};
-
-        if (skillInterests != undefined) {
-          console.log(skillInterests);
-          const skillInterestArray: ObjectId[] = await generateSkillUpdate(
-            skillInterests
-          );
-          updateArrayPayload.skillInterests = skillInterestArray;
+        const user = await Models.User.findById(id);
+        const { skillScore }: PutRequestBody = req.body || {};
+        if (skillScore != undefined) {
+          await generateSkillUpdate(skillScore, user.skillInterests);
         }
-        updatePayload.$push = updateArrayPayload;
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore TS2349
-        const updatedUser = await Models.User.findByIdAndUpdate(
-          id,
-          updatePayload,
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
+        const updatedUser = await Models.User.findById(id);
+        console.log(updatedUser);
         res.status(200).json({
           message: 'User updated',
           user: updatedUser,
         });
       } catch (e) {
+        console.log(e);
         res.status(404).json({ message: 'User not updated.', error: e });
         return;
       }

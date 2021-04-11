@@ -8,6 +8,7 @@ const generateSkilScore = async (
     skillNames.map(
       async (skill): Promise<ObjectId> => {
         try {
+          console.log(skill[0]);
           const skillScore: Models.ISkillScore = new Models.SkillScore({
             skillName: skill[0],
             progress: skill[1],

@@ -57,13 +57,7 @@ const userEndExperienceHandler = async (
         const experience: any = experienceWrapper.experience;
         try {
           const points = <Models.IExperience>experience.points;
-          const skillInterests = experience.targetSkill;
-          // result = skillInterests.map((o: any) => {
-          //   let obj = Object.assign({}, o);
-          //   delete obj._id;
-          //   console.log(obj);
-          //   return obj;
-          // });
+          const skillScore = experience.targetSkill;
           const response = await fetch(`${ROOT}/user/${id}`, {
             method: 'put',
             headers: {
@@ -78,9 +72,8 @@ const userEndExperienceHandler = async (
               'Content-Type': 'application/json',
               Authorization: req.headers.authorization,
             },
-            body: JSON.stringify({ skillInterests }),
+            body: JSON.stringify({ skillScore }),
           });
-          // console.log(experience.targetSkill);
 
           if (response.status == 200) {
             res.status(200).json({ success: true, data: experienceWrapper });
