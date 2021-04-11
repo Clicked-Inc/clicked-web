@@ -4,6 +4,9 @@ GET experience by experience ID, if id field is empty return all experiences.
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
+import authGuard from '@Api/authGuard';
+import checkPermissionLevel from '@Api/checkPermissionLevel';
+
 
 const requireIdHandler = async (
   req: NextApiRequest,
@@ -47,6 +50,19 @@ const requireIdHandler = async (
 
       case 'PUT' /* Edit a model by its ID */:
         try {
+          const permissionLevelMet = await checkPermissionLevel(
+            req,
+            'experience',
+            ['admin'],
+            id
+          );
+
+          if (!permissionLevelMet) {
+            res.status(400).json({
+              message: 'User does not have permission for this request.',
+            });
+            return;
+          }
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-ignore TS2349
           const experience = await Models.Experience.findByIdAndUpdate(
@@ -62,14 +78,29 @@ const requireIdHandler = async (
           }
           res.status(200).json({ success: true, data: experience });
         } catch (error) {
-          res
-            .status(400)
-            .json({ success: false, message: 'Editing Experience failed' });
+          res.status(400).json({
+            success: false,
+            message: 'Editing Experience failed',
+          });
         }
         break;
 
       case 'DELETE' /* Delete a model by its ID */:
         try {
+          const permissionLevelMet = await checkPermissionLevel(
+            req,
+            'experience',
+            ['admin'],
+            id
+          );
+
+          if (!permissionLevelMet) {
+            res.status(400).json({
+              message: 'User does not have permission for this request.',
+            });
+            return;
+          }
+
           const deletedExperience = await Models.Experience.deleteOne({
             _id: id,
           });
@@ -99,4 +130,4 @@ const requireIdHandler = async (
   }
 };
 
-export default requireIdHandler;
+export default authGuard(requireIdHandler);
