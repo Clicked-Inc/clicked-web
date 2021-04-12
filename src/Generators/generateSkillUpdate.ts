@@ -4,7 +4,6 @@ const generateSkillUpdate = async (
   skillNames: Array<Models.ISkillScore>,
   skillInt: string[]
 ): Promise<void> => {
-  console.log('skill update called');
   skillNames.forEach(
     async (skill): Promise<Models.ISkillInterest> => {
       const fullSkill = await Models.SkillScore.findById(skill);
@@ -20,7 +19,6 @@ const generateSkillUpdate = async (
           }
         );
         if (skillInterest) {
-          console.log('FOUND SKILL' + skillInterest);
           await skillInterest.save();
         }
         return skillInterest;

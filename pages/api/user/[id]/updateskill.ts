@@ -2,7 +2,6 @@
  * updates skillinterest progress when experience is completed.
  */
 
-import { ObjectId } from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
@@ -13,8 +12,6 @@ import generateSkillUpdate from '@Generators/generateSkillUpdate';
 type PutRequestBody = {
   skillScore: Array<Models.ISkillScore>;
 };
-
-const ROOT = process.env.SERVER_ROOT_URI || 'http://localhost:3000/api';
 
 const updateSkillHandler = async (
   req: NextApiRequest,
@@ -49,7 +46,6 @@ const updateSkillHandler = async (
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore TS2349
         const updatedUser = await Models.User.findById(id);
-        console.log(updatedUser);
         res.status(200).json({
           message: 'User updated',
           user: updatedUser,

@@ -7,15 +7,6 @@ import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import generateSkillScore from '@Generators/generateSkillScore';
 
-// const generateSkillScore = (
-//   skillInfo: (string | number)[][]
-// ): Models.ISkillScore[] => {
-//   const skillScoreArray: Models.ISkillScore[] = skillInfo.map(
-//     (skill) => new Models.SkillScore({ skillName: skill[0], score: skill[1] })
-//   );
-//   return skillScoreArray;
-// };
-
 const createExperienceHandler = async (
   req: NextApiRequest,
   res: NextApiResponse

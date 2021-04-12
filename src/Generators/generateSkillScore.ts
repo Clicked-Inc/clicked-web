@@ -1,14 +1,13 @@
 import * as Models from '@Models/index';
 import { ObjectId } from 'mongoose';
 
-const generateSkilScore = async (
+const generateSkillScore = async (
   skillNames: (string | number)[][]
 ): Promise<ObjectId[]> => {
   let skillScoreIdsArray: ObjectId[] = await Promise.all(
     skillNames.map(
       async (skill): Promise<ObjectId> => {
         try {
-          console.log(skill[0]);
           const skillScore: Models.ISkillScore = new Models.SkillScore({
             skillName: skill[0],
             progress: skill[1],
@@ -27,4 +26,4 @@ const generateSkilScore = async (
   );
   return skillScoreIdsArray;
 };
-export default generateSkilScore;
+export default generateSkillScore;

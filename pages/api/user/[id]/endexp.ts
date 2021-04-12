@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { Types } from 'mongoose';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import mongoose, { ObjectId } from 'mongoose';
-// import ObjectId from 'mongodb';
+import authGuard from '@Api/authGuard';
 
 const ROOT = process.env.SERVER_ROOT_URI || 'http://localhost:3000/api';
 
@@ -21,10 +21,11 @@ const userEndExperienceHandler = async (
       const _id = Array.isArray(id) ? id[0] : id;
       const { experience } = req.body;
       const filter = {
-        user: new mongoose.Types.ObjectId(_id),
-        experience: new mongoose.Types.ObjectId(experience),
+        user: new Types.ObjectId(_id),
+        experience: new Types.ObjectId(experience),
       };
       req.body.endDate = new Date();
+
       const experienceWrapper: Models.IExperienceWrapper = await Models.ExperienceWrapper.findOne(
         filter
       );
@@ -37,27 +38,16 @@ const userEndExperienceHandler = async (
           message: `No experence found with this user ${_id} and experience id: ${experience}`,
         });
         return;
-        // } else if (experienceWrapper.endDate) {
-        // res.status(400).json({
-        //     success: false,
-        //     message: `Experience has already been completed.`,
-        //   });
+      } else if (experienceWrapper.endDate) {
+        res.status(400).json({
+          success: false,
+          message: `Experience has already been completed.`,
+        });
       } else {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore TS2349
-        const experienceWrapper: Models.IExperienceWrapper = await Models.ExperienceWrapper.findOneAndUpdate(
-          filter,
-          req.body,
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
         await experienceWrapper.populate('experience').execPopulate();
         const experience: any = experienceWrapper.experience;
         try {
           const points = <Models.IExperience>experience.points;
-          const skillScore = experience.targetSkill;
           const response = await fetch(`${ROOT}/user/${id}`, {
             method: 'put',
             headers: {
@@ -66,6 +56,7 @@ const userEndExperienceHandler = async (
             },
             body: JSON.stringify({ points }),
           });
+          const skillScore = experience.targetSkill;
           const updateSkill = await fetch(`${ROOT}/user/${id}/updateskill`, {
             method: 'put',
             headers: {
@@ -75,16 +66,35 @@ const userEndExperienceHandler = async (
             body: JSON.stringify({ skillScore }),
           });
 
-          if (response.status == 200) {
+          if (response.status == 200 && updateSkill.status == 200) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore TS2349
+            const experienceWrapper: Models.IExperienceWrapper = await Models.ExperienceWrapper.findOneAndUpdate(
+              filter,
+              req.body,
+              {
+                new: true,
+                runValidators: true,
+              }
+            );
+            console.log('Successfully Ended Expereince.');
             res.status(200).json({ success: true, data: experienceWrapper });
             return;
+          } else if (response.status != 200) {
+            res.status(400).json({
+              success: false,
+              data: experienceWrapper,
+              message: 'Points failed to update.',
+            });
+            return;
+          } else if (updateSkill.status != 200) {
+            res.status(400).json({
+              success: false,
+              data: experienceWrapper,
+              message: 'Failed to update skill',
+            });
+            return;
           }
-          res.status(400).json({
-            success: false,
-            data: experienceWrapper,
-            message: 'Points failed to update.',
-          });
-          return;
         } catch (error) {
           console.log(error);
           res.status(400).json({
@@ -108,4 +118,4 @@ const userEndExperienceHandler = async (
   }
 };
 
-export default userEndExperienceHandler;
+export default authGuard(userEndExperienceHandler);

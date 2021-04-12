@@ -45,7 +45,6 @@ const registrationHandler = async (
             aspirationType,
             skillInterests: skillInterestArray,
           });
-          console.log(skillInterestArray);
           await user.save((err) => {
             if (err) {
               res.status(400).json({ message: 'Registration failed' });
@@ -55,7 +54,6 @@ const registrationHandler = async (
               .status(200)
               .json({ message: 'Registration successful', user: user });
           });
-          console.log(user);
         }
       );
     } else if (!uniqueUser[0]) {
