@@ -54,7 +54,7 @@ const userRequestHandler = async (
 
     case 'PUT':
       try {
-        const permissionLevelMet = await checkPermissionLevel(
+        let permissionLevelMet = await checkPermissionLevel(
           req,
           'user',
           ['admin'],
