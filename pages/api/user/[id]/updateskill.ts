@@ -40,15 +40,13 @@ const updateSkillHandler = async (
         }
         const user = await Models.User.findById(id);
         const { skillScore }: PutRequestBody = req.body || {};
+        const _id = Array.isArray(id) ? id[0] : id;
         if (skillScore != undefined) {
-          await generateSkillUpdate(skillScore, user.skillInterests);
+          await generateSkillUpdate(skillScore, user.skillInterests, _id);
         }
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore TS2349
-        const updatedUser = await Models.User.findById(id);
         res.status(200).json({
           message: 'User updated',
-          user: updatedUser,
+          user: user,
         });
       } catch (e) {
         console.log(e);

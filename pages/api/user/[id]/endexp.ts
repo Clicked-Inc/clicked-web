@@ -1,10 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Types } from 'mongoose';
+import { Types, ObjectId } from 'mongoose';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
-
-const ROOT = process.env.SERVER_ROOT_URI || 'http://localhost:3000/api';
+import generateSkillUpdate from '@Generators/generateSkillUpdate';
 
 const userEndExperienceHandler = async (
   req: NextApiRequest,
@@ -48,25 +47,35 @@ const userEndExperienceHandler = async (
         const experience: any = experienceWrapper.experience;
         try {
           const points = <Models.IExperience>experience.points;
-          const response = await fetch(`${ROOT}/user/${id}`, {
-            method: 'put',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: req.headers.authorization,
-            },
-            body: JSON.stringify({ points }),
-          });
+          let updatePayload: any = {};
+          if (points != undefined) {
+            let inc: any = {};
+            inc.points = points;
+            updatePayload.$inc = inc;
+          }
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //@ts-ignore TS2349
+          const updatedUser = await Models.User.findByIdAndUpdate(
+            id,
+            updatePayload,
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
           const skillScore = experience.targetSkill;
-          const updateSkill = await fetch(`${ROOT}/user/${id}/updateskill`, {
-            method: 'put',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: req.headers.authorization,
-            },
-            body: JSON.stringify({ skillScore }),
-          });
 
-          if (response.status == 200 && updateSkill.status == 200) {
+          const user = await Models.User.findById(id);
+          let updateSkill: ObjectId[];
+          if (skillScore != undefined) {
+            updateSkill = await generateSkillUpdate(
+              skillScore,
+              user.skillInterests,
+              _id
+            );
+          }
+
+          if (updatedUser && updateSkill?.length) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-ignore TS2349
             const experienceWrapper: Models.IExperienceWrapper = await Models.ExperienceWrapper.findOneAndUpdate(
@@ -80,14 +89,14 @@ const userEndExperienceHandler = async (
             console.log('Successfully Ended Expereince.');
             res.status(200).json({ success: true, data: experienceWrapper });
             return;
-          } else if (response.status != 200) {
+          } else if (!updatedUser) {
             res.status(400).json({
               success: false,
               data: experienceWrapper,
               message: 'Points failed to update.',
             });
             return;
-          } else if (updateSkill.status != 200) {
+          } else if (!updateSkill) {
             res.status(400).json({
               success: false,
               data: experienceWrapper,

@@ -21,6 +21,12 @@ const createExperienceHandler = async (
     try {
       const { targetSkill } = req.body;
       const skillScoreArray: ObjectId[] = await generateSkillScore(targetSkill);
+      if (targetSkill != null && !skillScoreArray) {
+        res
+          .status(400)
+          .json({ message: 'Failed to add experience to the database' });
+        return;
+      }
       req.body.targetSkill = skillScoreArray;
       const experience: Models.IExperience = new Models.Experience(req.body);
       await experience
