@@ -66,7 +66,6 @@ const userEndExperienceHandler = async (
           }
           res.status(400).json({
             success: false,
-            data: experienceWrapper,
             message: 'Points failed to update.',
           });
           return;

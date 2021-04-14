@@ -9,6 +9,7 @@ import {
   response,
   String,
 } from '@airtasker/spot';
+import './user/login';
 import './user/register';
 
 @api({ name: 'Clicked v1' })

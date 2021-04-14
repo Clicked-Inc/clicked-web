@@ -19,16 +19,16 @@ class Register {
   request(@body body: RegisterUserRequest) {}
 
   @response({ status: 200 })
-  successfulResponse(@body body: SuccessfulResponse) {}
+  successfulResponse(@body body: SuccessfulRegisterResponse) {}
 
   @response({ status: 421 })
-  incorrectRequestResponse(@body body: IncorrectRequestResponse) {}
+  incorrectRequestResponse(@body body: IncorrectRegisterRequestResponse) {}
 
   @response({ status: 409 })
   userCollisionResponse(@body body: UserCollisionResponse) {}
 
   @response({ status: 400 })
-  databaseErrorResponse(@body body: DatabaseErrorResponse) {}
+  databaseErrorResponse(@body body: RegisterDatabaseErrorResponse) {}
 }
 
 interface RegisterUserRequest {
@@ -42,12 +42,12 @@ interface RegisterUserRequest {
   skillInterests: String[];
 }
 
-interface SuccessfulResponse {
+interface SuccessfulRegisterResponse {
   message: 'Registration successful.';
   user: IUser;
 }
 
-interface IncorrectRequestResponse {
+interface IncorrectRegisterRequestResponse {
   message: 'Incorrect request type.';
 }
 
@@ -55,7 +55,7 @@ interface UserCollisionResponse {
   message: 'Email already taken.' | 'Username already taken.';
 }
 
-interface DatabaseErrorResponse {
+interface RegisterDatabaseErrorResponse {
   message: 'Registration failed.';
 }
 
