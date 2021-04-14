@@ -5,6 +5,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { ObjectId } from 'mongoose';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
+import authGuard from '@Api/authGuard';
 import generateSkillScore from '@Generators/generateSkillScore';
 
 const createExperienceHandler = async (
@@ -52,4 +53,4 @@ const createExperienceHandler = async (
   }
 };
 
-export default createExperienceHandler;
+export default authGuard(createExperienceHandler);

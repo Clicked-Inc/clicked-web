@@ -5,6 +5,8 @@ import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
 import generateSkillUpdate from '@Generators/generateSkillUpdate';
 
+const ROOT = process.env.SERVER_ROOT_URI || 'http://localhost:3000/api';
+
 const userEndExperienceHandler = async (
   req: NextApiRequest,
   res: NextApiResponse

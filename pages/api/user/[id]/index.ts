@@ -54,7 +54,12 @@ const userRequestHandler = async (
 
     case 'PUT':
       try {
-        let permissionLevelMet = await checkPermissionLevel(req, ['admin'], id);
+        const permissionLevelMet = await checkPermissionLevel(
+          req,
+          'user',
+          ['admin'],
+          id
+        );
         const userInfo: any = req.query.userInfo;
         const loggedInUserId: string = userInfo.uid;
         if (loggedInUserId === id) {
@@ -150,7 +155,9 @@ const userRequestHandler = async (
 
     case 'DELETE':
       try {
-        const permissionLevelMet = await checkPermissionLevel(req, ['admin']);
+        const permissionLevelMet = await checkPermissionLevel(req, 'user', [
+          'admin',
+        ]);
 
         if (!permissionLevelMet) {
           res.status(400).json({
