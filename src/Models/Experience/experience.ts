@@ -20,7 +20,7 @@ export interface IExperience extends Document {
   category: CategoryType;
   experienceType: ExperienceType;
   coach: ObjectId | Models.IUser;
-  targetSkill: Models.ISkillScore[];
+  targetSkill: ObjectId[] | Models.ISkillScore[];
   feedback?: ObjectId[] | Models.IFeedback[];
   averageRating?: number;
   currentUsers?: ObjectId[] | Models.IUser[];
@@ -48,7 +48,8 @@ const ExperienceSchema = new Schema({
     required: true,
   },
   targetSkill: {
-    type: [Models.SkillScore.schema],
+    type: [Schema.Types.ObjectId],
+    ref: 'SkillScore',
     required: true,
   },
   feedback: {
