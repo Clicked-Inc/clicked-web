@@ -1,10 +1,10 @@
 /* 
-GET new experience.
+GET new experience. Route does not have authguard, do not have be logged in to view experiences by skill.
  **/
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ObjectId } from 'mongoose';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import authGuard from '@Api/authGuard';
 
 const getExperiencebySkillHandler = async (
   req: NextApiRequest,
@@ -19,10 +19,44 @@ const getExperiencebySkillHandler = async (
     await connect();
     try {
       const { skillName } = req.body;
-      let experience: Array<Models.IExperience>;
-      experience = await Models.Experience.find();
+
+      let skill: ObjectId[];
+      skill = await Models.SkillScore.find({
+        skillName: { $in: skillName },
+      }).distinct('_id');
+
+      let experiences: Array<Models.IExperience>;
+      experiences = await Models.Experience.find(
+        {
+          targetSkill: { $in: skill },
+        },
+        (err) => {
+          if (err) {
+            console.log(err);
+            res.status(400).json({ success: false, message: err });
+            return;
+          }
+        }
+      );
+
+      if (!experiences || experiences.length == 0) {
+        console.log(
+          `Currently there are no experiences which cater to ${skillName}.`
+        );
+        res.status(400).json({
+          success: false,
+          message: `Currently there are no experiences which cater to ${skillName}.`,
+        });
+        return;
+      }
+      res.status(200).json({
+        success: true,
+        message: `Found experiences that are tagged as: ${skillName}.`,
+        data: experiences,
+      });
     } catch (error) {
       console.log('There is an error that we cannot presently determine.');
+      console.log(error);
       res.status(400).json({ success: false });
     }
   } catch (error) {
@@ -30,4 +64,4 @@ const getExperiencebySkillHandler = async (
   }
 };
 
-export default authGuard(getExperiencebySkillHandler);
+export default getExperiencebySkillHandler;
