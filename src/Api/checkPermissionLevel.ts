@@ -14,7 +14,8 @@ const checkPermissionLevel = async (
   id?: string | string[]
 ): Promise<boolean> => {
   let jwt_payload;
-  const token: string = req.headers.authorization.substring(7);
+
+  const token: string = req.headers.authorization.replace('Bearer ', '');
 
   try {
     jwt_payload = verify(token, process.env.JWT_SECRET);
