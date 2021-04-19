@@ -5,15 +5,17 @@ import connect from '@Utils/databaseConnection';
 import generateSkillInterests from '@Generators/generateSkillInterests';
 import validateUniqueUser from '@Utils/validateUniqueUser';
 import { ObjectId } from 'mongoose';
+import cors from '@Utils/cors';
+
 const registrationHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
+  await cors(req, res);
   if (req.method !== 'POST') {
     res.status(421).json({ message: 'Incorrect request type' });
     return;
   }
-
   try {
     await connect();
     const {

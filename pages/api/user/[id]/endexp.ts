@@ -3,6 +3,7 @@ import { ObjectId } from 'mongodb';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
+import cors from '@Utils/cors';
 
 const ROOT = process.env.SERVER_ROOT_URI || 'http://localhost:3000/api';
 
@@ -10,6 +11,7 @@ const userEndExperienceHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
+  await cors(req, res);
   if (req.method !== 'PUT') {
     res.status(421).json({ message: 'Incorrect request type' });
     return;

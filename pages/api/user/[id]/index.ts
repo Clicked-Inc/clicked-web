@@ -8,6 +8,7 @@ import generateSkillInterests from '@Generators/generateSkillInterests';
 import generateGeoPoint from '@Generators/generateGeoPoint';
 import generateEducation from '@Generators/generateEducation';
 import generateExternalExperiences from '@Generators/generateExternalExperiences';
+import cors from '@Utils/cors';
 
 type PutRequestBody = {
   firstName: string;
@@ -27,6 +28,7 @@ const userRequestHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
+  await cors(req, res);
   await connect();
   const { id } = req.query;
   switch (req.method) {
