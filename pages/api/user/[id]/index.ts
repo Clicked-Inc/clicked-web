@@ -142,6 +142,7 @@ const userRequestHandler = async (
           user: updatedUser,
         });
       } catch (e) {
+        console.log(e);
         res.status(404).json({ message: 'User not updated.', error: e });
         return;
       }
