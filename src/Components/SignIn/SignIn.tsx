@@ -72,6 +72,7 @@ export default function SignIn() {
       })
       .then((res) => {
         localStorage.setItem('authToken', res.data.authToken);
+        console.log('entered');
         window.location.reload();
         setIsLoggedIn(true);
         setIsLoading(false);
