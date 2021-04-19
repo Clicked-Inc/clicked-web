@@ -6,8 +6,7 @@ import * as Models from '@Models/index';
 import connect from '../../../Utils/databaseConnection';
 
 const generateSkillScore = (
-  skillInfo
-  // : (string | number)[][]
+  skillInfo: (string | number)[][]
 ): Models.ISkillScore[] => {
   const skillScoreArray: Models.ISkillScore[] = skillInfo.map(
     (skill) => new Models.SkillScore({ skillName: skill[0], score: skill[1] })
@@ -48,7 +47,7 @@ const createExperienceHandler = async (
           return;
         });
     } catch (error) {
-      console.log('error final');
+      console.log('There is an error that we cannot presently determine.');
       res.status(400).json({ success: false });
     }
   } catch (error) {
