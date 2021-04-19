@@ -47,7 +47,7 @@ const loginHandler = async (
         }
       );
     }
-
+    // TODO: Decide on ideal expiration time.
     compare(password, user.password, (err, result) => {
       if (!err && result) {
         sign(
@@ -57,7 +57,7 @@ const loginHandler = async (
             role: user.role,
           },
           process.env.JWT_SECRET,
-          { expiresIn: '2 days' },
+          { expiresIn: '2 weeks' },
           (err, token) => {
             if (token) {
               res.status(200).json({ message: 'success', authToken: token });

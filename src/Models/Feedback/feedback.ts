@@ -1,21 +1,21 @@
 import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
-
+import * as Models from '@Models/index';
 enum PrivacyType {
   Private = 'private',
   Public = 'public',
 }
 
 export interface IFeedback extends Document {
-  user: ObjectId;
-  coach: ObjectId;
-  experience: ObjectId;
+  user: ObjectId | Models.IUser;
+  coach: ObjectId | Models.IUser;
+  experience: ObjectId | Models.IExperience;
   privacy: PrivacyType;
   feedbackText: string;
   enjoyabilityRating?: number;
   difficultyRating?: number;
   completed: boolean;
   personalizedMessage?: string;
-  skillRatings?: ObjectId[];
+  skillRatings?: ObjectId[] | Models.ISkillScore[];
 }
 
 const FeedbackSchema = new Schema({

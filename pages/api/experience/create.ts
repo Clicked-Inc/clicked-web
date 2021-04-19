@@ -4,7 +4,6 @@ POST new experience.
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import authGuard from '@Api/authGuard';
 
 const generateSkillScore = (
   skillInfo: (string | number)[][]

@@ -4,8 +4,6 @@ GET experience by experience ID, if id field is empty return all experiences.
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import authGuard from '@Api/authGuard';
-import checkPermissionLevel from '@Api/checkPermissionLevel';
 
 const requireIdHandler = async (
   req: NextApiRequest,

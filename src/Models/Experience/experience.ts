@@ -1,6 +1,5 @@
+import * as Models from '@Models/index';
 import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
-import SkillScore, { ISkillScore } from './skillScore';
-
 // Add Validation
 enum CategoryType {
   Audio = 'audio',
@@ -20,14 +19,14 @@ export interface IExperience extends Document {
   name: string;
   category: CategoryType;
   experienceType: ExperienceType;
-  coach: ObjectId;
-  targetSkill: ISkillScore[];
-  feedback?: ObjectId[];
+  coach: ObjectId | Models.IUser;
+  targetSkill: Models.ISkillScore[];
+  feedback?: ObjectId[] | Models.IFeedback[];
   averageRating?: number;
-  currentUsers?: ObjectId[];
-  previousUsers?: ObjectId[];
+  currentUsers?: ObjectId[] | Models.IUser[];
+  previousUsers?: ObjectId[] | Models.IUser[];
+  points: number;
 }
-
 const ExperienceSchema = new Schema({
   name: {
     type: String,
@@ -49,7 +48,7 @@ const ExperienceSchema = new Schema({
     required: true,
   },
   targetSkill: {
-    type: [SkillScore.schema],
+    type: [Models.SkillScore.schema],
     required: true,
   },
   feedback: {
@@ -70,6 +69,10 @@ const ExperienceSchema = new Schema({
     type: [Schema.Types.ObjectId],
     ref: 'ExperienceWrapper',
     required: false,
+  },
+  points: {
+    type: Number,
+    required: true,
   },
 });
 
