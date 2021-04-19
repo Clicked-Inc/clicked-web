@@ -65,20 +65,24 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsLoading(true);
+    console.log('s');
     axios
-      .post(`http://localhost:3000/api/user/login`, {
-        email,
-        password,
+      .get(`http://localhost:3000/api/user/login`, {
+        headers: { crossdomain: true },
       })
       .then((res) => {
-        localStorage.setItem('authToken', res.data.authToken);
-        console.log('entered');
+        console.log(res);
+        localStorage.setItem('email', res.data.email);
+        localStorage.setItem('user', res.data.username);
+        console.log('succesfully');
         window.location.reload();
         setIsLoggedIn(true);
         setIsLoading(false);
         setShowPassword(false);
       })
       .catch((error) => {
+        console.log('sesfully');
+
         setError('Invalid email or password');
         setIsLoading(false);
         setEmail('');
