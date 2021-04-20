@@ -7,9 +7,6 @@ import {
   Button,
   InputLeftAddon,
   Center,
-  Alert,
-  AlertDescription,
-  AlertIcon,
   Checkbox,
   FormControl,
   Icon,
@@ -31,6 +28,10 @@ const SignIn = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const handlePasswordVisibility = () => setShowPassword(!showPassword);
+
+  const resetInputs = () => {
+    document.getElementById('form').reset();
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -72,7 +73,7 @@ const SignIn = () => {
             <Heading textAlign="left">Sign In</Heading>
           </Box>
           <Box my={4} textAlign="left">
-            <form onSubmit={handleSubmit}>
+            <form id="form" onSubmit={handleSubmit}>
               {error && <ErrorMessage message={error} />}
               <FormControl isRequired>
                 <Flex>

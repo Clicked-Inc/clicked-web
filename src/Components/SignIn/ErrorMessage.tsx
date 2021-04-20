@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Alert, AlertIcon, AlertDescription } from '@chakra-ui/react';
 
-export default function ErrorMessage({ message }) {
+const ErrorMessage = ({ message }) => {
   return (
     <Box my={4} color="black">
       <Alert status="error" borderRadius={4}>
@@ -10,4 +10,6 @@ export default function ErrorMessage({ message }) {
       </Alert>
     </Box>
   );
-}
+};
+
+export default ErrorMessage;
