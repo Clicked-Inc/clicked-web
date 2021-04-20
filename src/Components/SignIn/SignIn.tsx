@@ -1,46 +1,29 @@
 import React, { useState } from 'react';
 import {
   Box,
-  Text,
-  Icon as ChakraIcon,
   Stack,
   Flex,
   Link,
   Button,
-  IconButton,
   InputLeftAddon,
   Center,
+  Alert,
+  AlertDescription,
+  AlertIcon,
   Checkbox,
-  InputLeftElement,
   FormControl,
-  FormLabel,
   Icon,
   Heading,
   Input,
   InputGroup,
   InputRightElement,
   CircularProgress,
-  Container,
 } from '@chakra-ui/react';
 import { EmailIcon, UnlockIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import axios from 'axios';
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
-import { userLogin } from './testing';
-
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
-// function* fetchUser(action) {
-//    try {
-//       const user = yield call(http://localhost:3000/api/user/register);
-//       yield put({type: "USER_FETCH_SUCCEEDED", user: user});
-//    } catch (e) {
-//       yield put({type: "USER_FETCH_FAILED", message: e.message});
-//    }
-// }
-
-// import { userLogin } from '../utils/mockApi';
 import ErrorMessage from './ErrorMessage';
 
-export default function SignIn() {
+const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -49,40 +32,22 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const handlePasswordVisibility = () => setShowPassword(!showPassword);
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   setIsLoading(true);
-  //   try {
-  //     await userLogin({ email, password });
-  //     setIsLoading(false);
-  //   } catch (error) {
-  //     setError('Invalid username or password');
-  //     setIsLoading(false);
-  //     setEmail('');
-  //     setPassword('');
-  //   }
-  // };
   const handleSubmit = (event) => {
     event.preventDefault();
     setIsLoading(true);
-    console.log('s');
     axios
-      .get(`http://localhost:3000/api/user/login`, {
-        headers: { crossdomain: true },
+      .post(`http://localhost:3000/api/user/login`, {
+        email,
+        password,
       })
       .then((res) => {
-        console.log(res);
-        localStorage.setItem('email', res.data.email);
-        localStorage.setItem('user', res.data.username);
-        console.log('succesfully');
+        localStorage.setItem('authToken', res.data.authToken);
         window.location.reload();
         setIsLoggedIn(true);
         setIsLoading(false);
         setShowPassword(false);
       })
       .catch((error) => {
-        console.log('sesfully');
-
         setError('Invalid email or password');
         setIsLoading(false);
         setEmail('');
@@ -96,7 +61,6 @@ export default function SignIn() {
       <Box
         p={8}
         w="550px"
-        h="395px"
         borderWidth={1}
         borderRadius={8}
         boxShadow="lg"
@@ -121,7 +85,7 @@ export default function SignIn() {
                       color="black"
                       type="email"
                       placeholder="test@test.com"
-                      onChange={(event) => setEmail(event.currentTarget.value)} //!!
+                      onChange={(event) => setEmail(event.currentTarget.value)}
                     />
                   </InputGroup>
                 </Flex>
@@ -177,8 +141,8 @@ export default function SignIn() {
                   background="orange.500"
                   color="white"
                   type="submit"
-                  px={10}
-                  mt={4}
+                  px={12}
+                  mt={5}
                   py={6}
                   fontSize={19}
                   justifyContent="center"
@@ -201,6 +165,6 @@ export default function SignIn() {
       </Box>
     </Flex>
   );
-}
+};
 
-// export default SignIn;
+export default SignIn;
