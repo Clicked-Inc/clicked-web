@@ -6,11 +6,13 @@ import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
 import checkPermissionLevel from '@Api/checkPermissionLevel';
+import cors from '@Utils/cors';
 
 const requireIdHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
+  await cors(req, res);
   let {
     query: { id },
     method,

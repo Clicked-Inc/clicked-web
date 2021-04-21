@@ -3,12 +3,14 @@ import { Types, ObjectId } from 'mongoose';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
+import cors from '@Utils/cors';
 import generateSkillUpdate from '@Generators/generateSkillUpdate';
 
 const userEndExperienceHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
+  await cors(req, res);
   if (req.method !== 'PUT') {
     res.status(421).json({ message: 'Incorrect request type' });
     return;
@@ -24,10 +26,10 @@ const userEndExperienceHandler = async (
         experience: new Types.ObjectId(experience),
       };
       req.body.endDate = new Date();
-
       const experienceWrapper: Models.IExperienceWrapper = await Models.ExperienceWrapper.findOne(
         filter
       );
+
       if (!experienceWrapper) {
         console.log(
           `No experence found with this user ${_id} and experience id: ${experience}`
@@ -74,7 +76,7 @@ const userEndExperienceHandler = async (
               _id
             );
           }
-
+          console.log(updatedUser, updateSkill);
           if (updatedUser && updateSkill?.length) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-ignore TS2349
@@ -96,7 +98,7 @@ const userEndExperienceHandler = async (
               message: 'Points failed to update.',
             });
             return;
-          } else if (!updateSkill) {
+          } else if (!updateSkill?.length) {
             res.status(400).json({
               success: false,
               data: experienceWrapper,
@@ -104,6 +106,11 @@ const userEndExperienceHandler = async (
             });
             return;
           }
+          res.status(400).json({
+            success: false,
+            message: 'Points failed to update.',
+          });
+          return;
         } catch (error) {
           console.log(error);
           res.status(400).json({

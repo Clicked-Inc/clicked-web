@@ -4,16 +4,17 @@ import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
+import cors from '@Utils/cors';
 
 const loginHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
-  if (req.method !== 'GET') {
+  await cors(req, res);
+  if (req.method !== 'POST') {
     res.status(421).json({ message: 'Incorrect request type' });
     return;
   }
-
   try {
     await connect();
     const { email = null, username = null, password } = req.body;
