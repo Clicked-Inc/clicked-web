@@ -106,14 +106,11 @@ const userEndExperienceHandler = async (
             });
             return;
           }
-<<<<<<< HEAD
           res.status(400).json({
             success: false,
             message: 'Points failed to update.',
           });
           return;
-=======
->>>>>>> origin/main
         } catch (error) {
           console.log(error);
           res.status(400).json({
