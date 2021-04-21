@@ -26,10 +26,10 @@ const userEndExperienceHandler = async (
         experience: new Types.ObjectId(experience),
       };
       req.body.endDate = new Date();
-
       const experienceWrapper: Models.IExperienceWrapper = await Models.ExperienceWrapper.findOne(
         filter
       );
+
       if (!experienceWrapper) {
         console.log(
           `No experence found with this user ${_id} and experience id: ${experience}`
@@ -76,7 +76,7 @@ const userEndExperienceHandler = async (
               _id
             );
           }
-
+          console.log(updatedUser, updateSkill);
           if (updatedUser && updateSkill?.length) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-ignore TS2349
@@ -98,7 +98,7 @@ const userEndExperienceHandler = async (
               message: 'Points failed to update.',
             });
             return;
-          } else if (!updateSkill) {
+          } else if (!updateSkill?.length) {
             res.status(400).json({
               success: false,
               data: experienceWrapper,
