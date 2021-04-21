@@ -28,7 +28,9 @@ const userStartExperienceHandler = async (
         .save()
         .then(function (data) {
           res.status(200).send(data);
-          console.log('User has started this added to the database!');
+          console.log(
+            'User has started this experience and an ExperienceWrapper has been added to the database!'
+          );
         })
         .catch(function (err) {
           console.log(err);
