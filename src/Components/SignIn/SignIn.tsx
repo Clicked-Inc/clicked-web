@@ -49,8 +49,6 @@ const SignIn = () => {
         console.log(password);
         setError('Invalid email or password');
         setIsLoading(false);
-        // setEmail('');
-        // setPassword('');
         setShowPassword(false);
       });
   };
