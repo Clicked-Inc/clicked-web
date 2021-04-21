@@ -45,10 +45,12 @@ const SignIn = () => {
         setShowPassword(false);
       })
       .catch((error) => {
+        console.log(email);
+        console.log(password);
         setError('Invalid email or password');
         setIsLoading(false);
-        setEmail('');
-        setPassword('');
+        // setEmail('');
+        // setPassword('');
         setShowPassword(false);
       });
   };
