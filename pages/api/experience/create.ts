@@ -2,23 +2,18 @@
 POST new experience.
  **/
 import { NextApiRequest, NextApiResponse } from 'next';
+import { ObjectId } from 'mongoose';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
-
-const generateSkillScore = (
-  skillInfo: (string | number)[][]
-): Models.ISkillScore[] => {
-  const skillScoreArray: Models.ISkillScore[] = skillInfo.map(
-    (skill) => new Models.SkillScore({ skillName: skill[0], score: skill[1] })
-  );
-  return skillScoreArray;
-};
+import cors from '@Utils/cors';
+import generateSkillScore from '@Generators/generateSkillScore';
 
 const createExperienceHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
+  await cors(req, res);
   if (req.method !== 'POST') {
     res.status(421).json({ message: 'Incorrect request type' });
     return;
@@ -28,9 +23,13 @@ const createExperienceHandler = async (
     await connect();
     try {
       const { targetSkill } = req.body;
-      const skillScoreArray: Models.ISkillScore[] = generateSkillScore(
-        targetSkill
-      );
+      const skillScoreArray: ObjectId[] = await generateSkillScore(targetSkill);
+      if (targetSkill != null && !skillScoreArray) {
+        res
+          .status(400)
+          .json({ message: 'Failed to add experience to the database' });
+        return;
+      }
       req.body.targetSkill = skillScoreArray;
       const experience: Models.IExperience = new Models.Experience(req.body);
       await experience

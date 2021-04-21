@@ -1,15 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ObjectId } from 'mongodb';
+import { Types, ObjectId } from 'mongoose';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
-
-const ROOT = process.env.SERVER_ROOT_URI || 'http://localhost:3000/api';
+import cors from '@Utils/cors';
+import generateSkillUpdate from '@Generators/generateSkillUpdate';
 
 const userEndExperienceHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
+  await cors(req, res);
   if (req.method !== 'PUT') {
     res.status(421).json({ message: 'Incorrect request type' });
     return;
@@ -21,25 +22,21 @@ const userEndExperienceHandler = async (
       const _id = Array.isArray(id) ? id[0] : id;
       const { experience } = req.body;
       const filter = {
-        user: new ObjectId(_id),
-        experience: new ObjectId(experience),
+        user: new Types.ObjectId(_id),
+        experience: new Types.ObjectId(experience),
       };
       req.body.endDate = new Date();
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore TS2349
-      const experienceWrapper: Models.IExperienceWrapper = await Models.ExperienceWrapper.findOneAndUpdate(
-        filter,
-        req.body,
-        {
-          new: true,
-          runValidators: true,
-        }
+      const experienceWrapper: Models.IExperienceWrapper = await Models.ExperienceWrapper.findOne(
+        filter
       );
+
       if (!experienceWrapper) {
-        console.log(`No experience found with this filter ${filter}`);
+        console.log(
+          `No experence found with this user ${_id} and experience id: ${experience}`
+        );
         res.status(400).json({
           success: false,
-          message: `No experience found with this filter ${filter}`,
+          message: `No experence found with this user ${_id} and experience id: ${experience}`,
         });
         return;
       } else if (experienceWrapper.endDate) {
@@ -52,16 +49,61 @@ const userEndExperienceHandler = async (
         const experience: any = experienceWrapper.experience;
         try {
           const points = <Models.IExperience>experience.points;
-          const response = await fetch(`${ROOT}/user/${id}`, {
-            method: 'put',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: req.headers.authorization,
-            },
-            body: JSON.stringify({ points }),
-          });
-          if (response.status == 200) {
+          let updatePayload: any = {};
+          if (points != undefined) {
+            let inc: any = {};
+            inc.points = points;
+            updatePayload.$inc = inc;
+          }
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //@ts-ignore TS2349
+          const updatedUser = await Models.User.findByIdAndUpdate(
+            id,
+            updatePayload,
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+          const skillScore = experience.targetSkill;
+
+          const user = await Models.User.findById(id);
+          let updateSkill: ObjectId[];
+          if (skillScore != undefined) {
+            updateSkill = await generateSkillUpdate(
+              skillScore,
+              user.skillInterests,
+              _id
+            );
+          }
+          console.log(updatedUser, updateSkill);
+          if (updatedUser && updateSkill?.length) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-ignore TS2349
+            const experienceWrapper: Models.IExperienceWrapper = await Models.ExperienceWrapper.findOneAndUpdate(
+              filter,
+              req.body,
+              {
+                new: true,
+                runValidators: true,
+              }
+            );
+            console.log('Successfully Ended Expereince.');
             res.status(200).json({ success: true, data: experienceWrapper });
+            return;
+          } else if (!updatedUser) {
+            res.status(400).json({
+              success: false,
+              data: experienceWrapper,
+              message: 'Points failed to update.',
+            });
+            return;
+          } else if (!updateSkill?.length) {
+            res.status(400).json({
+              success: false,
+              data: experienceWrapper,
+              message: 'Failed to update skill',
+            });
             return;
           }
           res.status(400).json({

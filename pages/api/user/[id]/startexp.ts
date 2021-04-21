@@ -2,11 +2,13 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
+import cors from '@Utils/cors';
 
 const userStartExperienceHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
+  await cors(req, res);
   if (req.method !== 'POST') {
     res.status(421).json({ message: 'Incorrect request type' });
     return;
@@ -26,7 +28,9 @@ const userStartExperienceHandler = async (
         .save()
         .then(function (data) {
           res.status(200).send(data);
-          console.log('User has started this added to the database!');
+          console.log(
+            'User has started this experience and an ExperienceWrapper has been added to the database!'
+          );
         })
         .catch(function (err) {
           console.log(err);
