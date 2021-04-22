@@ -9,12 +9,11 @@ import cors from '@Utils/cors';
  * @apiName Start User Experience
  * @apiGroup User
  *
- * @apiParam (Body) {String} experience ObjectId representation of experience to start
+ * @apiParam (Body) {ObjectId} experience ObjectId representation of experience to start
  *
- * @apiSuccess {Object} experienceWrapper Experience wrapper object that was created
- * @apiSuccess {String} _id ObjectId of experience wrapper object
- * @apiSuccess {String} experience ObjectId of experience object corresponding to this experienceWrapper
- * @apiSuccess {String} user ObjectId of user object corresponding to this experienceWrapper
+ * @apiSuccess {ObjectId} _id ObjectId of experience wrapper object
+ * @apiSuccess {ObjectId} experience ObjectId of experience object corresponding to this experienceWrapper
+ * @apiSuccess {ObjectId} user ObjectId of user object corresponding to this experienceWrapper
  * @apiSuccess {Date} startDate Date string representing when the experience was started
  * 
  * @apiSuccessExample Success-Response:

@@ -11,15 +11,15 @@ import generateSkillUpdate from '@Generators/generateSkillUpdate';
  * @apiName End User Experience
  * @apiGroup User
  *
- * @apiParam (Body) {String} experience ObjectId representation of experience to end
+ * @apiParam (Body) {ObjectId} experience ObjectId representation of experience to end
  *
  * @apiSuccess {String} success Success status
  * @apiSuccess {Object} data Experience wrapper object that was updated
- * @apiSuccess {String} _id ObjectId of experience wrapper object
- * @apiSuccess {Object} experience Experience object corresponding to this experienceWrapper
- * @apiSuccess {String} user ObjectId of user object corresponding to this experienceWrapper
- * @apiSuccess {Date} startDate Date string representing when the experience was started
- * @apiSuccess {Date} endDate Date string representing when the experience was ended
+ * @apiSuccess {ObjectId} data._id ObjectId of experience wrapper object
+ * @apiSuccess {Object} data.experience Experience object corresponding to this experienceWrapper
+ * @apiSuccess {ObjectId} data.user ObjectId of user object corresponding to this experienceWrapper
+ * @apiSuccess {Date} data.startDate Date string representing when the experience was started
+ * @apiSuccess {Date} data.endDate Date string representing when the experience was ended
  * 
  * 
  * @apiSuccessExample Success-Response:

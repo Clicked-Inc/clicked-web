@@ -37,13 +37,13 @@ import cors from '@Utils/cors';
  * @apiSuccess {String} user.aspirationType User's aspiration type ('explore' or 'dive')
  * @apiSuccess {String} user.biography User's biography
  * @apiSuccess {Number} user.age User's age
- * @apiSuccess {String[]} user.skillInterests Array of ObjectIds corresponding to user's skill interests
- * @apiSuccess {String[]} user.education Array of ObjectIds corresponding to user's education backgrounds
- * @apiSuccess {String[]} user.externalExperiences Array of ObjectIds corresponding to user's external experiences
+ * @apiSuccess {ObjectId[]} user.skillInterests Array of ObjectIds corresponding to user's skill interests
+ * @apiSuccess {ObjectId[]} user.education Array of ObjectIds corresponding to user's education backgrounds
+ * @apiSuccess {ObjectId[]} user.externalExperiences Array of ObjectIds corresponding to user's external experiences
  * @apiSuccess {Number} user.points User's points
- * @apiSuccess {String[]} user.completedExperiences Array of ObjectIds corresponding to user's completed experiences
- * @apiSuccess {String[]} user.currentExperiences Array of ObjectIds corresponding to user's current experiences
- * @apiSuccess {String} user._id User's ObjectId
+ * @apiSuccess {ObjectId[]} user.completedExperiences Array of ObjectIds corresponding to user's completed experiences
+ * @apiSuccess {ObjectId[]} user.currentExperiences Array of ObjectIds corresponding to user's current experiences
+ * @apiSuccess {ObjectId} user._id User's ObjectId
  * @apiSuccess {Number} user.points User's points
  *
  * @apiSuccessExample Success-Response:
