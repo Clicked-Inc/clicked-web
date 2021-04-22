@@ -1,5 +1,8 @@
+console.log('none loaded');
+
 export { default as GeoPoint } from './User/geoPoint';
 export type { IGeoPoint } from './User/geoPoint';
+console.log('geopoint loaded');
 export { default as SkillInterest } from './Experience/skillInterest';
 export type { ISkillInterest } from './Experience/skillInterest';
 export { default as Education } from './User/education';

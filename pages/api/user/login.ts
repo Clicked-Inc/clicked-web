@@ -6,6 +6,36 @@ import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import cors from '@Utils/cors';
 
+/**
+ * @api {post} /api/user/login Login User
+ * @apiName Login User
+ * @apiGroup User
+ *
+ * @apiParam (Body) {String} email User's email address (optional if username is included)
+ * @apiParam (Body) {String} username User's username (optional if email is included)
+ * @apiParam (Body) {String} password User's password
+ *
+ * @apiSuccess {String} message Success status
+ * @apiSuccess {String} authToken Authorization JSONWebToken
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+          "message": "success",
+          "authToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDYyMWY1NDZlONzk1YjUiLCJlbWFpbCI6ImFAYS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTYxOTA3NzcwNywiZXhwIjoxNjIwMjg3MzA3fQ.M1CJiw6b5gsTZbN2R9FTxoGQNWYBxmte0n19kRsOPGM"
+        }
+ * 
+ *
+ * @apiError 421 IncorrectRequestResponse: A request other than POST was sent.
+ * @apiError 404 UserNotFoundResponse: Username/email does not exist in database.
+ * @apiError 401 IncorrectCredentialsResponse: Incorrect password provided.
+ * @apiError 400 DatabaseErrorResponse: Error in connecting or querying database
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 400 Conflict
+ *     {
+ *       "error": "Login requires an email/username"
+ *     }
+ */
 const loginHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
@@ -73,7 +103,7 @@ const loginHandler = async (
     });
   } catch (e) {
     // TODO: more specific error codes based on situation
-    res.status(400).json({ message: 'Registration failed' });
+    res.status(404).json({ message: 'Login failed' });
   }
 };
 
