@@ -18,6 +18,7 @@
     "paths": {
       "@Components/*": ["./src/Components/*"],
       "@Components": ["./src/Components"],
+      "@Reducers": ["./src/Reducers"],
       "@Api/*": ["./src/Api/*"],
       "@Models/*": ["./src/Models/*"],
       "@Screens/*": ["./src/Screens/*"],
