@@ -15,7 +15,8 @@
           "@Constants": "./src/Constants",
           "@Utils": "./src/Utils",
           "@Config": "./src/Config",
-          "@Public": "./public"
+          "@Public": "./public",
+          "@Reducers": "./src/Reducers"
         }
       }
     ]
