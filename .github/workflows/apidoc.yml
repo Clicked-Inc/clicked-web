@@ -13,7 +13,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: yarn
-    - run: yarn run apidoc --if-present
+    - run: yarn run apidoc
     - name: GitHub Pages
       uses: crazy-max/ghaction-github-pages@v2.3.0
       with:
