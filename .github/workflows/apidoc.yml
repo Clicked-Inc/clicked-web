@@ -1,0 +1,28 @@
+name: Apidoc
+
+on: push
+
+jobs:
+  documentation-generation:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install dependencies
+      run: yarn
+    - run: yarn run apidoc --if-present
+    - name: GitHub Pages
+      uses: crazy-max/ghaction-github-pages@v2.3.0
+      with:
+        # Git branch where assets will be deployed
+        target_branch: docs
+        # Allow an empty commit to be created
+        allow_empty_commit: false
+        # Build directory to deploy
+        build_dir: docs
+        # Commit message
+        commit_message: Publishing documentation
+    
