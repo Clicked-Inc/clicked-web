@@ -18,7 +18,8 @@
     "postinstall": "husky install",
     "chromatic": "npx chromatic --project-token CHROMATIC_PROJECT_TOKEN --exit-zero-on-changes",
     "spot-docs": "npx @airtasker/spot docs src/Api/docs/api.ts",
-    "spot-generate": "npx @airtasker/spot generate --contract src/Api/docs/api.ts"
+    "spot-generate": "npx @airtasker/spot generate --contract src/Api/docs/api.ts",
+    "apidoc": "npx apidoc -i pages/api -o docs"
   },
   "dependencies": {
     "@airtasker/spot": "^1.4.0",
@@ -30,6 +31,7 @@
     "@reduxjs/toolkit": "^1.5.1",
     "@svgr/webpack": "^5.5.0",
     "@types/mongodb": "^3.6.8",
+    "apidoc": "^0.27.1",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "framer-motion": "^3.6.2",
