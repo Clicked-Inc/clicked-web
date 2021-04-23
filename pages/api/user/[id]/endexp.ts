@@ -11,6 +11,8 @@ import generateSkillUpdate from '@Generators/generateSkillUpdate';
  * @apiName End User Experience
  * @apiGroup User
  *
+ * @apiHeader {String} Authorization authorization token generated using JWT, in the format 'Bearer <token>'.
+ * 
  * @apiParam (Body) {ObjectId} experience ObjectId representation of experience to end
  *
  * @apiSuccess {String} success Success status

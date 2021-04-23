@@ -9,6 +9,8 @@ import cors from '@Utils/cors';
  * @apiName End User Experience
  * @apiGroup User
  *
+ * @apiHeader {String} Authorization authorization token generated using JWT, in the format 'Bearer <token>'.
+ *
  * @apiParam (Body) {ObjectId} experience ObjectId of experience
  * @apiParam (Body) {ObjectId} coach ObjectId of coach (User) running the experience
  * @apiParam (Body) {String} privacy Privacy level of feedback ('public' or 'private')

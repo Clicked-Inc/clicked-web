@@ -13,6 +13,8 @@ import generateSkillScore from '@Generators/generateSkillScore';
  * @apiName Create Experience
  * @apiGroup Experience
  *
+ * @apiHeader {String} Authorization authorization token generated using JWT, in the format 'Bearer <token>'.
+ * 
  * @apiParam (Body) {String} name Name of experience
  * @apiParam (Body) {String} category Experience category
  * @apiParam (Body) {String} experienceType Experience type

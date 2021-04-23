@@ -9,6 +9,8 @@ import cors from '@Utils/cors';
  * @apiName Start User Experience
  * @apiGroup User
  *
+ * @apiHeader {String} Authorization authorization token generated using JWT, in the format 'Bearer <token>'.
+ * 
  * @apiParam (Body) {ObjectId} experience ObjectId representation of experience to start
  *
  * @apiSuccess {ObjectId} _id ObjectId of experience wrapper object

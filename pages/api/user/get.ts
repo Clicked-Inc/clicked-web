@@ -7,15 +7,33 @@ import checkPermissionLevel from '@Api/checkPermissionLevel';
 import cors from '@Utils/cors';
 
 /**
- * @api {get} /api/user/get Get User
- * @apiName Get User
+ * @api {get} /api/user/get Get User (Logged In)
+ * @apiName Get User (Logged In)
  * @apiGroup User
  *
  * @apiHeader {String} Authorization authorization token generated using JWT, in the format 'Bearer <token>'.
  *
  * @apiSuccess {String} message Success status
- * @apiSuccess {String} authToken Authorization JSONWebToken
- *
+ * @apiSuccess {Object} user User object persisted in MongoDB
+ * @apiSuccess {Number} user.age User's age
+ * @apiSuccess {String} user.email User's email (unique)
+ * @apiSuccess {String} user.username User's username (unique)
+ * @apiSuccess {String} user.role User's role ('student' or 'admin' or 'coach')
+ * @apiSuccess {String} user.password User's password
+ * @apiSuccess {String} user.firstName User's first name
+ * @apiSuccess {String} user.lastName User's last name
+ * @apiSuccess {String} user.profilePic User's profile picture URL
+ * @apiSuccess {String} user.aspirationType User's aspiration type ('explore' or 'dive')
+ * @apiSuccess {String} user.biography User's biography
+ * @apiSuccess {Number} user.age User's age
+ * @apiSuccess {ObjectId[]} user.skillInterests Array of ObjectIds corresponding to user's skill interests
+ * @apiSuccess {ObjectId[]} user.education Array of ObjectIds corresponding to user's education backgrounds
+ * @apiSuccess {ObjectId[]} user.externalExperiences Array of ObjectIds corresponding to user's external experiences
+ * @apiSuccess {Number} user.points User's points
+ * @apiSuccess {ObjectId[]} user.completedExperiences Array of ObjectIds corresponding to user's completed experiences
+ * @apiSuccess {ObjectId[]} user.currentExperiences Array of ObjectIds corresponding to user's current experiences
+ * @apiSuccess {ObjectId} user._id User's ObjectId
+ * @apiSuccess {Number} user.points User's points
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
 {
