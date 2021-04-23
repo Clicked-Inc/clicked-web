@@ -2,7 +2,7 @@ import React from 'react';
 import { RouterContext } from 'next/dist/next-server/lib/router-context';
 import { ChakraProvider } from '@chakra-ui/react';
 import * as nextImage from 'next/image';
-import PageWrapper from '../src/Components/PageWrapper';
+import theme from '../src/Theme';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -22,9 +22,9 @@ export const decorators = [
     </RouterContext.Provider>
   ),
   (Story) => (
-    <PageWrapper resetCSS>
+    <ChakraProvider theme={theme} resetCSS>
       <Story />
-    </PageWrapper>
+    </ChakraProvider>
   ),
 ];
 
