@@ -75,4 +75,4 @@ const giveFeedbackHandler = async (
   }
 };
 
-export default giveFeedbackHandler;
+export default authGuard(giveFeedbackHandler);
