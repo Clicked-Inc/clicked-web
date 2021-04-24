@@ -7,7 +7,5 @@ export default {
   title: 'SideBar',
 };
 
-const Template: Story = () => (
-  <SideBar />
-);
+const Template: Story = () => <SideBar />;
 export const Default = Template.bind({});

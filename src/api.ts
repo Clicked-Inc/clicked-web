@@ -23,12 +23,12 @@ class CreateUser {
 }
 
 interface CreateUserRequest {
-  firstName: String;
-  lastName: String;
+  firstName: string;
+  lastName: string;
 }
 
 interface CreateUserResponse {
-  firstName: String;
-  lastName: String;
-  role: String;
+  firstName: string;
+  lastName: string;
+  role: string;
 }

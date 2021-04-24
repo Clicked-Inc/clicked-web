@@ -7,7 +7,5 @@ export default {
   title: 'SideNav',
 };
 
-const Template: Story = () => (
-  <SideNav />
-);
+const Template: Story = () => <SideNav />;
 export const Default = Template.bind({});

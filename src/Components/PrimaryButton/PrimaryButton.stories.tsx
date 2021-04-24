@@ -7,12 +7,8 @@ export default {
   title: 'PrimaryButton',
 };
 
-const Template1: Story = () => (
-  <PrimaryButton variant="large" text="Primary"/>
-);
+const Template1: Story = () => <PrimaryButton variant="large" text="Primary" />;
 export const LargePrimaryButton = Template1.bind({});
 
-const Template2: Story = () => (
-  <PrimaryButton variant="small" text="Primary"/>
-);
+const Template2: Story = () => <PrimaryButton variant="small" text="Primary" />;
 export const SmallPrimaryButton = Template2.bind({});
