@@ -112,7 +112,7 @@ const registrationHandler = async (
       await hash(
         password,
         Number(process.env.saltRounds),
-        async (err: any, hash: string) => {
+        async (err: Error, hash: string) => {
           const user: Models.IUser = new Models.User({
             email,
             username,
