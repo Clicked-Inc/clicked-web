@@ -27,7 +27,6 @@ import ExpertTwoImage from './Icons/expert_two.svg';
 import ExpertThreeImage from './Icons/expert_three.svg';
 import ExpertFourImage from './Icons/expert_four.svg';
 
-
 export default {
   Notification,
   NotificationDot,
@@ -56,5 +55,5 @@ export default {
   ExpertOneImage,
   ExpertTwoImage,
   ExpertThreeImage,
-  ExpertFourImage
+  ExpertFourImage,
 };

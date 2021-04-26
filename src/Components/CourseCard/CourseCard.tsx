@@ -15,11 +15,7 @@ const CourseCard = () => (
   <Box maxW={321} h={450} boxShadow="md" rounded={10}>
     <Box spacing={10} minW="100%" h={200} objectFit="cover">
       <Box>
-        <Icon
-          name="CourseCardCover"
-          maxW="100%"
-          h={200}
-        />
+        <Icon name="CourseCardCover" maxW="100%" h={200} />
       </Box>
       <Button
         variant="solid"

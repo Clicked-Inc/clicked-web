@@ -7,7 +7,6 @@ import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
 import checkPermissionLevel from '@Api/checkPermissionLevel';
 
-
 const requireIdHandler = async (
   req: NextApiRequest,
   res: NextApiResponse
