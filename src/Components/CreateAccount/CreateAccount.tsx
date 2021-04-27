@@ -84,21 +84,20 @@ const CreateAccount = () => {
     const role = 'student';
     const interestsArray = ['running', 'cooking'];
     // convert strings to an array
+    // 
     const username = screenName;
-    // alias
-
     event.preventDefault();
     // setIsLoading(true);
     axios
       .post(`http://localhost:3000/api/user/register`, {
         email,
-        screenName,
+        username: screenName,
         role,
         password,
         firstName,
         lastName,
-        aspirationsQ,
-        interestsArray,
+        aspirationType: aspirationsQ.toLowerCase(),
+        skillInterests: interestsArray,
       })
       .then((res) => {
         localStorage.setItem('authToken', res.data.authToken);

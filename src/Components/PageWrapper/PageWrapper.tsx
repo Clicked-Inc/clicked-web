@@ -1,9 +1,15 @@
+import { Box } from '@chakra-ui/react';
 import React from 'react';
-import { ChakraProvider } from '@chakra-ui/react';
-import theme from '../../Theme';
+import Head from 'next/head';
 
 const PageWrapper: React.FC = ({ children }) => (
-  <ChakraProvider theme={theme}>{children}</ChakraProvider>
+  <>
+    <Head>
+      <title>Create Next App</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+    <Box as="main">{children}</Box>
+  </>
 );
 
 export default PageWrapper;

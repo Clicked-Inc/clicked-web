@@ -2,7 +2,7 @@ import mongoose, { Document, model, Schema } from 'mongoose';
 
 export interface ISkillScore extends Document {
   skillName: string;
-  score: number;
+  progress: number;
 }
 
 export const SkillScoreSchema = new Schema({
@@ -10,9 +10,10 @@ export const SkillScoreSchema = new Schema({
     type: String,
     required: true,
   },
-  score: {
+  progress: {
     type: Number,
-    required: true,
+    required: false,
+    default: 0,
   },
 });
 

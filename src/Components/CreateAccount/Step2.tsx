@@ -104,10 +104,9 @@ const Step2: React.FC<StepTwoProps> = ({
                   bg="white"
                   onChange={handleChange('aspirationsQ')}
                   value={values.aspirationsQ}
-                  placeholder="Option 1"
+                  placeholder="Explore"
                 >
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                  <option value="option2">Dive</option>
                 </Select>
               )}
             />

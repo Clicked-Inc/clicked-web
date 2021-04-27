@@ -3,12 +3,12 @@ When a USER starts and experience, a document of this model is creates.
 When a USER finishes an experience, an enddate is added. Users currently in the experience will not have an enddate. 
 **/
 
-import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
+import mongoose, { Document, model, ObjectId, Schema, Types } from 'mongoose';
 import * as Models from '@Models/index';
 
 export interface IExperienceWrapper extends Document {
-  experience: ObjectId | Models.IExperience;
-  user: ObjectId | Models.IUser;
+  experience: Types.ObjectId | Models.IExperience;
+  user: Types.ObjectId | Models.IUser;
   startDate: Date;
   endDate?: Date;
   feedbackGiven?: ObjectId | Models.IFeedback;
@@ -44,6 +44,8 @@ const ExperienceWrapperSchema = new Schema({
     required: false,
   },
 });
+
+ExperienceWrapperSchema.index({ experience: 1, user: 1 }, { unique: true });
 
 export default mongoose.models.ExperienceWrapper ||
   model<IExperienceWrapper>('ExperienceWrapper', ExperienceWrapperSchema);
