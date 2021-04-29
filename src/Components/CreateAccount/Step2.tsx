@@ -3,11 +3,12 @@ import {
   Box,
   FormControl,
   FormLabel,
-  Input,
   Button,
-  HStack,
-  Select,
+  Flex,
+  Spacer,
+  Select
 } from '@chakra-ui/react';
+
 import { Icon } from '../Icon';
 
 import { useForm, Controller } from 'react-hook-form';
@@ -76,19 +77,14 @@ const Step2: React.FC<StepTwoProps> = ({
                   bg="white"
                   onChange={handleChange('careerDevelopmentQ')}
                   value={values.careerDevelopmentQ}
-                  placeholder="Option 1"
+                  placeholder="Select"
                 >
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                  <option value="option2">Option 1</option>
+                  <option value="option3">Option 2</option>
                 </Select>
+
               )}
             />
-
-            {/* <Select bg='white' onChange={handleChange("careerDevelopmentQ")} value={values.careerDevelopmentQ} placeholder="Select option">
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                </Select> */}
             {errors.careerDevelopmentQ && (
               <Box color="red.500">{errors.careerDevelopmentQ}</Box>
             )}
@@ -104,27 +100,24 @@ const Step2: React.FC<StepTwoProps> = ({
                   bg="white"
                   onChange={handleChange('aspirationsQ')}
                   value={values.aspirationsQ}
-                  placeholder="Explore"
+                  placeholder="Select"
                 >
-                  <option value="option2">Dive</option>
+                  <option value="explore">Explore</option>
+                  <option value="dive">Dive</option>
                 </Select>
               )}
             />
-
-            {/* <Select bg='white' onChange={handleChange("aspirationsQ")} value={values.aspirationsQ} placeholder="Select option">
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                </Select> */}
-            {/* {errors.aspirationsQ && <Box color="red.500">{errors.aspirationsQ}</Box>} */}
           </FormControl>
-          <Box marginTop={10} textAlign="right">
-            <Box mr={3}>
-              <Button onClick={previous}>Back</Button>
-              {/* <input type="submit" /> */}
-              <Button onClick={next}>Next</Button>
+          <Flex mt={10}>
+            <Spacer />
+            <Box>
+              <Button onClick={previous}  mr="4">Back</Button>
+              <Button type="submit">Next</Button>
             </Box>
-          </Box>
+          </Flex>
+          {/* <Box marginTop={10} textAlign="right">
+            
+          </Box> */}
         </Box>
       </form>
     </Box>

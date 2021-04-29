@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
-import { HStack, Box, Grid } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
+import { Redirect } from "react-router-dom";
 import { Icon } from '../Icon';
 import axios from 'axios';
 
@@ -26,6 +27,8 @@ const CreateAccount = () => {
     bio: '',
   });
 
+  const [error, setError] = useState("");
+
   function getSteps() {
     return ['Step 1', 'Step 2', 'Step 3'];
   }
@@ -47,8 +50,8 @@ const CreateAccount = () => {
 
   function generateStepper(step) {
     return (
-      <Box pl={12} w={300} verticalAlign="top" height="100%">
-        <Box mb={10} pt={8}>
+      <Box py={5} px={50} textAlign="center" height="100%">
+        <Box mb={10}>
           <Icon name="ClickedLogoLarge" />
         </Box>
 
@@ -82,10 +85,8 @@ const CreateAccount = () => {
       bio,
     } = inputs;
     const role = 'student';
-    const interestsArray = ['running', 'cooking'];
-    // convert strings to an array
-    // 
-    const username = screenName;
+    const interestsArray = interests.split(',');
+
     event.preventDefault();
     // setIsLoading(true);
     axios
@@ -102,16 +103,14 @@ const CreateAccount = () => {
       .then((res) => {
         localStorage.setItem('authToken', res.data.authToken);
         window.location.reload();
+        setError("");
         console.log('Success');
-
-        // setIsLoggedIn(true);
-        // setIsLoading(false);
-        // setShowPassword(false);
+        <Redirect to="/" />
       })
       .catch((error) => {
         console.log(error);
         console.log(error.message);
-
+        setError("Authentication Failed.");
         // setError('Invalid email or password');
         // setIsLoading(false);
         // setShowPassword(false);
@@ -121,10 +120,10 @@ const CreateAccount = () => {
   switch (inputs.step) {
     case 1:
       return (
-        <Box width="100%">
-          <Grid templateColumns="repeat(5, 1fr)" gap={4}>
-            <Box>{generateStepper(inputs.step - 1)}</Box>
-            <Box bg="#E5E5E5" width="100%" height="100%" py={8} px={12}>
+        <Box>
+          <Flex columns={2}>
+            <Box width="30%">{generateStepper(inputs.step - 1)}</Box>
+            <Box bg="#E5E5E5" maxHeight="100%" width="100%" py={8} px={12}>
               <Step1
                 prevStep={prevStep}
                 nextStep={nextStep}
@@ -132,37 +131,42 @@ const CreateAccount = () => {
                 values={inputs}
               />
             </Box>
-          </Grid>
+          </Flex>
         </Box>
       );
     case 2:
       return (
-        <HStack>
-          {generateStepper(inputs.step - 1)}
-          <Box bg="#E5E5E5" width="100%" height="100%" py={8} px={12}>
-            <Step2
-              prevStep={prevStep}
-              nextStep={nextStep}
-              handleChange={handleChange}
-              values={inputs}
-            />
-          </Box>
-        </HStack>
+        <Box>
+          <Flex columns={2}>
+            <Box width="30%">{generateStepper(inputs.step - 1)}</Box>
+            <Box bg="#E5E5E5" maxHeight="100%" width="100%" py={8} px={12}>
+              <Step2
+                prevStep={prevStep}
+                nextStep={nextStep}
+                handleChange={handleChange}
+                values={inputs}
+              />
+            </Box>
+          </Flex>
+        </Box>
       );
     case 3:
-      return (
-        <HStack>
-          {generateStepper(inputs.step - 1)}
-          <Box bg="#E5E5E5" width="100%" height="100%" py={8} px={12}>
-            <Step3
-              prevStep={prevStep}
-              nextStep={nextStep}
-              handleChange={handleChange}
-              values={inputs}
-              handleUserSubmit={handleUserSubmit}
-            />
-          </Box>
-        </HStack>
+      return (              
+        <Box>
+          <Flex columns={2}>
+            <Box width="30%">{generateStepper(inputs.step - 1)}</Box>
+            <Box bg="#E5E5E5" maxHeight="100%" width="100%" py={8} px={12}>
+              <Step3
+                prevStep={prevStep}
+                nextStep={nextStep}
+                handleChange={handleChange}
+                values={inputs}
+                handleUserSubmit={handleUserSubmit}
+                error={error}
+              />
+            </Box>
+          </Flex>
+        </Box>
       );
     case 4:
       return (

@@ -5,10 +5,10 @@ import {
   FormLabel,
   Input,
   Button,
-  HStack,
   Textarea,
+  Flex,
+  Spacer
 } from '@chakra-ui/react';
-import { Icon } from '../Icon';
 
 import { useForm, Controller } from 'react-hook-form';
 
@@ -29,6 +29,7 @@ type StepThreeProps = {
     bio: string;
   };
   handleUserSubmit: Function;
+  error: string;
 };
 
 const Step3: React.FC<StepThreeProps> = ({
@@ -37,13 +38,10 @@ const Step3: React.FC<StepThreeProps> = ({
   handleChange,
   values,
   handleUserSubmit,
+  error
 }) => {
   function previous(e) {
     prevStep();
-  }
-
-  function next() {
-    nextStep();
   }
 
   const {
@@ -55,7 +53,6 @@ const Step3: React.FC<StepThreeProps> = ({
   const onSubmit = (data) => {
     console.log(data);
     handleUserSubmit();
-    next();
   };
   const onError = (errors, e) => console.log(errors, e);
 
@@ -69,12 +66,12 @@ const Step3: React.FC<StepThreeProps> = ({
           <FormControl mt={5} id="interests">
             <FormLabel>What are some of your interests?</FormLabel>
             <Input
-              {...register('interests', {
-                required: {
-                  value: true,
-                  message: 'Please enter your interests',
-                },
-              })}
+              // {...register('interests', {
+              //   required: {
+              //     value: true,
+              //     message: 'Please enter your interests',
+              //   },
+              // })}
               w={1000}
               bg="white"
               value={values.interests}
@@ -86,9 +83,9 @@ const Step3: React.FC<StepThreeProps> = ({
           <FormControl mt={5} id="bio">
             <FormLabel>Write a short bio about yourself.</FormLabel>
             <Textarea
-              {...register('bio', {
-                required: { value: true, message: 'Please enter a bio' },
-              })}
+              // {...register('bio', {
+              //   required: { value: true, message: 'Please enter a bio' },
+              // })}
               w={1000}
               bg="white"
               size="sm"
@@ -97,15 +94,19 @@ const Step3: React.FC<StepThreeProps> = ({
             />
             {errors.bio && <Box color="red.500">{errors.bio}</Box>}
           </FormControl>
-          <Box marginTop={15} textAlign="center">
-            Upload a profile picture
-          </Box>
-          <Box marginTop={10} textAlign="right">
-            <Box mr={3}>
-              <Button onClick={previous}>Back</Button>
-              <input type="submit" />
+          <Flex mt={10}>
+            <Spacer />
+            <Box>
+              <Button onClick={previous}  mr="4">Back</Button>
+              <Button type="submit">Complete Registration</Button>
             </Box>
-          </Box>
+          </Flex>
+          <Flex mt={5}>
+            <Spacer />
+            <Box h={30}>
+              <Box color="red.500">{error}</Box>
+            </Box>
+          </Flex>
         </Box>
       </form>
     </Box>

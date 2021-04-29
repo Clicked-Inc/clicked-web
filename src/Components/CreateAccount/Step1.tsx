@@ -8,6 +8,7 @@ import {
   Input,
   Button,
   SimpleGrid,
+  FormErrorMessage
 } from '@chakra-ui/react';
 import { Icon } from '../Icon';
 
@@ -57,7 +58,7 @@ const Step1: React.FC<StepOneProps> = ({
       <Box mb={10} fontWeight="700" fontSize={36}>
         Create Account
       </Box>
-      <Box width="100%">
+      <Box>
         <form onSubmit={handleSubmit(onSubmit, onError)}>
           <SimpleGrid minChildWidth="450px" columns={2} spacing={20}>
             {/* <VStack spacing={20}>
@@ -78,11 +79,10 @@ const Step1: React.FC<StepOneProps> = ({
                   defaultValue={values.firstName}
                   onChange={handleChange('firstName')}
                 />
-                <Box>
-                  {errors.firstName && (
+                <Box h={100}>{errors.firstName && (
                     <Box color="red.500">{errors.firstName.message}</Box>
-                  )}
-                </Box>
+                  )}</Box>
+                  
               </FormControl>
             </Box>
 
@@ -98,7 +98,7 @@ const Step1: React.FC<StepOneProps> = ({
                 defaultValue={values.lastName}
                 onChange={handleChange('lastName')}
               />
-              <Box>
+              <Box h={30}>
                 {errors.lastName && (
                   <Box color="red.500">{errors.lastName.message}</Box>
                 )}
@@ -123,9 +123,10 @@ const Step1: React.FC<StepOneProps> = ({
                 defaultValue={values.email}
                 onChange={handleChange('email')}
               />
+              <Box h={30}>
               {errors.email && (
                 <Box color="red.500">{errors.email.message}</Box>
-              )}
+              )}</Box>
             </FormControl>
 
             <FormControl id="screenName">
@@ -147,9 +148,10 @@ const Step1: React.FC<StepOneProps> = ({
                 defaultValue={values.screenName}
                 onChange={handleChange('screenName')}
               />
+              <Box h={30}>
               {errors.screenName && (
                 <Box color="red.500">{errors.screenName.message}</Box>
-              )}
+              )}</Box>
             </FormControl>
             {/* </HStack>
                     <HStack spacing={100}> */}
@@ -170,9 +172,9 @@ const Step1: React.FC<StepOneProps> = ({
                 defaultValue={values.password}
                 onChange={handleChange('password')}
               />
-              {errors.password && (
+              <Box>{errors.password && (
                 <Box color="red.500">{errors.password.message}</Box>
-              )}
+              )}</Box>
             </FormControl>
 
             <FormControl id="retypePassword">
@@ -184,23 +186,22 @@ const Step1: React.FC<StepOneProps> = ({
                 bg="white"
                 {...register('retypePassword', {
                   required: { value: true, message: 'Please retype password' },
-                  minLength: 8,
+                  minLength: {value: 8, message: 'Password must have at least 8 characters'},
                   validate: (value) =>
                     value === values.password || 'The passwords do not match',
                 })}
                 defaultValue={values.retypePassword}
                 onChange={handleChange('retypePassword')}
               />
-              {errors.retypePassword && (
+              <Box h={30}>{errors.retypePassword && (
                 <Box color="red.500">{errors.retypePassword.message}</Box>
-              )}
+              )}</Box>
             </FormControl>
             {/* </HStack>
                 </VStack> */}
           </SimpleGrid>
-
           <Box marginTop={10} textAlign="right">
-            <input type="submit" />
+            <Button type="submit">Next</Button>
           </Box>
         </form>
         {/* 
