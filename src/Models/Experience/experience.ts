@@ -77,5 +77,10 @@ const ExperienceSchema = new Schema({
   },
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isExperience = (obj: IExperience | any): obj is IExperience => {
+  return obj && obj.name && typeof obj.name === 'string';
+};
+
 export default mongoose.models.Experience ||
   model<IExperience>('Experience', ExperienceSchema);

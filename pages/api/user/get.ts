@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
-import checkPermissionLevel from '@Api/checkPermissionLevel';
 import cors from '@Utils/cors';
 
 /**
@@ -75,7 +74,8 @@ const getHandler = async (
   await cors(req, res);
   await connect();
   try {
-    const obj: any = req.query.userInfo;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const obj: any = req.body.userInfo;
     const id: string = obj.uid;
     const user = await Models.User.findById(
       id,

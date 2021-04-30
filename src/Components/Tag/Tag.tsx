@@ -28,9 +28,9 @@ const Tag: React.FC<TagProps> = ({ variant, label, icon }) => {
   const { size, fontColor, bgColor, weight } = generateStyles(variant);
 
   function renderSwitch(param) {
-    switch(param) {
-      case "": 
-        return "";
+    switch (param) {
+      case '':
+        return '';
       default:
         return (
           <Box display={param != '' ? 'show' : 'none'} mr={2}>

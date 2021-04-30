@@ -1,5 +1,10 @@
 import Cors from 'cors';
-const corsHandler = (req, res) => {
+import { NextApiRequest, NextApiResponse } from 'next';
+
+const corsHandler = (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<unknown> => {
   return new Promise((resolve, reject) => {
     const middleware = Cors({
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],

@@ -1,5 +1,7 @@
 import * as Models from '@Models/index';
 import { ObjectId } from 'mongoose';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const generateExperienceWrapper = async (array: any[]): Promise<ObjectId[]> => {
   let experienceWrapperIdsArray: ObjectId[] = await Promise.all(
     array.map(
