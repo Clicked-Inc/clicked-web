@@ -1,5 +1,6 @@
 import Cors from 'cors';
 import { NextApiRequest, NextApiResponse } from 'next';
+
 const corsHandler = (
   req: NextApiRequest,
   res: NextApiResponse
