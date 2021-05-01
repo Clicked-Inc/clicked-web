@@ -1,6 +1,5 @@
+import * as Models from '@Models/index';
 import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
-import SkillScore, { ISkillScore } from './skillScore';
-
 // Add Validation
 enum CategoryType {
   Audio = 'audio',
@@ -20,14 +19,14 @@ export interface IExperience extends Document {
   name: string;
   category: CategoryType;
   experienceType: ExperienceType;
-  coach: ObjectId;
-  targetSkill: ISkillScore[];
-  feedback?: ObjectId; //TODO: Change this to a reference to objectID instead?
+  coach: ObjectId | Models.IUser;
+  targetSkill: ObjectId[] | Models.ISkillScore[];
+  feedback?: ObjectId[] | Models.IFeedback[];
   averageRating?: number;
-  currentUsers?: ObjectId;
-  previousUsers?: ObjectId;
+  currentUsers?: ObjectId[] | Models.IUser[];
+  previousUsers?: ObjectId[] | Models.IUser[];
+  points: number;
 }
-
 const ExperienceSchema = new Schema({
   name: {
     type: String,
@@ -44,16 +43,17 @@ const ExperienceSchema = new Schema({
     required: true,
   },
   coach: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
   targetSkill: {
-    type: [SkillScore.schema],
+    type: [Schema.Types.ObjectId],
+    ref: 'SkillScore',
     required: true,
   },
   feedback: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
     ref: 'Feedback',
     required: false,
   },
@@ -62,16 +62,25 @@ const ExperienceSchema = new Schema({
     required: false,
   },
   currentUsers: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'ExperienceUsers',
+    type: [Schema.Types.ObjectId],
+    ref: 'ExperienceWrapper',
     required: false,
   },
   previousUsers: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'ExperienceUsers',
+    type: [Schema.Types.ObjectId],
+    ref: 'ExperienceWrapper',
     required: false,
   },
+  points: {
+    type: Number,
+    required: true,
+  },
 });
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isExperience = (obj: IExperience | any): obj is IExperience => {
+  return obj && obj.name && typeof obj.name === 'string';
+};
 
 export default mongoose.models.Experience ||
   model<IExperience>('Experience', ExperienceSchema);

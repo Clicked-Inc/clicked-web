@@ -1,3 +1,5 @@
+import connect from '@Utils/databaseConnection';
+import * as Models from '@Models/index';
 import { verify } from 'jsonwebtoken';
 import { NextApiRequest } from 'next';
 
@@ -6,11 +8,15 @@ import { NextApiRequest } from 'next';
 // if not, check that user role is an admin or coach or whatever in list of passed in roles [done]
 const checkPermissionLevel = async (
   req: NextApiRequest,
+  type: string,
   permissionLevels?: string[],
   id?: string | string[]
 ): Promise<boolean> => {
   let jwt_payload;
-  const token = req.headers.authorization?.replace('userToken=', '');
+  if (req.headers.authorization == null) {
+    return false;
+  }
+  const token: string = req.headers.authorization.replace('Bearer ', '');
 
   try {
     jwt_payload = verify(token, process.env.JWT_SECRET);
@@ -19,8 +25,18 @@ const checkPermissionLevel = async (
     return false;
   }
 
-  if (id && id === jwt_payload.id) {
-    return true;
+  if (id) {
+    if (type == 'user' && id === jwt_payload.uid) {
+      return true;
+    }
+    await connect();
+    let experience: Array<Models.IExperience>;
+    experience = await Models.Experience.find({ _id: id });
+
+    // get user id by coach attribute and compare to id of current user
+    if (experience && experience[0].coach.toString() === jwt_payload.uid) {
+      return true;
+    }
   }
 
   if (permissionLevels) {

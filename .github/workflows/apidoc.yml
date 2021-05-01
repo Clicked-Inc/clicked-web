@@ -1,0 +1,27 @@
+name: Apidoc
+
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  documentation-generation:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Push documentation folder
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: 'docs'
+        destination_repo: 'Clicked-Inc/clicked-docs'
+        destination_folder: '/'
+        user_email: 'anjanb@berkeley.edu'
+        user_name: 'Clicked Team'
+        commit_message: 'Pushing documentation'
