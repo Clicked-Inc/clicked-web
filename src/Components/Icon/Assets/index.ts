@@ -9,6 +9,9 @@ import UIUXIcon from './Icons/ui_ux_icon.svg';
 import SoftwareDevIcon from './Icons/software_dev_icon.svg';
 import MarketingIcon from './Icons/marketing_icon.svg';
 import ProjectCardCover from './Icons/project_card_cover.svg';
+import CourseCardCover from './Icons/course_card_cover.svg';
+import ImageIcon from './Icons/image_icon.svg';
+import SmileyIcon from './Icons/smiley_icon.svg';
 import IconDashboard from './Icons/icon_dashboard.svg';
 import IconContact from './Icons/icon_contact.svg';
 import IconCourses from './Icons/icon_courses.svg';
@@ -19,7 +22,6 @@ import IconGuide from './Icons/icon_guide.svg';
 import IconInspiration from './Icons/icon_inspiration.svg';
 import SideNavArrow from './Icons/sidenav_arrow.svg';
 import SideNavSelection from './Icons/sidenav_selection.svg';
-import CourseCardCover from './Icons/course_card_cover.svg';
 import SideBarProfileImage from './Icons/sidebar_pic.svg';
 import ExpertOneImage from './Icons/expert_one.svg';
 import ExpertTwoImage from './Icons/expert_two.svg';
@@ -38,6 +40,10 @@ export default {
   SoftwareDevIcon,
   MarketingIcon,
   ProjectCardCover,
+
+  ImageIcon,
+  SmileyIcon,
+
   IconDashboard,
   IconContact,
   IconCourses,
