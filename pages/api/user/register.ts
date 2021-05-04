@@ -4,7 +4,7 @@ import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import generateSkillInterests from '@Generators/generateSkillInterests';
 import validateUniqueUser from '@Utils/validateUniqueUser';
-import { ObjectId } from 'mongoose';
+import { ObjectId, Error } from 'mongoose';
 import cors from '@Utils/cors';
 
 /**
@@ -123,13 +123,14 @@ const registrationHandler = async (
             aspirationType,
             skillInterests: skillInterestArray,
           });
-          console.log(user)
           await user.save((err) => {
             if (err) {
-    
-              console.log(err)
-              res.status(400).json({ message: 'Registration failed' });
-              return;
+              if (err instanceof Error.ValidationError) {
+                for (const field in err.errors) {
+                  res.status(400).json({ message: field });
+                  return;
+                }
+              }
             }
             res
               .status(200)
@@ -143,6 +144,7 @@ const registrationHandler = async (
       res.status(409).json({ message: 'Username already exists.' });
     }
   } catch (e) {
+    console.log(e);
     // TODO: more specific error codes based on situation
     res.status(400).json({ message: 'Registration failed' });
   }
