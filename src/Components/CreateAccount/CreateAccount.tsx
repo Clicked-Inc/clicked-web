@@ -1,8 +1,8 @@
 import React, { Component, useState } from 'react';
 import { Box, Flex } from '@chakra-ui/react';
-import { Redirect } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 import { Icon } from '../Icon';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -11,6 +11,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
+import { NextApiResponse } from 'next';
 
 const CreateAccount = () => {
   const [inputs, setInputs] = useState({
@@ -27,7 +28,7 @@ const CreateAccount = () => {
     bio: '',
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   function getSteps() {
     return ['Step 1', 'Step 2', 'Step 3'];
@@ -103,14 +104,26 @@ const CreateAccount = () => {
       .then((res) => {
         localStorage.setItem('authToken', res.data.authToken);
         window.location.reload();
-        setError("");
+        setError('');
         console.log('Success');
-        <Redirect to="/" />
+        <Redirect to="/" />;
       })
       .catch((error) => {
+        const response: AxiosResponse = error.response;
+        const statusCode: number = response.status;
+        switch (statusCode) {
+          case 409:
+            setError(response.data.message);
+            break;
+          case 400:
+            setError('Authentication Failed.');
+            break;
+          default:
+            setError('Authentication Failed.');
+            break;
+        }
         console.log(error);
-        console.log(error.message);
-        setError("Authentication Failed.");
+        console.log(error.response);
         // setError('Invalid email or password');
         // setIsLoading(false);
         // setShowPassword(false);
@@ -151,7 +164,7 @@ const CreateAccount = () => {
         </Box>
       );
     case 3:
-      return (              
+      return (
         <Box>
           <Flex columns={2}>
             <Box width="30%">{generateStepper(inputs.step - 1)}</Box>
