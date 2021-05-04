@@ -36,8 +36,8 @@ export default function Header() {
             />
           </InputGroup>
         </Box>
-        <Spacer />
-        <Box mr={40} mt={6}>
+        
+        <Box pl={600} mr={40} mt={6}>
           <Box mr={5}>
             <Icon name="Notification" />
           </Box>

@@ -79,8 +79,12 @@ const Step2: React.FC<StepTwoProps> = ({
                   value={values.careerDevelopmentQ}
                   placeholder="Select"
                 >
-                  <option value="option2">Option 1</option>
-                  <option value="option3">Option 2</option>
+                  <option value="Select career development stage">Select career development stage</option>
+                  <option value="Just starting my journey">Just starting my journey</option>
+                  <option value="Exploring new skills and career options">Exploring new skills and career options</option>
+                  <option value="Building my skills for a specific career">Building my skills for a specific career</option>
+                  <option value="Early career professional perfecting my skills">Early career professional perfecting my skills</option>
+                  <option value="Experience professional coaching others">Experience professional coaching others</option>
                 </Select>
 
               )}
