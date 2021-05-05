@@ -27,6 +27,7 @@ type StepThreeProps = {
     aspirationsQ: string;
     interests: string;
     bio: string;
+    role: string;
   };
   handleUserSubmit: Function;
   error: string;
@@ -66,12 +67,6 @@ const Step3: React.FC<StepThreeProps> = ({
           <FormControl mt={5} id="interests">
             <FormLabel>What are some of your interests?</FormLabel>
             <Input
-              // {...register('interests', {
-              //   required: {
-              //     value: true,
-              //     message: 'Please enter your interests',
-              //   },
-              // })}
               w={1000}
               bg="white"
               value={values.interests}
@@ -83,9 +78,6 @@ const Step3: React.FC<StepThreeProps> = ({
           <FormControl mt={5} id="bio">
             <FormLabel>Write a short bio about yourself.</FormLabel>
             <Textarea
-              // {...register('bio', {
-              //   required: { value: true, message: 'Please enter a bio' },
-              // })}
               w={1000}
               bg="white"
               size="sm"

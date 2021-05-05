@@ -6,7 +6,10 @@ import {
   Button,
   Flex,
   Spacer,
-  Select
+  Select,
+  RadioGroup,
+  Stack,
+  Radio
 } from '@chakra-ui/react';
 
 import { Icon } from '../Icon';
@@ -28,6 +31,7 @@ type StepTwoProps = {
     aspirationsQ: string;
     interests: string;
     bio: string;
+    role: string;
   };
 };
 
@@ -56,7 +60,7 @@ const Step2: React.FC<StepTwoProps> = ({
     next();
   };
   const onError = (errors, e) => console.log(errors, e);
-
+  let yeet = values;
   return (
     <Box>
       <Box mb={10} fontWeight="700" fontSize={36}>
@@ -64,6 +68,31 @@ const Step2: React.FC<StepTwoProps> = ({
       </Box>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <Box>
+          <FormControl mt={5} id="role">
+            <FormLabel>
+              What is your role?
+            </FormLabel>
+            <Controller
+              name="role"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  bg="white"
+                  onChange={handleChange('role')}
+                  value={values.role}
+                  placeholder="Select"
+                >
+                  <option value="student">Student</option>
+                  <option value="coach">Coach</option>
+                  <option value="admin">Admin</option>
+                </Select>
+
+              )}
+            />
+            {errors.careerDevelopmentQ && (
+              <Box color="red.500">{errors.careerDevelopmentQ}</Box>
+            )}
+          </FormControl>
           <FormControl mt={5} id="careerDevelopmentQ">
             <FormLabel>
               Which of the following describes where you are in your career
@@ -119,9 +148,6 @@ const Step2: React.FC<StepTwoProps> = ({
               <Button type="submit">Next</Button>
             </Box>
           </Flex>
-          {/* <Box marginTop={10} textAlign="right">
-            
-          </Box> */}
         </Box>
       </form>
     </Box>

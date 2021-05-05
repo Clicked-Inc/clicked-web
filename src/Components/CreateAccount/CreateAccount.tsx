@@ -11,7 +11,6 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
-import { NextApiResponse } from 'next';
 
 const CreateAccount = () => {
   const [inputs, setInputs] = useState({
@@ -26,6 +25,7 @@ const CreateAccount = () => {
     aspirationsQ: '',
     interests: '',
     bio: '',
+    role: 'student'
   });
 
   const [error, setError] = useState('');
@@ -39,12 +39,14 @@ const CreateAccount = () => {
     setInputs((prev) => ({ ...prev, [input]: e.target.value }));
   };
 
-  // proceed to next step
+  const handleRadio = (input) => (e) => {
+    setInputs((prev) => ({ ...prev, ['radio']: e.target.value }));
+  }
+
   function nextStep() {
     setInputs((prev) => ({ ...prev, ['step']: inputs.step + 1 }));
   }
 
-  // go back to last step
   function prevStep() {
     setInputs((prev) => ({ ...prev, ['step']: inputs.step - 1 }));
   }
@@ -84,22 +86,24 @@ const CreateAccount = () => {
       aspirationsQ,
       interests,
       bio,
+      role
     } = inputs;
-    const role = 'student';
     const interestsArray = interests.split(',');
-
     event.preventDefault();
-    // setIsLoading(true);
+    if (interestsArray.length == 0) {
+      setError("Please enter interests");
+    }
     axios
       .post(`http://localhost:3000/api/user/register`, {
         email,
         username: screenName,
-        role,
         password,
         firstName,
         lastName,
         aspirationType: aspirationsQ.toLowerCase(),
         skillInterests: interestsArray,
+        role: role.toLowerCase(),
+        bio
       })
       .then((res) => {
         localStorage.setItem('authToken', res.data.authToken);
@@ -124,9 +128,6 @@ const CreateAccount = () => {
         }
         console.log(error);
         console.log(error.response);
-        // setError('Invalid email or password');
-        // setIsLoading(false);
-        // setShowPassword(false);
       });
   }
 

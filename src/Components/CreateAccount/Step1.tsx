@@ -29,6 +29,7 @@ type StepOneProps = {
     aspirationsQ: string;
     interests: string;
     bio: string;
+    role: string;
   };
 };
 
@@ -61,8 +62,6 @@ const Step1: React.FC<StepOneProps> = ({
       <Box>
         <form onSubmit={handleSubmit(onSubmit, onError)}>
           <SimpleGrid minChildWidth="450px" columns={2} spacing={20}>
-            {/* <VStack spacing={20}>
-                    <HStack spacing={100}> */}
             <Box height={10}>
               <FormControl id="firstName">
                 <FormLabel>First Name</FormLabel>
@@ -104,9 +103,6 @@ const Step1: React.FC<StepOneProps> = ({
                 )}
               </Box>
             </FormControl>
-            {/* </HStack>
-                    
-                    <HStack spacing={100}> */}
             <FormControl id="email">
               <FormLabel>Email</FormLabel>
               <Input
@@ -153,8 +149,6 @@ const Step1: React.FC<StepOneProps> = ({
                 <Box color="red.500">{errors.screenName.message}</Box>
               )}</Box>
             </FormControl>
-            {/* </HStack>
-                    <HStack spacing={100}> */}
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
               <Input
@@ -197,17 +191,11 @@ const Step1: React.FC<StepOneProps> = ({
                 <Box color="red.500">{errors.retypePassword.message}</Box>
               )}</Box>
             </FormControl>
-            {/* </HStack>
-                </VStack> */}
           </SimpleGrid>
           <Box marginTop={10} textAlign="right">
             <Button type="submit">Next</Button>
           </Box>
         </form>
-        {/* 
-                <Box marginTop={10} textAlign="right">
-                    <Button onClick={next}>Continue</Button>
-                </Box> */}
       </Box>
     </Box>
   );
