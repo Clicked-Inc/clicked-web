@@ -120,7 +120,7 @@ const CreateAccount = () => {
             setError(response.data.message);
             break;
           case 400:
-            setError('Authentication Failed.');
+            setError('Authentication Failed: ' + response.data.message);
             break;
           default:
             setError('Authentication Failed.');
