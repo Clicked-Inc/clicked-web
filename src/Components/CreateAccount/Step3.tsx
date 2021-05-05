@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Box,
   FormControl,
@@ -11,11 +11,10 @@ import {
   CircularProgress
 } from '@chakra-ui/react';
 
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 type StepThreeProps = {
   prevStep: Function;
-  nextStep: Function;
   handleChange: Function;
   values: {
     firstName: string;
@@ -37,7 +36,6 @@ type StepThreeProps = {
 
 const Step3: React.FC<StepThreeProps> = ({
   prevStep,
-  nextStep,
   handleChange,
   values,
   handleUserSubmit,
@@ -50,8 +48,6 @@ const Step3: React.FC<StepThreeProps> = ({
   }
 
   const {
-    control,
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm({});
@@ -77,7 +73,6 @@ const Step3: React.FC<StepThreeProps> = ({
               value={values.interests}
               onChange={handleChange('interests')}
             />
-            {errors.interests && <Box color="red.500">{errors.interests}</Box>}
           </FormControl>
 
           <FormControl mt={5} id="bio">
@@ -88,7 +83,6 @@ const Step3: React.FC<StepThreeProps> = ({
               value={values.bio}
               onChange={handleChange('bio')}
             />
-            {errors.bio && <Box color="red.500">{errors.bio}</Box>}
           </FormControl>
           <Flex mt={10}>
             <Spacer />

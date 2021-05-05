@@ -216,7 +216,6 @@ const CreateAccount = () => {
             <Box bg="#E5E5E5" maxHeight="100%" width="100%" py={8} px={12}>
               <Step3
                 prevStep={prevStep}
-                nextStep={nextStep}
                 handleChange={handleChange}
                 values={inputs}
                 handleUserSubmit={handleUserSubmit}
@@ -225,16 +224,6 @@ const CreateAccount = () => {
               />
             </Box>
           </Flex>
-        </Box>
-      );
-    case 4:
-      return (
-        <Box>
-          {inputs.firstName}
-          {inputs.lastName}
-          {inputs.email}
-          {inputs.screenName}
-          {inputs.password}
         </Box>
       );
   }
