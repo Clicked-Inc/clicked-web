@@ -4,7 +4,7 @@ import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import generateSkillInterests from '@Generators/generateSkillInterests';
 import validateUniqueUser from '@Utils/validateUniqueUser';
-import { ObjectId } from 'mongoose';
+import { ObjectId, Error } from 'mongoose';
 import cors from '@Utils/cors';
 
 /**
@@ -102,7 +102,9 @@ const registrationHandler = async (
       firstName,
       lastName,
       aspirationType,
+      careerDevelopmentType,
       skillInterests,
+      bio,
     } = req.body;
     const uniqueUser: boolean[] = await validateUniqueUser(email, username);
     if (uniqueUser[0] && uniqueUser[1]) {
@@ -121,12 +123,17 @@ const registrationHandler = async (
             firstName,
             lastName,
             aspirationType,
+            careerDevelopmentType,
             skillInterests: skillInterestArray,
+            bio,
           });
           await user.save((err) => {
-            if (err) {
-              res.status(400).json({ message: 'Registration failed' });
-              return;
+            console.log(err);
+            if (err instanceof Error.ValidationError) {
+              for (const field in err.errors) {
+                res.status(400).json({ message: field });
+                return;
+              }
             }
             res
               .status(200)

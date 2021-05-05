@@ -1,7 +1,7 @@
 import mongoose, { Document, model, Schema, ObjectId } from 'mongoose';
 import GeoPoint, { IGeoPoint } from './geoPoint';
 import * as Models from '@Models/index';
-// TODO: add more aspiration types
+
 enum AspirationType {
   Explore = 'explore',
   Dive = 'dive',
@@ -11,6 +11,15 @@ enum UserType {
   Student = 'student',
   Coach = 'coach',
   Admin = 'admin',
+}
+
+enum CareerDevelopmentType {
+  Option1 = 'Select career development stage',
+  Option2 = 'Just starting my journey',
+  Option3 = 'Exploring new skills and career options',
+  Option4 = 'Building my skills for a specific career',
+  Option5 = 'Early career professional perfecting my skills',
+  Option6 = 'Experience professional coaching others',
 }
 
 export interface IUser extends Document {
@@ -31,6 +40,8 @@ export interface IUser extends Document {
   learningPlan?: ObjectId | Models.ILearningPlan;
   completedExperiences?: ObjectId[] | Models.IExperienceWrapper[];
   currentExperiences?: ObjectId[] | Models.IExperienceWrapper[];
+  bio: string;
+  careerDevelopmentType: string;
 }
 
 const UserSchema = new Schema({
@@ -53,6 +64,7 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
+    required: true,
   },
   firstName: {
     type: String,
@@ -109,6 +121,15 @@ const UserSchema = new Schema({
     type: [Schema.Types.ObjectId],
     ref: 'ExperienceWrapper',
     required: false,
+  },
+  bio: {
+    type: String,
+    required: true,
+  },
+  careerDevelopmentType: {
+    type: String,
+    enum: Object.values(CareerDevelopmentType),
+    required: true,
   },
 });
 
