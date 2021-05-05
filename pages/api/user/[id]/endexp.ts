@@ -120,7 +120,7 @@ const userEndExperienceHandler = async (
               runValidators: true,
             }
           );
-          const skillScore = experience.targetSkill;
+          const skillScore = <ObjectId[]>experience.targetSkill;
 
           const user = await Models.User.findById(id);
           let updateSkill: ObjectId[];

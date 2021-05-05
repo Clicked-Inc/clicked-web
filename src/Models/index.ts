@@ -30,3 +30,9 @@ export type { IFeedback } from './Feedback/feedback';
 //  */
 export { default as LearningPlan } from './learningPlan';
 export type { ILearningPlan } from './learningPlan';
+
+// /**
+//  * ValidSkills Schemas
+//  */
+export { default as ValidSkills } from './Skills/validSkills';
+export type { IValidSkills } from './Skills/validSkills';
