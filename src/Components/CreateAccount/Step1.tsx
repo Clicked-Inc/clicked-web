@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import {
   Box,
-  HStack,
-  VStack,
+  Flex,
+  Spacer,
   FormControl,
   FormLabel,
   Input,
   Button,
   SimpleGrid,
-  FormErrorMessage
 } from '@chakra-ui/react';
-import { Icon } from '../Icon';
 
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 type StepOneProps = {
   prevStep: Function;
@@ -31,6 +29,7 @@ type StepOneProps = {
     bio: string;
     role: string;
   };
+  error: string;
 };
 
 const Step1: React.FC<StepOneProps> = ({
@@ -38,7 +37,9 @@ const Step1: React.FC<StepOneProps> = ({
   nextStep,
   handleChange,
   values,
+  error
 }) => {
+  
   function next() {
     nextStep();
   }
@@ -48,10 +49,12 @@ const Step1: React.FC<StepOneProps> = ({
     handleSubmit,
     formState: { errors },
   } = useForm({});
+  
   const onSubmit = (data) => {
     console.log(data);
     next();
   };
+  
   const onError = (errors, e) => console.log(errors, e);
 
   return (
@@ -170,7 +173,6 @@ const Step1: React.FC<StepOneProps> = ({
                 <Box color="red.500">{errors.password.message}</Box>
               )}</Box>
             </FormControl>
-
             <FormControl id="retypePassword">
               <FormLabel>Re-Enter Password</FormLabel>
               <Input
@@ -192,9 +194,18 @@ const Step1: React.FC<StepOneProps> = ({
               )}</Box>
             </FormControl>
           </SimpleGrid>
-          <Box marginTop={10} textAlign="right">
-            <Button type="submit">Next</Button>
-          </Box>
+          <Flex mt={10}>
+            <Spacer />
+            <Box>
+              <Button type="submit">Next</Button>
+            </Box>
+          </Flex>
+          <Flex mt={5}>
+            <Spacer />
+            <Box h={30}>
+              <Box color="red.500">{error}</Box>
+            </Box>
+          </Flex>
         </form>
       </Box>
     </Box>

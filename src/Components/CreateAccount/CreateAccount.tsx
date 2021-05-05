@@ -25,10 +25,14 @@ const CreateAccount = () => {
     aspirationsQ: '',
     interests: '',
     bio: '',
-    role: 'student'
+    role: ''
   });
 
-  const [error, setError] = useState('');
+  const [errorStep1, setErrorStep1] = useState('');
+  const [errorStep2, setErrorStep2] = useState('');
+  const [errorStep3, setErrorStep3] = useState('');
+
+  const [isLoading, setIsLoading] = useState(false);
 
   function getSteps() {
     return ['Step 1', 'Step 2', 'Step 3'];
@@ -49,6 +53,12 @@ const CreateAccount = () => {
 
   function prevStep() {
     setInputs((prev) => ({ ...prev, ['step']: inputs.step - 1 }));
+  }
+
+  function clearErrors() {
+    setErrorStep1('');
+    setErrorStep2('');
+    setErrorStep3('');
   }
 
   function generateStepper(step) {
@@ -90,9 +100,35 @@ const CreateAccount = () => {
     } = inputs;
     const interestsArray = interests.split(',');
     event.preventDefault();
-    if (interestsArray.length == 0) {
-      setError("Please enter interests");
+    if (role == '') {
+      clearErrors()
+      prevStep()
+      setErrorStep2("Please select a role");
+      return;
     }
+    else if (careerDevelopmentQ == '') {
+      clearErrors()
+      prevStep()
+      setErrorStep2("Please select a career stage");
+      return;
+    }
+    else if (aspirationsQ == '') {
+      clearErrors()
+      prevStep()
+      setErrorStep2("Please select an aspiration");
+      return;
+    }
+    else if (interestsArray.length == 0 || interests === '') {
+      clearErrors()
+      setErrorStep3("Please enter interests");
+      return;
+    }
+    else if (bio.length < 20) {
+      clearErrors()
+      setErrorStep3("Bio length must be greater than 20 characters");
+      return;
+    }
+    setIsLoading(true);
     axios
       .post(`http://localhost:3000/api/user/register`, {
         email,
@@ -107,23 +143,29 @@ const CreateAccount = () => {
       })
       .then((res) => {
         localStorage.setItem('authToken', res.data.authToken);
+        setIsLoading(false);
         window.location.reload();
-        setError('');
+        clearErrors()
         console.log('Success');
         <Redirect to="/" />;
       })
       .catch((error) => {
         const response: AxiosResponse = error.response;
         const statusCode: number = response.status;
+        setIsLoading(false);
         switch (statusCode) {
           case 409:
-            setError(response.data.message);
+            setInputs((prev) => ({ ...prev, ['step']: 1}));
+            clearErrors()
+            setErrorStep1(response.data.message);
             break;
           case 400:
-            setError('Authentication Failed: ' + response.data.message);
+            clearErrors()
+            setErrorStep3('Registration Failed: ' + response.data.message);
             break;
           default:
-            setError('Authentication Failed.');
+            clearErrors()
+            setErrorStep3('Registration Failed.');
             break;
         }
         console.log(error);
@@ -143,6 +185,7 @@ const CreateAccount = () => {
                 nextStep={nextStep}
                 handleChange={handleChange}
                 values={inputs}
+                error={errorStep1}
               />
             </Box>
           </Flex>
@@ -159,6 +202,7 @@ const CreateAccount = () => {
                 nextStep={nextStep}
                 handleChange={handleChange}
                 values={inputs}
+                error={errorStep2}
               />
             </Box>
           </Flex>
@@ -176,7 +220,8 @@ const CreateAccount = () => {
                 handleChange={handleChange}
                 values={inputs}
                 handleUserSubmit={handleUserSubmit}
-                error={error}
+                error={errorStep3}
+                loading={isLoading}
               />
             </Box>
           </Flex>

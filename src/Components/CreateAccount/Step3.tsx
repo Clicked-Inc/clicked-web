@@ -7,7 +7,8 @@ import {
   Button,
   Textarea,
   Flex,
-  Spacer
+  Spacer,
+  CircularProgress
 } from '@chakra-ui/react';
 
 import { useForm, Controller } from 'react-hook-form';
@@ -31,6 +32,7 @@ type StepThreeProps = {
   };
   handleUserSubmit: Function;
   error: string;
+  loading: boolean;
 };
 
 const Step3: React.FC<StepThreeProps> = ({
@@ -39,8 +41,10 @@ const Step3: React.FC<StepThreeProps> = ({
   handleChange,
   values,
   handleUserSubmit,
-  error
+  error,
+  loading
 }) => {
+  
   function previous(e) {
     prevStep();
   }
@@ -51,10 +55,12 @@ const Step3: React.FC<StepThreeProps> = ({
     handleSubmit,
     formState: { errors },
   } = useForm({});
+  
   const onSubmit = (data) => {
     console.log(data);
     handleUserSubmit();
   };
+  
   const onError = (errors, e) => console.log(errors, e);
 
   return (
@@ -67,7 +73,6 @@ const Step3: React.FC<StepThreeProps> = ({
           <FormControl mt={5} id="interests">
             <FormLabel>What are some of your interests?</FormLabel>
             <Input
-              w={1000}
               bg="white"
               value={values.interests}
               onChange={handleChange('interests')}
@@ -78,7 +83,6 @@ const Step3: React.FC<StepThreeProps> = ({
           <FormControl mt={5} id="bio">
             <FormLabel>Write a short bio about yourself.</FormLabel>
             <Textarea
-              w={1000}
               bg="white"
               size="sm"
               value={values.bio}
@@ -90,7 +94,15 @@ const Step3: React.FC<StepThreeProps> = ({
             <Spacer />
             <Box>
               <Button onClick={previous}  mr="4">Back</Button>
-              <Button type="submit">Complete Registration</Button>
+              <Button type="submit" width={200}>{loading ? (
+                    <CircularProgress
+                      isIndeterminate
+                      size="24px"
+                      color="teal"
+                    />
+                  ) : (
+                    'Complete Registration'
+                  )}</Button>
             </Box>
           </Flex>
           <Flex mt={5}>

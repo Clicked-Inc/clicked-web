@@ -33,6 +33,7 @@ type StepTwoProps = {
     bio: string;
     role: string;
   };
+  error: string
 };
 
 const Step2: React.FC<StepTwoProps> = ({
@@ -40,7 +41,9 @@ const Step2: React.FC<StepTwoProps> = ({
   nextStep,
   handleChange,
   values,
+  error
 }) => {
+  
   function previous(e) {
     prevStep();
   }
@@ -55,12 +58,14 @@ const Step2: React.FC<StepTwoProps> = ({
     handleSubmit,
     formState: { errors },
   } = useForm({});
+  
   const onSubmit = (data) => {
     console.log(data);
     next();
   };
+  
   const onError = (errors, e) => console.log(errors, e);
-  let yeet = values;
+
   return (
     <Box>
       <Box mb={10} fontWeight="700" fontSize={36}>
@@ -146,6 +151,12 @@ const Step2: React.FC<StepTwoProps> = ({
             <Box>
               <Button onClick={previous}  mr="4">Back</Button>
               <Button type="submit">Next</Button>
+            </Box>
+          </Flex>
+          <Flex mt={5}>
+            <Spacer />
+            <Box h={30}>
+              <Box color="red.500">{error}</Box>
             </Box>
           </Flex>
         </Box>
