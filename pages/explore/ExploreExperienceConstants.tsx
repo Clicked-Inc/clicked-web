@@ -13,9 +13,6 @@ export const tags = [
     icon: '',
   },
   { variant: 'white-gray-medium', label: 'Strategy and Operations', icon: '' },
-];
-
-export const tags2 = [
   {
     variant: 'white-gray-medium',
     label: 'Visual and Graphic Design',
