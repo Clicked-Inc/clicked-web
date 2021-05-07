@@ -2,14 +2,13 @@ import * as Models from '@Models/index';
 import { ObjectId } from 'mongoose';
 
 const generateSkillUpdate = async (
-  skillScore: Array<Models.ISkillScore>,
+  skillScore: Array<ObjectId>,
   userSkillInterest: string[],
   userId: string
 ): Promise<ObjectId[]> => {
   let updatedSkillArray: ObjectId[] = await Promise.all(
     skillScore.map(
       async (skill): Promise<ObjectId> => {
-        // console.log(skill);
         const fullSkill = await Models.SkillScore.findById(skill);
         try {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment

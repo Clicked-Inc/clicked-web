@@ -1,4 +1,5 @@
 import * as Models from '@Models/index';
+import checkValidSkills from '@Utils/checkValidSkill';
 import { ObjectId } from 'mongoose';
 
 const generateSkillInterests = async (
@@ -8,13 +9,21 @@ const generateSkillInterests = async (
     skillNames.map(
       async (skillName): Promise<ObjectId> => {
         try {
-          const skillInterest: Models.ISkillInterest = new Models.SkillInterest(
-            {
-              skillName,
-            }
-          );
-          await skillInterest.save();
-          return skillInterest._id;
+          const validSkill = await checkValidSkills(skillName);
+          if (validSkill) {
+            const skillInterest: Models.ISkillInterest = new Models.SkillInterest(
+              {
+                skillName,
+              }
+            );
+            await skillInterest.save();
+            return skillInterest._id;
+          } else {
+            console.log(
+              `${skillName} was not added as a skill for this user as it is not a valid skill.`
+            );
+            return null;
+          }
         } catch (e) {
           return;
         }
