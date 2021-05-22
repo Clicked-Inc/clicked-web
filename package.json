@@ -20,6 +20,7 @@
     "apidoc": "npx apidoc -i pages/api -o docs && git add -A ."
   },
   "dependencies": {
+    "@airtasker/spot": "^1.7.0",
     "@chakra-ui/icons": "^1.0.5",
     "@chakra-ui/input": "^1.1.2",
     "@chakra-ui/react": "^1.3.3",

@@ -35,6 +35,7 @@ export default function SideBar() {
           marginBottom={4}
           paddingLeft={4}
           isInline
+          key={label}
         >
           {selectionRectangle}
           <Link
