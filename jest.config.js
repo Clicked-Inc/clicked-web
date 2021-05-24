@@ -15,7 +15,6 @@ module.exports = {
       statements: 100,
     },
   },
-  setupFiles: ['<rootDir>/enzyme.js'],
   preset: 'ts-jest',
   testPathIgnorePatterns: [
     '/.next/',
@@ -27,7 +26,7 @@ module.exports = {
   ],
   testRegex: '(/__test__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
   testURL: 'http://localhost',
-  testEnvironment: 'jsdom',
+  testEnvironment: 'node',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   moduleNameMapper: {
     '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
