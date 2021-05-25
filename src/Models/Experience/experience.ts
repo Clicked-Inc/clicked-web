@@ -1,4 +1,4 @@
-import * as Models from '@Models/index';
+import * as Models from '@Internal/Models/index';
 import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
 // Add Validation
 enum CategoryType {

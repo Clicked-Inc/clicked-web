@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import * as Models from '@Models/index';
-import connect from '@Utils/databaseConnection';
-import authGuard from '@Api/authGuard';
-import cors from '@Utils/cors';
+import * as Models from '@Internal/Models/index';
+import connect from '@Internal/Utils/databaseConnection';
+import authGuard from '@Internal/Api/authGuard';
+import cors from '@Internal/Utils/cors';
 
 /**
  * @api {post} /api/user/[id]/startexp Start User Experience

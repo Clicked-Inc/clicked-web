@@ -3,8 +3,8 @@ GET new experience. Route does not have authguard, do not have be logged in to v
  **/
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ObjectId } from 'mongoose';
-import * as Models from '@Models/index';
-import connect from '@Utils/databaseConnection';
+import * as Models from '@Internal/Models/index';
+import connect from '@Internal/Utils/databaseConnection';
 
 /**
  * @api {get} /api/experience/getbyskill Get Experience by Skill

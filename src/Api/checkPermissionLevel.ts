@@ -1,5 +1,5 @@
-import connect from '@Utils/databaseConnection';
-import * as Models from '@Models/index';
+import connect from '@Internal/Utils/databaseConnection';
+import * as Models from '@Internal/Models/index';
 import { verify } from 'jsonwebtoken';
 import { NextApiRequest } from 'next';
 

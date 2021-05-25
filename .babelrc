@@ -7,16 +7,16 @@
       {
         "root": ["./"],
         "alias": {
-          "@Components": "./src/Components",
-          "@Api": "./src/Api",
-          "@Models": "./src/Models",
-          "@Pages": "./src/Pages",
-          "@Hooks": "./src/Hooks",
-          "@Constants": "./src/Constants",
-          "@Utils": "./src/Utils",
-          "@Config": "./src/Config",
-          "@Public": "./public",
-          "@Reducers": "./src/Reducers"
+          "@Internal/Components": "./src/Components",
+          "@Internal/Api": "./src/Api",
+          "@Internal/Models": "./src/Models",
+          "@Internal/Pages": "./src/Pages",
+          "@Internal/Hooks": "./src/Hooks",
+          "@Internal/Constants": "./src/Constants",
+          "@Internal/Utils": "./src/Utils",
+          "@Internal/Config": "./src/Config",
+          "@Internal/Public": "./public",
+          "@Internal/Reducers": "./src/Reducers"
         }
       }
     ]

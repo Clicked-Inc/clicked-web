@@ -1,4 +1,4 @@
-import { IUser } from '@Models/index';
+import { IUser } from '@Internal/Models/index';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 

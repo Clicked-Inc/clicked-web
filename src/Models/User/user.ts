@@ -1,6 +1,6 @@
 import mongoose, { Document, model, Schema, ObjectId } from 'mongoose';
 import GeoPoint, { IGeoPoint } from './geoPoint';
-import * as Models from '@Models/index';
+import * as Models from '@Internal/Models/index';
 
 enum AspirationType {
   Explore = 'explore',

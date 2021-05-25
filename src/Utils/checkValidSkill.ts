@@ -1,4 +1,4 @@
-import * as Models from '@Models/index';
+import * as Models from '@Internal/Models/index';
 
 const checkValidSkill = async (skill: string): Promise<boolean> => {
   const validSkill = await Models.ValidSkills.findOne({ skillName: skill });

@@ -2,9 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { NativeError } from 'mongoose';
 import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
-import * as Models from '@Models/index';
-import connect from '@Utils/databaseConnection';
-import cors from '@Utils/cors';
+import * as Models from '@Internal/Models/index';
+import connect from '@Internal/Utils/databaseConnection';
+import cors from '@Internal/Utils/cors';
 
 /**
  * @api {post} /api/user/login Login User

@@ -1,14 +1,14 @@
 import { ObjectId, NativeError } from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
-import * as Models from '@Models/index';
-import connect from '@Utils/databaseConnection';
-import authGuard, { UserAuthInfo } from '@Api/authGuard';
-import checkPermissionLevel from '@Api/checkPermissionLevel';
-import generateSkillInterests from '@Generators/generateSkillInterests';
-import generateGeoPoint from '@Generators/generateGeoPoint';
-import generateEducation from '@Generators/generateEducation';
-import generateExternalExperiences from '@Generators/generateExternalExperiences';
-import cors from '@Utils/cors';
+import * as Models from '@Internal/Models/index';
+import connect from '@Internal/Utils/databaseConnection';
+import authGuard, { UserAuthInfo } from '@Internal/Api/authGuard';
+import checkPermissionLevel from '@Internal/Api/checkPermissionLevel';
+import generateSkillInterests from '@Internal/Generators/generateSkillInterests';
+import generateGeoPoint from '@Internal/Generators/generateGeoPoint';
+import generateEducation from '@Internal/Generators/generateEducation';
+import generateExternalExperiences from '@Internal/Generators/generateExternalExperiences';
+import cors from '@Internal/Utils/cors';
 
 type PutRequestBody = {
   firstName: string;

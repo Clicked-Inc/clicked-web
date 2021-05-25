@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Types, ObjectId } from 'mongoose';
-import * as Models from '@Models/index';
-import connect from '@Utils/databaseConnection';
-import authGuard from '@Api/authGuard';
-import cors from '@Utils/cors';
-import generateSkillUpdate from '@Generators/generateSkillUpdate';
+import * as Models from '@Internal/Models/index';
+import connect from '@Internal/Utils/databaseConnection';
+import authGuard from '@Internal/Api/authGuard';
+import cors from '@Internal/Utils/cors';
+import generateSkillUpdate from '@Internal/Generators/generateSkillUpdate';
 
 /**
  * @api {put} /api/user/[id]/endexp End User Experience

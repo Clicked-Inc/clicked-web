@@ -25,13 +25,14 @@ module.exports = {
     '/.storybook/',
   ],
   testRegex: '(/__test__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
-  testURL: 'http://localhost',
+  testURL: 'http://localhost:3000',
   testEnvironment: 'node',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   moduleNameMapper: {
     '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/__mocks__/fileMock.js',
+    '@Internal/(.*)': '<rootDir>/src/$1',
   },
   transform: {
     '\\.[jt]sx?$': 'babel-jest',

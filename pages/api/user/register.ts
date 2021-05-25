@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { hash } from 'bcrypt';
-import * as Models from '@Models/index';
-import connect from '@Utils/databaseConnection';
-import generateSkillInterests from '@Generators/generateSkillInterests';
-import validateUniqueUser from '@Utils/validateUniqueUser';
+import * as Models from '@Internal/Models/index';
+import connect from '@Internal/Utils/databaseConnection';
+import generateSkillInterests from '@Internal/Generators/generateSkillInterests';
+import validateUniqueUser from '@Internal/Utils/validateUniqueUser';
 import { ObjectId, Error } from 'mongoose';
-import cors from '@Utils/cors';
+import cors from '@Internal/Utils/cors';
 
 /**
  * @api {post} /pages/user/register Register User
@@ -106,6 +106,18 @@ const registrationHandler = async (
       skillInterests,
       bio,
     } = req.body;
+    console.log(
+      email,
+      username,
+      role,
+      password,
+      firstName,
+      lastName,
+      aspirationType,
+      careerDevelopmentType,
+      skillInterests,
+      bio
+    );
     const uniqueUser: boolean[] = await validateUniqueUser(email, username);
     if (uniqueUser[0] && uniqueUser[1]) {
       const skillInterestArray: ObjectId[] = await generateSkillInterests(
@@ -147,6 +159,7 @@ const registrationHandler = async (
       res.status(409).json({ message: 'Username already exists.' });
     }
   } catch (e) {
+    console.log(e);
     // TODO: more specific error codes based on situation
     res.status(400).json({ message: 'Registration failed' });
   }

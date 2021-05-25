@@ -1,41 +1,54 @@
 import { testApiHandler } from 'next-test-api-route-handler';
 // Import the handler under test from the pages/api directory
-import endpoint from '../pages/api/user/register';
-import type { PageConfig } from 'next';
-import { describe, it } from 'mocha';
+import handler from '../pages/api/user/register';
+import 'jest';
+import {
+  testConnect,
+  disconnect,
+  clear,
+} from '@Internal/Utils/databaseConnection';
+
 import { expect } from 'chai';
-// Respect the Next.js config object if it's exported
-const handler: typeof endpoint & { config?: PageConfig } = endpoint;
+beforeAll(async () => {
+  await testConnect('userregister');
+});
+
+afterEach(async () => await clear());
+afterAll(async () => await disconnect());
+
 describe('Test /user/register', () => {
   it('Works properly', async () => {
-    expect.hasAssertions();
     await testApiHandler({
       requestPatcher: (req) => (req.url = '/api/user/register'),
       handler,
       test: async ({ fetch }) => {
-        const query = {
-          email: 'abcd@abcd.com',
-          username: 'abcd',
+        const body = {
+          email: 'abcddd@abcd.com',
+          username: 'abcddd',
           role: 'student',
           password: 'abcd',
           firstName: 'anjan',
           lastName: 'bharadwaj',
           aspirationType: 'dive',
           skillInterests: ['programming', 'design'],
+          careerDevelopmentType: 'Select career development stage',
+          bio: 'hey!',
+          profilePic: 'asdasds',
         };
-
+        const bodyJson = JSON.stringify(body);
+        console.log(bodyJson);
         const res = await fetch({
           method: 'POST',
           headers: {
             // Must have the correct content type too
             'content-type': 'application/json',
           },
-          body: JSON.stringify({
-            query,
-          }),
+          body: bodyJson,
         });
-
-        expect(await res.json()).to.have.property('user');
+        console.log(res.status);
+        const dataResult = await res.json();
+        console.log('dataResult', dataResult);
+        expect(dataResult).to.have.property('user');
       },
     });
   });

@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongoose';
-import * as Models from '@Models/index';
-import checkValidSkills from '@Utils/checkValidSkill';
+import * as Models from '@Internal/Models/index';
+import checkValidSkills from '@Internal/Utils/checkValidSkill';
 
 const generateSkillScore = async (
   skillNames: { skillName: string; progress: number }[]
