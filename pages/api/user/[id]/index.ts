@@ -2,7 +2,7 @@ import { ObjectId, NativeError } from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
-import authGuard from '@Api/authGuard';
+import authGuard, { UserAuthInfo } from '@Api/authGuard';
 import checkPermissionLevel from '@Api/checkPermissionLevel';
 import generateSkillInterests from '@Generators/generateSkillInterests';
 import generateGeoPoint from '@Generators/generateGeoPoint';
@@ -220,6 +220,7 @@ const userRequestHandler = async (
       break;
 
     case 'PUT':
+      console.log('PUT REQUEST');
       try {
         let permissionLevelMet = await checkPermissionLevel(
           req,
@@ -227,7 +228,7 @@ const userRequestHandler = async (
           ['admin'],
           id
         );
-        const userInfo: any = req.query.userInfo;
+        const userInfo: UserAuthInfo = req.body.userInfo;
         const loggedInUserId: string = userInfo.uid;
         if (loggedInUserId === id) {
           permissionLevelMet = true;
@@ -251,9 +252,23 @@ const userRequestHandler = async (
           externalExperiences,
           points,
         }: PutRequestBody = req.body || {};
-
-        let updatePayload: any = {};
-        let updateArrayPayload: any = {};
+        type UpdatePayload = {
+          firstName?: string;
+          lastName?: string;
+          email?: string;
+          age?: number;
+          profilePic?: string;
+          aspirationType?: string;
+          $inc?: { points: number };
+          $push?: UpdateArrayPayload;
+        };
+        type UpdateArrayPayload = {
+          skillInterests?: ObjectId[];
+          education?: ObjectId[];
+          externalExperiences?: ObjectId[];
+        };
+        let updatePayload: UpdatePayload = {};
+        let updateArrayPayload: UpdateArrayPayload = {};
 
         if (firstName != undefined) {
           updatePayload.firstName = firstName;
@@ -272,9 +287,7 @@ const userRequestHandler = async (
           updatePayload.location = geoPoint;
         }
         if (points != undefined) {
-          let inc: any = {};
-          inc.points = points;
-          updatePayload.$inc = inc;
+          updatePayload.$inc = { points };
         }
         if (aspirationType != undefined) {
           updatePayload.aspirationType = aspirationType;
@@ -322,10 +335,17 @@ const userRequestHandler = async (
 
     case 'DELETE':
       try {
-        const permissionLevelMet = await checkPermissionLevel(req, 'user', [
-          'admin',
-        ]);
-
+        let permissionLevelMet = await checkPermissionLevel(
+          req,
+          'user',
+          ['admin'],
+          id
+        );
+        const userInfo: UserAuthInfo = req.body.userInfo;
+        const loggedInUserId: string = userInfo.uid;
+        if (loggedInUserId === id) {
+          permissionLevelMet = true;
+        }
         if (!permissionLevelMet) {
           res.status(400).json({
             message: 'User does not have permission for this request.',

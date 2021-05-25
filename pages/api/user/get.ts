@@ -75,7 +75,8 @@ const getHandler = async (
   await cors(req, res);
   await connect();
   try {
-    const obj: any = req.query.userInfo;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const obj: any = req.body.userInfo;
     const id: string = obj.uid;
     const user = await Models.User.findById(
       id,

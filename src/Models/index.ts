@@ -18,7 +18,7 @@ export { default as SkillScore } from './Experience/skillScore';
 export type { ISkillScore } from './Experience/skillScore';
 export { default as Experience } from './Experience/experience';
 export type { IExperience } from './Experience/experience';
-
+export { isExperience } from './Experience/experience';
 // /**
 //  * Feedback Schemas
 //  */
@@ -30,3 +30,9 @@ export type { IFeedback } from './Feedback/feedback';
 //  */
 export { default as LearningPlan } from './learningPlan';
 export type { ILearningPlan } from './learningPlan';
+
+// /**
+//  * ValidSkills Schemas
+//  */
+export { default as ValidSkills } from './Skills/validSkills';
+export type { IValidSkills } from './Skills/validSkills';

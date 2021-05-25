@@ -50,6 +50,8 @@ const Tag: React.FC<TagProps> = ({ variant, label, icon }) => {
       boxShadow="md"
       py={2}
       px={3}
+      mr={1}
+      mb={1}
     >
       {renderSwitch(icon)}
       <TagLabel color={fontColor} fontWeight={weight}>

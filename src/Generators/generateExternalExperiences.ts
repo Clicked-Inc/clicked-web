@@ -1,6 +1,8 @@
 import * as Models from '@Models/index';
 import { ObjectId } from 'mongoose';
+
 const generateExternalExperiences = async (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   array: any[]
 ): Promise<ObjectId[]> => {
   let externalExperienceIdsArray: ObjectId[] = await Promise.all(

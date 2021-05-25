@@ -30,11 +30,11 @@ export default function SideNav() {
       }
       return (
         <Stack
-          position="relative"
           marginTop={2}
           marginBottom={5}
           paddingLeft={4}
           isInline
+          key={input.key}
         >
           {selectionRectangle}
           {label[1]}

@@ -227,7 +227,7 @@ const requireIdHandler = async (
             });
             return;
           }
-
+          delete req.body.userInfo;
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-ignore TS2349
           const experience = await Models.Experience.findByIdAndUpdate(
@@ -252,13 +252,12 @@ const requireIdHandler = async (
 
       case 'DELETE' /* Delete a model by its ID */:
         try {
-          // const permissionLevelMet = await checkPermissionLevel(
-          //   req,
-          //   'user',
-          //   ['admin'],
-          //   id
-          // );
-          const permissionLevelMet = true;
+          const permissionLevelMet = await checkPermissionLevel(
+            req,
+            'user',
+            ['admin'],
+            id
+          );
           if (!permissionLevelMet) {
             res.status(400).json({
               message: 'User does not have permission for this request.',

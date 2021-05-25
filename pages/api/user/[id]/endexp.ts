@@ -96,14 +96,19 @@ const userEndExperienceHandler = async (
         });
       } else {
         await experienceWrapper.populate('experience').execPopulate();
-        const experience: any = experienceWrapper.experience;
+        const experience = experienceWrapper.experience;
+        if (!Models.isExperience(experience)) {
+          res.status(400).json({
+            success: false,
+            message: `ExperienceWrapper does not correspond to an existing experience`,
+          });
+          return;
+        }
         try {
-          const points = <Models.IExperience>experience.points;
-          let updatePayload: any = {};
+          const points = experience.points;
+          let updatePayload = {};
           if (points != undefined) {
-            let inc: any = {};
-            inc.points = points;
-            updatePayload.$inc = inc;
+            updatePayload = { $inc: { points } };
           }
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           //@ts-ignore TS2349
@@ -115,7 +120,7 @@ const userEndExperienceHandler = async (
               runValidators: true,
             }
           );
-          const skillScore = experience.targetSkill;
+          const skillScore = <ObjectId[]>experience.targetSkill;
 
           const user = await Models.User.findById(id);
           let updateSkill: ObjectId[];

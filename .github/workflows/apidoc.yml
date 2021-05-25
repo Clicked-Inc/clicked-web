@@ -1,28 +1,27 @@
 name: Apidoc
 
-on: push
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   documentation-generation:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Push documentation folder
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install dependencies
-      run: yarn
-    - run: yarn run apidoc
-    - name: GitHub Pages
-      uses: crazy-max/ghaction-github-pages@v2.3.0
-      with:
-        # Git branch where assets will be deployed
-        target_branch: docs
-        # Allow an empty commit to be created
-        allow_empty_commit: false
-        # Build directory to deploy
-        build_dir: docs
-        # Commit message
-        commit_message: Publishing documentation
-    
+        source_file: 'docs'
+        destination_repo: 'Clicked-Inc/clicked-docs'
+        destination_folder: '/'
+        user_email: 'anjanb@berkeley.edu'
+        user_name: 'Clicked Team'
+        commit_message: 'Pushing documentation'
