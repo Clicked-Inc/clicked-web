@@ -147,6 +147,7 @@ const registrationHandler = async (
       res.status(409).json({ message: 'Username already exists.' });
     }
   } catch (e) {
+    console.log(e);
     // TODO: more specific error codes based on situation
     res.status(400).json({ message: 'Registration failed' });
   }

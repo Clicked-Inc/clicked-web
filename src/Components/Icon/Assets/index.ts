@@ -3,6 +3,7 @@ import NotificationDot from './Icons/notification_dot.svg';
 import BadgeOne from './Icons/badge_one.svg';
 import CourseLogo from './Icons/course_logo.svg';
 import ClickedLogo from './Icons/clicked_logo.svg';
+import ClickedLogoLarge from './Icons/clicked_logo_large.svg';
 import SideBarOrangeRectangle from './Icons/sidebar_rectangle.svg';
 import HintIcon from './Icons/hint_icon.svg';
 import UIUXIcon from './Icons/ui_ux_icon.svg';
@@ -34,6 +35,7 @@ export default {
   BadgeOne,
   CourseLogo,
   ClickedLogo,
+  ClickedLogoLarge,
   SideBarOrangeRectangle,
   HintIcon,
   UIUXIcon,
