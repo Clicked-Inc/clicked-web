@@ -27,6 +27,7 @@ import ExpertOneImage from './Icons/expert_one.svg';
 import ExpertTwoImage from './Icons/expert_two.svg';
 import ExpertThreeImage from './Icons/expert_three.svg';
 import ExpertFourImage from './Icons/expert_four.svg';
+import MilestoneFlag from './Icons/milestone_flag.svg';
 
 export default {
   Notification,
@@ -38,12 +39,11 @@ export default {
   HintIcon,
   UIUXIcon,
   SoftwareDevIcon,
+  MilestoneFlag,
   MarketingIcon,
   ProjectCardCover,
-
   ImageIcon,
   SmileyIcon,
-
   IconDashboard,
   IconContact,
   IconCourses,
