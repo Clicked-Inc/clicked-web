@@ -7,7 +7,7 @@ import cors from '@Internal/Utils/cors';
 
 /**
  * @api {get} /api/user/get Get User (Logged In)
- * @apiName Get User (Logged In)
+ * @apiName Get User (Logged In) / User GET themselves
  * @apiGroup User
  *
  * @apiHeader {String} Authorization authorization token generated using JWT, in the format 'Bearer <token>'.

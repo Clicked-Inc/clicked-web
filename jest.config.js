@@ -24,6 +24,7 @@ module.exports = {
     '/coverage/',
     '/.storybook/',
   ],
+  setupFiles: ['./jestSetup.ts'],
   testRegex: '(/__test__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
   testURL: 'http://localhost:3000',
   testEnvironment: 'node',

@@ -1,14 +1,13 @@
 import { testApiHandler } from 'next-test-api-route-handler';
 // Import the handler under test from the pages/api directory
-import handler from '../pages/api/user/register';
-import 'jest';
+import handler from '../../pages/api/user/register';
 import {
   testConnect,
   disconnect,
   clear,
 } from '@Internal/Utils/databaseConnection';
 
-import { expect } from 'chai';
+import { expect, assert } from 'chai';
 beforeAll(async () => {
   await testConnect('userregister');
 });
@@ -23,8 +22,8 @@ describe('Test /user/register', () => {
       handler,
       test: async ({ fetch }) => {
         const body = {
-          email: 'abcddd@abcd.com',
-          username: 'abcddd',
+          email: 'a@a.com',
+          username: 'a',
           role: 'student',
           password: 'abcd',
           firstName: 'anjan',
@@ -36,7 +35,6 @@ describe('Test /user/register', () => {
           profilePic: 'asdasds',
         };
         const bodyJson = JSON.stringify(body);
-        console.log(bodyJson);
         const res = await fetch({
           method: 'POST',
           headers: {
@@ -45,10 +43,9 @@ describe('Test /user/register', () => {
           },
           body: bodyJson,
         });
-        console.log(res.status);
         const dataResult = await res.json();
-        console.log('dataResult', dataResult);
         expect(dataResult).to.have.property('user');
+        assert(res.status == 200);
       },
     });
   });

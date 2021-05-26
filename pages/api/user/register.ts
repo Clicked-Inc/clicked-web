@@ -106,23 +106,12 @@ const registrationHandler = async (
       skillInterests,
       bio,
     } = req.body;
-    console.log(
-      email,
-      username,
-      role,
-      password,
-      firstName,
-      lastName,
-      aspirationType,
-      careerDevelopmentType,
-      skillInterests,
-      bio
-    );
     const uniqueUser: boolean[] = await validateUniqueUser(email, username);
     if (uniqueUser[0] && uniqueUser[1]) {
       const skillInterestArray: ObjectId[] = await generateSkillInterests(
         skillInterests
       );
+      console.log(process.env.saltRounds);
       await hash(
         password,
         Number(process.env.saltRounds),
@@ -139,6 +128,7 @@ const registrationHandler = async (
             skillInterests: skillInterestArray,
             bio,
           });
+          console.log(user);
           await user.save((err) => {
             console.log(err);
             if (err instanceof Error.ValidationError) {

@@ -1361,7 +1361,7 @@ define({ "api": [
     "type": "get",
     "url": "/api/user/get",
     "title": "Get User (Logged In)",
-    "name": "Get_User_(Logged_In)",
+    "name": "Get_User_(Logged_In)_/_User_GET_themselves",
     "group": "User",
     "header": {
       "fields": {
