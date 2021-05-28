@@ -9,6 +9,7 @@ import { testConnect, disconnect } from '@Internal/Utils/databaseConnection';
 
 import { expect, assert } from 'chai';
 import { runLogin } from './login.test';
+import { IUser, User } from '@Internal/Models/index';
 beforeAll(async () => {
   await testConnect('userlogin');
 });
@@ -18,7 +19,7 @@ afterAll(async () => await disconnect());
 describe('Test User GET', () => {
   let authToken = 'Bearer ';
   beforeAll(async () => {
-    authToken += await runLogin();
+    authToken += await runLogin('a@a.com', 'abcd');
   });
 
   test('Works properly when logged in', async () => {
@@ -62,3 +63,35 @@ describe('Test User GET', () => {
     });
   });
 });
+
+export const runGet = async (
+  userid: string,
+  authToken: string,
+  expectedToSuceed: boolean
+): Promise<unknown> => {
+  let user = {};
+  await testApiHandler({
+    requestPatcher: (req) => (req.url = '/api/user/'),
+    handler: handler1,
+    params: { id: userid },
+    test: async ({ fetch }) => {
+      const res = await fetch({
+        method: 'GET',
+        headers: {
+          Authorization: authToken,
+          'content-type': 'application/json',
+        },
+      });
+      const dataResult = await res.json();
+      expect(dataResult).to.have.property('user');
+      assert(res.status == 200);
+      if (expectedToSuceed) {
+        user = <IUser>dataResult.user;
+      }
+    },
+  });
+  if (expectedToSuceed) {
+    return <IUser>user;
+  }
+  return;
+};

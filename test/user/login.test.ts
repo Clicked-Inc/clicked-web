@@ -62,15 +62,18 @@ describe('Test /user/login with email', () => {
   });
 });
 
-export const runLogin = async (): Promise<string> => {
+export const runLogin = async (
+  email: string,
+  password: string
+): Promise<string> => {
   let token = '';
   await testApiHandler({
     requestPatcher: (req) => (req.url = '/api/user/login'),
     handler,
     test: async ({ fetch }) => {
       const body = {
-        username: 'a',
-        password: 'abcd',
+        email,
+        password,
       };
       const bodyJson = JSON.stringify(body);
       const res = await fetch({

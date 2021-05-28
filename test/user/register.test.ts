@@ -283,3 +283,43 @@ describe('Test /user/register', () => {
     });
   });
 });
+
+export const runRegister = async (
+  email: string,
+  username: string,
+  password: string
+): Promise<string> => {
+  let userid = '';
+  await testApiHandler({
+    requestPatcher: (req) => (req.url = '/api/user/register'),
+    handler,
+    test: async ({ fetch }) => {
+      const body = {
+        email,
+        username,
+        role: 'student',
+        password,
+        firstName: 'anjan',
+        lastName: 'bharadwaj',
+        aspirationType: 'dive',
+        skillInterests: ['programming', 'design'],
+        careerDevelopmentType: 'Select career development stage',
+        bio: 'hey!',
+        profilePic: 'asdasds',
+      };
+      const bodyJson = JSON.stringify(body);
+      const res = await fetch({
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: bodyJson,
+      });
+      const dataResult = await res.json();
+      expect(dataResult).to.have.property('user');
+      assert(res.status == 200);
+      userid = dataResult.user.id;
+    },
+  });
+  return userid;
+};
