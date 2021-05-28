@@ -106,12 +106,15 @@ const registrationHandler = async (
       skillInterests,
       bio,
     } = req.body;
+    if (!email || !username) {
+      res.status(400).json({ message: 'Registration failed' });
+      return;
+    }
     const uniqueUser: boolean[] = await validateUniqueUser(email, username);
     if (uniqueUser[0] && uniqueUser[1]) {
       const skillInterestArray: ObjectId[] = await generateSkillInterests(
         skillInterests
       );
-      console.log(process.env.saltRounds);
       await hash(
         password,
         Number(process.env.saltRounds),
@@ -128,9 +131,7 @@ const registrationHandler = async (
             skillInterests: skillInterestArray,
             bio,
           });
-          console.log(user);
           await user.save((err) => {
-            console.log(err);
             if (err instanceof Error.ValidationError) {
               for (const field in err.errors) {
                 res.status(400).json({ message: field });
@@ -149,7 +150,6 @@ const registrationHandler = async (
       res.status(409).json({ message: 'Username already exists.' });
     }
   } catch (e) {
-    console.log(e);
     // TODO: more specific error codes based on situation
     res.status(400).json({ message: 'Registration failed' });
   }

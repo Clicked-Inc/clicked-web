@@ -11,7 +11,7 @@ beforeAll(async () => {
 afterAll(async () => await disconnect());
 
 describe('Test /user/login with email', () => {
-  it('Works properly', async () => {
+  it('Works properly with email', async () => {
     await testApiHandler({
       requestPatcher: (req) => (req.url = '/api/user/login'),
       handler,
@@ -35,10 +35,8 @@ describe('Test /user/login with email', () => {
       },
     });
   });
-});
 
-describe('Test /user/login with username', () => {
-  it('Works properly', async () => {
+  it('Works properly with username', async () => {
     await testApiHandler({
       requestPatcher: (req) => (req.url = '/api/user/login'),
       handler,
@@ -64,34 +62,30 @@ describe('Test /user/login with username', () => {
   });
 });
 
-export const runLogin = async (
-  callback: (authToken: string) => Promise<void>
-): Promise<void> => {
-  await describe('Test /user/login with username', () => {
-    it('Works properly', async () => {
-      await testApiHandler({
-        requestPatcher: (req) => (req.url = '/api/user/login'),
-        handler,
-        test: async ({ fetch }) => {
-          const body = {
-            username: 'a',
-            password: 'abcd',
-          };
-          const bodyJson = JSON.stringify(body);
-          const res = await fetch({
-            method: 'POST',
-            headers: {
-              // Must have the correct content type too
-              'content-type': 'application/json',
-            },
-            body: bodyJson,
-          });
-          const dataResult = await res.json();
-          expect(dataResult).to.have.property('authToken');
-          assert(res.status == 200);
-          callback(dataResult.authToken);
+export const runLogin = async (): Promise<string> => {
+  let token = '';
+  await testApiHandler({
+    requestPatcher: (req) => (req.url = '/api/user/login'),
+    handler,
+    test: async ({ fetch }) => {
+      const body = {
+        username: 'a',
+        password: 'abcd',
+      };
+      const bodyJson = JSON.stringify(body);
+      const res = await fetch({
+        method: 'POST',
+        headers: {
+          // Must have the correct content type too
+          'content-type': 'application/json',
         },
+        body: bodyJson,
       });
-    });
+      const dataResult = await res.json();
+      expect(dataResult).to.have.property('authToken');
+      assert(res.status == 200);
+      token = dataResult.authToken;
+    },
   });
+  return token;
 };

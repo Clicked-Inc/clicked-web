@@ -1,6 +1,9 @@
 import { testApiHandler } from 'next-test-api-route-handler';
+
 // Import the handler under test from the pages/api directory
-import handler from '../../pages/api/user/login';
+import handler1 from '../../pages/api/user/[id]';
+import handler2 from '../../pages/api/user/get';
+
 import 'jest';
 import { testConnect, disconnect } from '@Internal/Utils/databaseConnection';
 
@@ -11,33 +14,39 @@ beforeAll(async () => {
 });
 
 afterAll(async () => await disconnect());
-const callback1 = async (authToken): Promise<void> => {
-  test('Works properly', async () => {
-    const testUserId = '60ac8789635233fdb4bcdd7d';
-    await testApiHandler({
-      requestPatcher: (req) => (req.url = '/api/user/' + testUserId),
-      handler,
-      test: async ({ fetch }) => {
-        const res = await fetch({
-          method: 'GET',
-          headers: {
-            Authorization: authToken,
-            'content-type': 'application/json',
-          },
-        });
-        const dataResult = await res.json();
-        expect(dataResult).to.have.property('user');
-        assert(res.status == 200);
-      },
-    });
-  });
-};
 
-const callback2 = async (authToken): Promise<void> => {
-  test('Works properly', async () => {
+describe('Test User GET', () => {
+  let authToken = 'Bearer ';
+  beforeAll(async () => {
+    authToken += await runLogin();
+  });
+
+  test('Works properly when logged in', async () => {
     await testApiHandler({
       requestPatcher: (req) => (req.url = '/api/user/get'),
-      handler,
+      handler: handler2,
+      test: async ({ fetch }) => {
+        const res = await fetch({
+          method: 'GET',
+          headers: {
+            Authorization: authToken,
+            'content-type': 'application/json',
+          },
+        });
+
+        const dataResult = await res.json();
+        expect(dataResult).to.have.property('user');
+        assert(res.status == 200);
+      },
+    });
+  });
+
+  test('Works properly when not logged in', async () => {
+    const testUserId = '60ac8789635233fdb4bcdd7d';
+    await testApiHandler({
+      requestPatcher: (req) => (req.url = '/api/user/'),
+      handler: handler1,
+      params: { id: testUserId },
       test: async ({ fetch }) => {
         const res = await fetch({
           method: 'GET',
@@ -52,10 +61,4 @@ const callback2 = async (authToken): Promise<void> => {
       },
     });
   });
-};
-describe('Test User GET (when not logged in)', () => {
-  runLogin(callback1);
-});
-describe('Test User GET (when logged in)', () => {
-  runLogin(callback2);
 });

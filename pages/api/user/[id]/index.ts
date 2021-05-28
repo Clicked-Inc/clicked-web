@@ -196,6 +196,7 @@ const userRequestHandler = async (
   await cors(req, res);
   await connect();
   const { id } = req.query;
+
   switch (req.method) {
     case 'GET':
       try {

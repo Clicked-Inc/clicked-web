@@ -1,6 +1,5 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import { verify } from 'jsonwebtoken';
-
 const authGuard = (nextApiHandler: NextApiHandler) => async (
   req: NextApiRequest,
   res: NextApiResponse
