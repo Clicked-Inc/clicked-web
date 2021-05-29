@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import * as Models from '@Models/index';
 import connect from '@Utils/databaseConnection';
 import authGuard from '@Api/authGuard';
+import checkPermissionLevel from '@Api/checkPermissionLevel';
 import cors from '@Utils/cors';
 
 /**
