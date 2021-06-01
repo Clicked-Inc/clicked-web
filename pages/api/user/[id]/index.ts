@@ -221,7 +221,6 @@ const userRequestHandler = async (
       break;
 
     case 'PUT':
-      console.log('PUT REQUEST');
       try {
         let permissionLevelMet = await checkPermissionLevel(
           req,

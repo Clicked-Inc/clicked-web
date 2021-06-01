@@ -1,34 +1,37 @@
 import { testApiHandler } from 'next-test-api-route-handler';
 
 // Import the handler under test from the pages/api directory
-import handler from '../../pages/api/user/[id]';
+import handler from '../../pages/api/user/[id]/index';
 
 import 'jest';
-import { testConnect, disconnect } from '@Internal/Utils/databaseConnection';
+import {
+  testConnect,
+  disconnect,
+  clear,
+} from '@Internal/Utils/databaseConnection';
 
-import { expect, assert } from 'chai';
-import { runLogin } from './login.test';
-import { runRegister } from './register.test';
-import { runGet } from './get.test';
-beforeAll(async () => {
-  await testConnect('userlogin');
-});
+import { assert } from 'chai';
+import { runLogin, runRegister, runGet } from '../helper';
 
-afterAll(async () => await disconnect());
-
-describe('Test User GET', () => {
+describe('Test User DELETE', () => {
   let userid = '';
-  let authToken = 'Bearer ';
+  let authToken = '';
   beforeAll(async () => {
-    authToken += await runLogin('b@b.com', 'abcd');
+    await testConnect('userdelete');
+    await runRegister('b@b.com', 'b', 'abcd', 'admin');
+    authToken = 'Bearer ' + (await runLogin('b@b.com', 'abcd'));
   });
   beforeEach(async () => {
-    userid = await runRegister('c@c.com', 'c', 'abcd');
+    userid = await runRegister('c@c.com', 'c', 'abcd', 'student');
   });
 
+  afterAll(async () => {
+    await clear();
+    await disconnect();
+  });
   test('Works properly when admin', async () => {
     await testApiHandler({
-      requestPatcher: (req) => (req.url = '/api/user/'),
+      requestPatcher: (req) => (req.url = '/api/user/[id]'),
       handler: handler,
       params: { id: userid },
       test: async ({ fetch }) => {
@@ -39,11 +42,7 @@ describe('Test User GET', () => {
             'content-type': 'application/json',
           },
         });
-
-        const dataResult = await res.json();
-        expect(dataResult).to.have.property('user');
         assert(res.status == 200);
-
         runGet(userid, authToken, false);
       },
     });

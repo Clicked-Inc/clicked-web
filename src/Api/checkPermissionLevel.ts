@@ -17,24 +17,25 @@ const checkPermissionLevel = async (
     return false;
   }
   const token: string = req.headers.authorization.replace('Bearer ', '');
-
   try {
     jwt_payload = verify(token, process.env.JWT_SECRET);
   } catch (e) {
     console.log(e);
     return false;
   }
-
   if (id) {
     if (type == 'user' && id === jwt_payload.uid) {
       return true;
     }
-    await connect();
     let experience: Array<Models.IExperience>;
     experience = await Models.Experience.find({ _id: id });
 
     // get user id by coach attribute and compare to id of current user
-    if (experience && experience[0].coach.toString() === jwt_payload.uid) {
+    if (
+      experience &&
+      experience.length > 0 &&
+      experience[0].coach.toString() === jwt_payload.uid
+    ) {
       return true;
     }
   }

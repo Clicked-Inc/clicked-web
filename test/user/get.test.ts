@@ -1,27 +1,33 @@
 import { testApiHandler } from 'next-test-api-route-handler';
 
 // Import the handler under test from the pages/api directory
-import handler1 from '../../pages/api/user/[id]';
+import handler1 from '../../pages/api/user/[id]/index';
 import handler2 from '../../pages/api/user/get';
 
 import 'jest';
-import { testConnect, disconnect } from '@Internal/Utils/databaseConnection';
+import {
+  testConnect,
+  disconnect,
+  clear,
+} from '@Internal/Utils/databaseConnection';
 
 import { expect, assert } from 'chai';
-import { runLogin } from './login.test';
-import { IUser, User } from '@Internal/Models/index';
-beforeAll(async () => {
-  await testConnect('userlogin');
-});
-
-afterAll(async () => await disconnect());
+import { IUser } from '@Internal/Models/index';
+import { runRegister, runLogin } from '../helper';
+let userId = '';
 
 describe('Test User GET', () => {
-  let authToken = 'Bearer ';
+  let authToken = '';
   beforeAll(async () => {
-    authToken += await runLogin('a@a.com', 'abcd');
+    await testConnect('userget');
+    userId = await runRegister('a@a.com', 'a', 'abcd', 'student');
+    authToken = 'Bearer ' + (await runLogin('a@a.com', 'abcd'));
   });
 
+  afterAll(async () => {
+    await clear();
+    await disconnect();
+  });
   test('Works properly when logged in', async () => {
     await testApiHandler({
       requestPatcher: (req) => (req.url = '/api/user/get'),
@@ -43,11 +49,10 @@ describe('Test User GET', () => {
   });
 
   test('Works properly when not logged in', async () => {
-    const testUserId = '60ac8789635233fdb4bcdd7d';
     await testApiHandler({
       requestPatcher: (req) => (req.url = '/api/user/'),
       handler: handler1,
-      params: { id: testUserId },
+      params: { id: userId },
       test: async ({ fetch }) => {
         const res = await fetch({
           method: 'GET',
@@ -63,35 +68,3 @@ describe('Test User GET', () => {
     });
   });
 });
-
-export const runGet = async (
-  userid: string,
-  authToken: string,
-  expectedToSuceed: boolean
-): Promise<unknown> => {
-  let user = {};
-  await testApiHandler({
-    requestPatcher: (req) => (req.url = '/api/user/'),
-    handler: handler1,
-    params: { id: userid },
-    test: async ({ fetch }) => {
-      const res = await fetch({
-        method: 'GET',
-        headers: {
-          Authorization: authToken,
-          'content-type': 'application/json',
-        },
-      });
-      const dataResult = await res.json();
-      expect(dataResult).to.have.property('user');
-      assert(res.status == 200);
-      if (expectedToSuceed) {
-        user = <IUser>dataResult.user;
-      }
-    },
-  });
-  if (expectedToSuceed) {
-    return <IUser>user;
-  }
-  return;
-};
