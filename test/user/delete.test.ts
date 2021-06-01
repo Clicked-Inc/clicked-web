@@ -47,4 +47,23 @@ describe('Test User DELETE', () => {
       },
     });
   });
+  test('Works properly when self-deleting', async () => {
+    authToken = 'Bearer ' + (await runLogin('c@c.com', 'abcd'));
+    await testApiHandler({
+      requestPatcher: (req) => (req.url = '/api/user/[id]'),
+      handler: handler,
+      params: { id: userid },
+      test: async ({ fetch }) => {
+        const res = await fetch({
+          method: 'DELETE',
+          headers: {
+            Authorization: authToken,
+            'content-type': 'application/json',
+          },
+        });
+        assert(res.status == 200);
+        runGet(userid, authToken, false);
+      },
+    });
+  });
 });
