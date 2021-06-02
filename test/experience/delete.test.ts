@@ -1,7 +1,7 @@
 import { testApiHandler } from 'next-test-api-route-handler';
 
 // Import the handler under test from the pages/api directory
-import handler from '../../pages/api/experience/[id]';
+import handler from '../../pages/api/user/[id]/index';
 
 import 'jest';
 import {

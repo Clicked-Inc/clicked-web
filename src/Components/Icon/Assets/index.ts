@@ -3,6 +3,7 @@ import NotificationDot from './Icons/notification_dot.svg';
 import BadgeOne from './Icons/badge_one.svg';
 import CourseLogo from './Icons/course_logo.svg';
 import ClickedLogo from './Icons/clicked_logo.svg';
+import ClickedLogoLarge from './Icons/clicked_logo_large.svg';
 import SideBarOrangeRectangle from './Icons/sidebar_rectangle.svg';
 import HintIcon from './Icons/hint_icon.svg';
 import UIUXIcon from './Icons/ui_ux_icon.svg';
@@ -27,6 +28,7 @@ import ExpertOneImage from './Icons/expert_one.svg';
 import ExpertTwoImage from './Icons/expert_two.svg';
 import ExpertThreeImage from './Icons/expert_three.svg';
 import ExpertFourImage from './Icons/expert_four.svg';
+import MilestoneFlag from './Icons/milestone_flag.svg';
 
 export default {
   Notification,
@@ -34,16 +36,16 @@ export default {
   BadgeOne,
   CourseLogo,
   ClickedLogo,
+  ClickedLogoLarge,
   SideBarOrangeRectangle,
   HintIcon,
   UIUXIcon,
   SoftwareDevIcon,
+  MilestoneFlag,
   MarketingIcon,
   ProjectCardCover,
-
   ImageIcon,
   SmileyIcon,
-
   IconDashboard,
   IconContact,
   IconCourses,
