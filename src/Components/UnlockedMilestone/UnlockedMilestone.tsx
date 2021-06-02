@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from '../Icon';
 import { Box, Center } from '@chakra-ui/react';
-import PrimaryButton from '@Components/PrimaryButton';
+import PrimaryButton from '@Internal/Components/PrimaryButton';
 
 const UnlockedMilestone = () => (
   <Box maxW={689} h={206} shadow="lg" textAlign="center" p={15}>
