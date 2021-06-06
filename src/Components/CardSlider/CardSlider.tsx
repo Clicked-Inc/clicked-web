@@ -21,6 +21,7 @@ const CardSlider: React.FC<HorizontalScrollerProps> = ({
 }) => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [elementWidth, setElementWidth] = useState(0);
+  const [elementHeight, setElementHeight] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const numberOfComponentsPerView = useBreakpointValue({
     base: 1,
@@ -33,6 +34,12 @@ const CardSlider: React.FC<HorizontalScrollerProps> = ({
   useEffect(() => {
     if (scrollerRef.current) {
       setElementWidth(parseInt(scrollerRef.current.clientWidth.toFixed(0)));
+    }
+  }, [scrollerRef]);
+
+  useEffect(() => {
+    if (scrollerRef.current) {
+      setElementHeight(parseInt(scrollerRef.current.clientHeight.toFixed(0)));
     }
   }, [scrollerRef]);
 
@@ -80,7 +87,7 @@ const CardSlider: React.FC<HorizontalScrollerProps> = ({
         icon={<Icon as={FaChevronLeft} />}
         fontSize="25px"
         w="60px"
-        h={450}
+        h={elementHeight}
         bgGradient="linear-gradient(to-l, transparent , white)"
       />
 
@@ -120,7 +127,7 @@ const CardSlider: React.FC<HorizontalScrollerProps> = ({
         variant="ghost"
         fontSize="25px"
         w="60px"
-        h={450}
+        h={elementHeight}
         bgGradient="linear-gradient(to-r, transparent, white)"
       />
     </Flex>

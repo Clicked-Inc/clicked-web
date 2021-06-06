@@ -11,14 +11,24 @@ import {
   Spacer,
 } from '@chakra-ui/react';
 import { Icon } from '../Icon';
+import { StringParameterObject } from '@airtasker/spot/build/lib/src/generators/openapi2/openapi2-specification';
 
-export default function ExpertsSection() {
+interface ExpertsSectionProps {
+  hideTitle?: boolean;
+}
+
+const ExpertsSection: React.FC<ExpertsSectionProps> = ({ hideTitle }) => {
   return (
     <Box>
-      <Box color="gray.900" fontWeight="700" fontSize="20px">
+      <Box
+        color="gray.900"
+        fontWeight="700"
+        fontSize="20px"
+        display={hideTitle ? 'none' : 'block'}
+      >
         Experts here to help
       </Box>
-      <Box mt={5} h={100} w={620} borderRadius="6px">
+      <Box mt={5} h={100} w={620} borderRadius="6px" bgColor="white">
         <Box padding={5}>
           <HStack spacing="24px">
             <Icon name="ExpertOneImage" />
@@ -33,7 +43,7 @@ export default function ExpertsSection() {
           </HStack>
         </Box>
       </Box>
-      <Box mt={5} h={100} w={620} borderRadius="6px">
+      <Box mt={5} h={100} w={620} borderRadius="6px" bgColor="white">
         <Box padding={5}>
           <HStack spacing="24px">
             <Icon name="ExpertTwoImage" />
@@ -60,7 +70,7 @@ export default function ExpertsSection() {
           </HStack>
         </Box>
       </Box>
-      <Box mt={5} h={100} w={620} borderRadius="6px">
+      <Box mt={5} h={100} w={620} borderRadius="6px" bgColor="white">
         <Box padding={5}>
           <HStack spacing="24px">
             <Icon name="ExpertThreeImage" />
@@ -87,7 +97,7 @@ export default function ExpertsSection() {
           </HStack>
         </Box>
       </Box>
-      <Box mt={5} h={100} w={620} borderRadius="6px">
+      <Box mt={5} h={100} w={620} borderRadius="6px" bgColor="white">
         <Box padding={5}>
           <HStack spacing="24px">
             <Icon name="ExpertFourImage" />
@@ -116,4 +126,6 @@ export default function ExpertsSection() {
       </Box>
     </Box>
   );
-}
+};
+
+export default ExpertsSection;
