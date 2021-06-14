@@ -11,7 +11,7 @@ import {
   PopoverHeader,
   PopoverTrigger,
 } from '@chakra-ui/react';
-import { Icon } from '@Components/Icon';
+import { Icon } from '@Internal/Components/Icon';
 
 export type HintButtonProps = {
   hint: string;

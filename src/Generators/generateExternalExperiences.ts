@@ -1,4 +1,4 @@
-import * as Models from '@Models/index';
+import * as Models from '@Internal/Models/index';
 import { ObjectId } from 'mongoose';
 
 const generateExternalExperiences = async (

@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import * as Models from '@Models/index';
-import connect from '@Utils/databaseConnection';
-import cors from '@Utils/cors';
-import authGuard from '@Api/authGuard';
+import * as Models from '@Internal/Models/index';
+import connect from '@Internal/Utils/databaseConnection';
+import cors from '@Internal/Utils/cors';
+import authGuard from '@Internal/Api/authGuard';
 
 const addValidSkillHandler = async (
   req: NextApiRequest,

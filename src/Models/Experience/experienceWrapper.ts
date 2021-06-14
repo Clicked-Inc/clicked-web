@@ -4,7 +4,7 @@ When a USER finishes an experience, an enddate is added. Users currently in the 
 **/
 
 import mongoose, { Document, model, ObjectId, Schema, Types } from 'mongoose';
-import * as Models from '@Models/index';
+import * as Models from '@Internal/Models/index';
 
 export interface IExperienceWrapper extends Document {
   experience: Types.ObjectId | Models.IExperience;

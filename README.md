@@ -40,7 +40,7 @@ yarn generate # Quickly generate new pages or components
 
 ### Route Aliases
 
-We've created aliases for common routes, for example, access the `src/Components` directory with `@Components` from anywhere in the app.
+We've created aliases for common routes, for example, access the `src/Components` directory with `@Internal/Components` from anywhere in the app.
 
 These are configured in `.babelrc` and `tsconfig.json`.
 

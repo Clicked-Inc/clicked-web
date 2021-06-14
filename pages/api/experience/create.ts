@@ -3,11 +3,11 @@ POST new experience.
  **/
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ObjectId } from 'mongoose';
-import * as Models from '@Models/index';
-import connect from '@Utils/databaseConnection';
-import authGuard from '@Api/authGuard';
-import cors from '@Utils/cors';
-import generateSkillScore from '@Generators/generateSkillScore';
+import * as Models from '@Internal/Models/index';
+import connect from '@Internal/Utils/databaseConnection';
+import authGuard from '@Internal/Api/authGuard';
+import cors from '@Internal/Utils/cors';
+import generateSkillScore from '@Internal/Generators/generateSkillScore';
 /**
  * @api {post} /api/experience/[id]/create Create Experience
  * @apiName Create Experience

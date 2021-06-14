@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { hash } from 'bcrypt';
-import * as Models from '@Models/index';
-import connect from '@Utils/databaseConnection';
-import generateSkillInterests from '@Generators/generateSkillInterests';
-import validateUniqueUser from '@Utils/validateUniqueUser';
+import * as Models from '@Internal/Models/index';
+import connect from '@Internal/Utils/databaseConnection';
+import generateSkillInterests from '@Internal/Generators/generateSkillInterests';
+import validateUniqueUser from '@Internal/Utils/validateUniqueUser';
 import { ObjectId, Error } from 'mongoose';
-import cors from '@Utils/cors';
+import cors from '@Internal/Utils/cors';
 
 /**
  * @api {post} /pages/user/register Register User
@@ -106,6 +106,10 @@ const registrationHandler = async (
       skillInterests,
       bio,
     } = req.body;
+    if (!email || !username) {
+      res.status(400).json({ message: 'Registration failed' });
+      return;
+    }
     const uniqueUser: boolean[] = await validateUniqueUser(email, username);
     if (uniqueUser[0] && uniqueUser[1]) {
       const skillInterestArray: ObjectId[] = await generateSkillInterests(
@@ -128,7 +132,6 @@ const registrationHandler = async (
             bio,
           });
           await user.save((err) => {
-            console.log(err);
             if (err instanceof Error.ValidationError) {
               for (const field in err.errors) {
                 res.status(400).json({ message: field });

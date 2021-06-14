@@ -1,5 +1,5 @@
-import * as Models from '@Models/index';
-import checkValidSkills from '@Utils/checkValidSkill';
+import * as Models from '@Internal/Models/index';
+import checkValidSkills from '@Internal/Utils/checkValidSkill';
 import { ObjectId } from 'mongoose';
 
 const generateSkillInterests = async (
@@ -19,9 +19,9 @@ const generateSkillInterests = async (
             await skillInterest.save();
             return skillInterest._id;
           } else {
-            console.log(
-              `${skillName} was not added as a skill for this user as it is not a valid skill.`
-            );
+            // console.log(
+            //   `${skillName} was not added as a skill for this user as it is not a valid skill.`
+            // );
             return null;
           }
         } catch (e) {

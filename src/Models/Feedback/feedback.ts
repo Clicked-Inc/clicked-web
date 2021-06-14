@@ -1,5 +1,5 @@
 import mongoose, { Document, model, ObjectId, Schema } from 'mongoose';
-import * as Models from '@Models/index';
+import * as Models from '@Internal/Models/index';
 enum PrivacyType {
   Private = 'private',
   Public = 'public',

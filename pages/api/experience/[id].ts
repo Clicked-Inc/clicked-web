@@ -2,11 +2,11 @@
 GET experience by experience ID, if id field is empty return all experiences. 
  **/
 import { NextApiRequest, NextApiResponse } from 'next';
-import * as Models from '@Models/index';
-import connect from '@Utils/databaseConnection';
-import authGuard from '@Api/authGuard';
-import checkPermissionLevel from '@Api/checkPermissionLevel';
-import cors from '@Utils/cors';
+import * as Models from '@Internal/Models/index';
+import connect from '@Internal/Utils/databaseConnection';
+import authGuard from '@Internal/Api/authGuard';
+import checkPermissionLevel from '@Internal/Api/checkPermissionLevel';
+import cors from '@Internal/Utils/cors';
 
 /**
  * @api {get} /api/experience/[id] Get Experience

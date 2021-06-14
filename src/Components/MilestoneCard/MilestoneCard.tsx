@@ -3,8 +3,8 @@ import { Box, Text, Flex, HStack, Button, Center } from '@chakra-ui/react';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { IoDocumentOutline, IoPlayCircleOutline } from 'react-icons/io5';
 import { HiLockClosed } from 'react-icons/hi';
-import Tag from '@Components/Tag';
-import HintButton from '@Components/HintButton';
+import Tag from '@Internal/Components/Tag';
+import HintButton from '@Internal/Components/HintButton';
 
 type TagType = {
   label: string;

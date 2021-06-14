@@ -1,14 +1,13 @@
 import { NativeError } from 'mongoose';
 import { NextApiRequest, NextApiResponse } from 'next';
-import * as Models from '@Models/index';
-import connect from '@Utils/databaseConnection';
-import authGuard from '@Api/authGuard';
-import checkPermissionLevel from '@Api/checkPermissionLevel';
-import cors from '@Utils/cors';
+import * as Models from '@Internal/Models/index';
+import connect from '@Internal/Utils/databaseConnection';
+import authGuard from '@Internal/Api/authGuard';
+import cors from '@Internal/Utils/cors';
 
 /**
  * @api {get} /api/user/get Get User (Logged In)
- * @apiName Get User (Logged In)
+ * @apiName Get User (Logged In) / User GET themselves
  * @apiGroup User
  *
  * @apiHeader {String} Authorization authorization token generated using JWT, in the format 'Bearer <token>'.
